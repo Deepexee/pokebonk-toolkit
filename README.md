@@ -5,8 +5,6 @@ Pokédex, type chart, map guides, run history with progress charts, and an autom
 
 **Download:** [pokebonk.deepexe.fr](https://pokebonk.deepexe.fr)
 
-![Landing page](docs/preview.png)
-
 ## Features
 
 - **Toolkit menu** (F2 or the button in the corner), styled like the game: Pokédex, types, maps with the best partners for each one.
@@ -19,9 +17,8 @@ Pokédex, type chart, map guides, run history with progress charts, and an autom
 | Folder | What it is |
 | --- | --- |
 | `PokeBonk/` | Windows app: `pokebonk.py` (pywebview window, Discord status) and `hub.js` (toolkit injected into the game) |
-| `PokeBonk/tools/` | Scripts that generate the Discord pictures and the landing page sprites |
+| `PokeBonk/tools/` | Scripts that generate the Discord pictures |
 | `android/` | Android app: a WebView that loads the game with the same `hub.js` |
-| `site/` | Landing page served at pokebonk.deepexe.fr |
 
 The Discord pictures are hosted in [Deepexee/PokebonkImage](https://github.com/Deepexee/PokebonkImage).
 
@@ -53,4 +50,4 @@ On the first build it creates a signing key (`pokebonk.keystore` and `keystore.p
 ## Credits
 
 Made by **Deepexe** and **Kanami**. Fan-made, not affiliated with PokéBonk, Nintendo or The Pokémon Company.
-Sprites from the game and from [PMD SpriteCollab](https://github.com/PMDCollab/SpriteCollab).
+Sprites from the game.
