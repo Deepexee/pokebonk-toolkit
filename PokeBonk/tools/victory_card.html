@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@900&display=block" rel="stylesheet">
+<style>
+  html,body{margin:0;width:512px;height:512px;overflow:hidden;background:#000}
+  .card{position:relative;width:512px;height:512px;overflow:hidden;
+    background:
+      repeating-linear-gradient(-45deg,rgba(255,255,255,.16) 0 20px,rgba(255,255,255,0) 20px 40px),
+      radial-gradient(120% 95% at 50% 38%,#fff3b0 0%,#ffd84a 30%,#f5aa12 62%,#c87600 100%)}
+  .rays{position:absolute;left:50%;top:40%;width:1200px;height:1200px;margin:-600px 0 0 -600px;
+    background:repeating-conic-gradient(rgba(255,252,220,.55) 0deg 7deg,rgba(255,252,220,0) 7deg 20deg);
+    -webkit-mask:radial-gradient(circle,#000 0,rgba(0,0,0,.7) 18%,transparent 45%)}
+  .vignette{position:absolute;inset:0;background:radial-gradient(85% 85% at 50% 42%,transparent 55%,rgba(110,50,0,.45))}
+  .ground{position:absolute;left:50%;top:286px;width:220px;height:40px;margin-left:-110px;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(110,55,0,.55),rgba(110,55,0,0))}
+  .trophy{position:absolute;left:50%;top:62px;width:236px;height:236px;margin-left:-118px;image-rendering:pixelated;
+    filter:drop-shadow(10px 12px 0 rgba(120,60,0,.45)) drop-shadow(0 0 22px rgba(255,255,220,.8));animation:none}
+  .spark{position:absolute;width:26px;height:26px;background:#fffef0;
+    clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 6px #fff)}
+  .title{position:absolute;left:0;right:0;top:336px;text-align:center;
+    font:900 96px/1 "M PLUS Rounded 1c",sans-serif;letter-spacing:-.01em;color:#fff;
+    -webkit-text-stroke:7px #9a4f00;paint-order:stroke fill;
+    text-shadow:0 9px 0 #7a3e00,0 18px 26px rgba(90,40,0,.55)}
+  .sub{position:absolute;left:0;right:0;top:450px;text-align:center;font:900 26px/1 "M PLUS Rounded 1c",sans-serif;
+    color:#7a3e00;letter-spacing:.18em}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="rays"></div>
+  <div class="vignette"></div>
+  <div class="ground"></div>
+  <img class="trophy" src="https://pokebonk.com/assets/ui/icons/record.png" alt="">
+  <i class="spark" style="left:96px;top:96px"></i>
+  <i class="spark" style="left:384px;top:72px;transform:scale(1.3)"></i>
+  <i class="spark" style="left:410px;top:238px;transform:scale(.7)"></i>
+  <i class="spark" style="left:74px;top:258px;transform:scale(.6)"></i>
+  <div class="title">VICTORY!</div>
+  <div class="sub">POKÉBONK</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+POKEBONK — SZYBKI PORADNIK (PL)
+
+1. CZEGO POTRZEBA
+- Windows 10 lub 11
+- Python z zaznaczoną opcją "Add Python to PATH" (komenda "py" musi działać)
+- Połączenie z internetem (skrypt sam doinstaluje dwie biblioteki)
+
+2. BUDOWANIE APLIKACJI
+1. Wypakuj archiwum (prawy przycisk myszy -> "Wyodrębnij wszystko").
+2. Otwórz wypakowany folder i kliknij dwukrotnie build.bat.
+3. Otworzy się czarne okno: doinstaluje pywebview i PyInstaller, potem skompiluje.
+   Nie zamykaj go, to trwa kilka minut.
+4. Na końcu naciśnij dowolny klawisz. Program jest w podfolderze dist:
+   PokeBonkApp.exe
+5. Kliknij dwukrotnie PokeBonkApp.exe, aby uruchomić grę.
+
+Uwaga: przy pierwszym uruchomieniu Windows SmartScreen może pokazać
+"Windows chroni komputer". Kliknij "Więcej informacji", a potem "Mimo to
+uruchom". To normalne dla programu domowego, bez podpisu cyfrowego.
+
+3. MENU NARZĘDZI
+- Klawisz F2 (albo przycisk w prawym górnym rogu): otwiera / zamyka menu.
+- Escape: zamyka menu.
+- Lewa kolumna: Pokédex (151 Pokémonów), Typy (18 typów) i Mapy (6 regionów).
+- Mapy: każdy region pokazuje znane starcia, mechaniki terenu i ranking
+  79 partnerów od najlepszego do najgorszego, z powodem (mnożniki typów,
+  pokrycie, passivy przydatne na tej mapie). Ranking jest liczony z tabeli
+  typów i opisów passivów (dane fanów) - nie jest odczytywany z gry.
+- Pasek wyszukiwania: wpisz nazwę Pokémona lub typu ("fire", "woda"...).
+  W Mapach wyszukiwanie znajdzie też region lub bossa ("Gengar", "lód").
+- Kliknij kartę, aby zobaczyć ewolucję, słabości, odporności i to, w co dany
+  Pokémon lub typ trafia mocno.
+- Przyciski PL / EN / FR w prawym górnym rogu: język menu (wybór jest pamiętany).
+- Gdy menu jest otwarte, gra nie dostaje Twoich klawiszy: nie ruszasz się
+  przypadkiem.
+
+4. MNOŻNIKI POKEBONK
+- mocno x1,35 · słabo x0,8 · ledwo x0,5 (żaden typ nie jest w pełni odporny)
+- Podwójny typ: mnożniki się mnożą; otrzymywane obrażenia ograniczone do
+  x0,5-x1,6.
+- Ten sam typ co atak (STAB): x1,25.
+
+5. GDY COŚ NIE DZIAŁA
+- Build nie przechodzi: sprawdź, czy "py --version" działa w wierszu poleceń,
+  i uruchom build.bat ponownie.
+- Aplikacja się nie otwiera: otwórz plik
+  %LOCALAPPDATA%\PokeBonk\log.txt i wyślij go osobie, od której masz archiwum.

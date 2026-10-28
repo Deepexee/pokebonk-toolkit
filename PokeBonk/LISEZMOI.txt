@@ -1,0 +1,53 @@
+﻿POKEBONK — GUIDE RAPIDE (FR)
+
+1. CE QU'IL FAUT
+- Windows 10 ou 11
+- Python installé avec l'option « Add Python to PATH » (la commande « py » doit fonctionner)
+- Une connexion internet (le script installe deux bibliothèques tout seul)
+
+2. CONSTRUIRE L'APPLICATION
+1. Décompressez l'archive (clic droit → « Extraire tout »).
+2. Ouvrez le dossier extrait et double-cliquez sur build.bat.
+3. Une fenêtre noire s'ouvre : elle installe pywebview et PyInstaller, puis compile.
+   Ne la fermez pas, cela prend quelques minutes.
+4. À la fin, appuyez sur une touche. Le programme se trouve dans le sous-dossier dist :
+   PokeBonkApp.exe
+5. Double-cliquez sur PokeBonkApp.exe pour lancer le jeu.
+
+Remarque : au premier lancement, Windows SmartScreen peut afficher
+« Windows a protégé votre PC ». Cliquez sur « Informations complémentaires »
+puis « Exécuter quand même ». C'est normal pour un programme fait maison, non signé.
+
+3. UTILISER LE MENU D'OUTILS
+- Touche F2 (ou le bouton « Outils » en haut à droite) : ouvre / ferme le menu.
+- Échap : ferme le menu.
+- Onglets en haut : Pokédex (les 151 Pokémon), Types (les 18 types),
+  Cartes (les 6 régions) et Progression.
+- Progression : chaque partie est enregistrée toute seule (durée, K.O., niveau,
+  or, toutes les 10 s). Vous y voyez vos records, votre courbe de forme, vos
+  stats par Pokémon et par carte, et le déroulé de chaque partie.
+  Fichier : %LOCALAPPDATA%\PokeBonk\runs.json
+- Statut Discord : se met à jour tout seul pendant la partie (mode, carte,
+  Pokémon, niveau, K.O.) avec l'image de la carte et le portrait du Pokémon.
+- Cartes : chaque région montre ses combats connus, ses mécaniques de terrain et
+  un classement des 79 partenaires, du plus adapté au moins adapté, avec la raison
+  (multiplicateurs de types, couverture, passifs utiles sur cette carte).
+  Ce classement est calculé à partir de la table des types et des descriptions de
+  passifs (données de fans) — il n'est pas lu dans le jeu.
+- Barre de recherche : tapez un nom de Pokémon ou un type (« feu », « water »…).
+  Dans Cartes, la recherche trouve aussi une région ou un boss (« Gengar », « glace »).
+- Cliquez sur une carte pour voir l'évolution, les faiblesses, les résistances
+  et ce que le Pokémon ou le type frappe fort.
+- Boutons PL / EN / FR en haut à droite : langue du menu (le choix est mémorisé).
+- Pendant que le menu est ouvert, le jeu ne reçoit pas vos touches : vous ne bougez pas par accident.
+
+4. MULTIPLICATEURS DE POKEBONK
+- fort ×1,35 · faible ×0,8 · à peine ×0,5 (aucun type n'est totalement immunisé)
+- Double type : les multiplicateurs se multiplient ; dégâts reçus limités à ×0,5–×1,6.
+- Même type que l'attaque (STAB) : ×1,25.
+
+5. EN CAS DE PROBLÈME
+- Le build échoue : vérifiez que « py --version » fonctionne dans une invite de
+  commandes, puis relancez build.bat.
+- L'application ne s'ouvre pas : ouvrez le fichier
+  %LOCALAPPDATA%\PokeBonk\log.txt et envoyez-le à la personne qui vous a donné l'archive.

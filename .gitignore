@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+
+PokeBonk/build/
+PokeBonk/dist/
+*.spec
+
+android/build/
+android/*.apk
+android/*.idsig
+android/*.keystore
+android/keystore.properties
+android/assets/hub.js
+android/assets/typedex.json
+android/assets/maps.json
+
+site/download/

@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PokéBonk Toolkit</title>
+<meta name="description" content="The unofficial desktop app for PokéBonk: Pokédex, maps, run tracking and an automatic Discord status.">
+<link rel="icon" href="assets/items/poke-ball.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:rgba(34,40,58,.97);--paper2:#1a1f2e;--paper3:#2a3248;--pill:#3a4466;
+  --ink:#e7eaf6;--ink2:#aeb6cc;--ink3:#8d97b3;
+  --red:#ff5a5f;--red-d:#e0303e;--orange:#ff9a3a;--yellow:#fc3;--blue:#3a8cff;--green:#36c96a;--green-d:#1fa04e;--purple:#8a5cff;--purple-d:#5a2fc8;
+  --ring:inset 0 0 0 1px rgba(150,165,215,.16);
+  --shadow:0 12px 32px rgba(0,0,0,.55),0 2px 8px rgba(0,0,0,.4);
+  --stripes:repeating-linear-gradient(-45deg,#ffffff24 0 10px,#fff0 10px 20px);
+  --ft:"M PLUS Rounded 1c","Nunito",system-ui,sans-serif;--f:"Nunito",system-ui,sans-serif;
+  --tilt:62deg;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:#141826;color:var(--ink);font:700 16px/1.55 var(--f);overflow-x:hidden}
+img{display:block}
+.pix{image-rendering:pixelated;image-rendering:crisp-edges}
+a{color:inherit}
+kbd{display:inline-grid;place-items:center;min-width:24px;height:22px;padding:0 7px;border-radius:7px;background:#1a1f2e;color:#c9d0e4;font:900 12px/1 var(--ft);box-shadow:inset 0 -2px 0 rgba(0,0,0,.35)}
+
+.nav{position:fixed;inset:14px 16px auto;z-index:50;display:flex;align-items:center;gap:10px;pointer-events:none}
+.nav>*{pointer-events:auto}
+.brand{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 8px;border-radius:999px;background:rgba(34,40,58,.92);box-shadow:0 4px 14px rgba(0,0,0,.35),var(--ring);text-decoration:none;font:900 15px/1 var(--ft)}
+.brand img{width:28px;height:28px}
+.links{margin-left:auto;display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(34,40,58,.92);box-shadow:0 4px 14px rgba(0,0,0,.35),var(--ring)}
+.links a{padding:9px 14px;border-radius:999px;text-decoration:none;font:900 13.5px/1 var(--ft);color:var(--ink2);transition:background .15s,color .15s}
+.links a:hover{color:#fff;background:var(--pill)}
+.nav .dl-mini{height:44px}
+
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:62px;padding:0 30px;border:0;border-radius:999px;color:#fff;text-decoration:none;font:800 21px/1 var(--ft);cursor:pointer;white-space:nowrap;
+  background:var(--stripes),linear-gradient(#ff787c,var(--red) 60%,var(--red-d));box-shadow:0 5px 0 #9d222b,0 6px 18px rgba(0,0,0,.45);transition:transform .1s,filter .15s}
+.btn:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #9d222b,0 3px 8px rgba(0,0,0,.4)}
+.btn img{width:30px;height:30px}
+.btn kbd{background:rgba(0,0,0,.25);color:#fff}
+.btn.sm{height:44px;padding:0 18px;font-size:15px;box-shadow:0 4px 0 #9d222b,0 4px 12px rgba(0,0,0,.4)}
+.btn.sm img{width:22px;height:22px}
+.btn.green{background:var(--stripes),linear-gradient(#5be08a,var(--green) 60%,var(--green-d));box-shadow:0 5px 0 #13703a,0 6px 18px rgba(0,0,0,.45)}
+.btn.green:active{box-shadow:0 2px 0 #13703a,0 3px 8px rgba(0,0,0,.4)}
+.btn svg{width:24px;height:24px}
+.btn.dark{background:rgba(34,40,58,.95);box-shadow:0 5px 0 #0e111b,0 6px 18px rgba(0,0,0,.45),var(--ring)}
+.btn.dark:active{box-shadow:0 2px 0 #0e111b}
+.btn.dark svg{width:24px;height:24px}
+
+.hero{position:relative;height:100vh;min-height:640px;max-height:1100px;overflow:hidden;
+  background:linear-gradient(180deg,#6f9fe3 0%,#9dbbea 22%,#e9c9b6 42%,#ffd59e 52%,#ffe7bf 58%,#fff1d6 64%)}
+.sun{position:absolute;left:66%;top:14%;width:420px;height:420px;margin:-100px 0 0 -100px;border-radius:50%;background:radial-gradient(circle,#fffbe8 0 10%,#ffe7a8 16%,rgba(255,196,110,.55) 28%,rgba(255,170,90,.18) 48%,rgba(255,160,80,0) 70%);will-change:transform}
+.rays{position:absolute;left:calc(66% + 110px);top:calc(14% + 110px);width:1800px;height:1800px;margin:-900px 0 0 -900px;pointer-events:none;opacity:.55;will-change:transform;background:repeating-conic-gradient(from 0deg,rgba(255,236,190,.2) 0deg 4deg,rgba(255,236,190,0) 4deg 13deg);-webkit-mask:radial-gradient(circle,#000 0,rgba(0,0,0,.6) 18%,transparent 50%);mask:radial-gradient(circle,#000 0,rgba(0,0,0,.6) 18%,transparent 50%);animation:spin 160s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.warm{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,170,80,0) 45%,rgba(255,160,70,.14) 64%,rgba(255,120,60,.12))}
+.glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 45% at 66% 30%,rgba(255,214,140,.35),transparent 70%)}
+.motes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.mote{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff6cc 0 22%,rgba(255,214,120,.55) 40%,rgba(255,214,120,0) 70%);opacity:0;will-change:transform,opacity;animation:mote linear infinite}
+@keyframes mote{0%{opacity:0;transform:translate(0,0)}15%{opacity:.95}85%{opacity:.8}100%{opacity:0;transform:translate(var(--dx),-180px)}}
+.clouds{position:absolute;inset:0 0 auto;height:55%;will-change:transform}
+.cloud{position:absolute;height:28px;border-radius:14px;background:#fff6ea;opacity:.95;box-shadow:0 6px 0 rgba(255,168,128,.55);animation:drift linear infinite}
+.cloud::before,.cloud::after{content:"";position:absolute;bottom:10px;border-radius:999px;background:#fff6ea}
+.cloud::before{left:18%;width:44%;height:36px}
+.cloud::after{left:46%;width:34%;height:26px}
+@keyframes drift{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+
+.range{position:absolute;left:-10%;right:-10%;bottom:-6px;height:220px;will-change:transform;background-repeat:repeat-x;background-position:bottom}
+.range.far{bottom:14px;height:180px;opacity:.6;filter:sepia(.45) saturate(.7) brightness(1.18) hue-rotate(-12deg)}
+.range.mid{opacity:.9;filter:sepia(.2) saturate(.9) brightness(1.04)}
+.range canvas{position:absolute;inset:0;width:100%;height:100%}
+
+.world-wrap{position:absolute;inset:0;perspective:1100px;perspective-origin:50% 70%;overflow:hidden}
+.world{position:absolute;left:50%;bottom:-240px;width:6400px;height:2800px;margin-left:-3200px;transform-style:preserve-3d;transform-origin:50% 100%;will-change:transform;
+  background:url("assets/env/forest/ground.png") 0 0/128px 128px;image-rendering:pixelated}
+.world::before{content:"";position:absolute;left:50%;top:62%;width:1700px;height:1000px;margin-left:-850px;border-radius:50%;
+  background:url("assets/env/forest/path.png") 0 0/128px 128px;-webkit-mask:radial-gradient(closest-side,#000 62%,transparent 100%);mask:radial-gradient(closest-side,#000 62%,transparent 100%);opacity:.95}
+.bb{position:absolute;left:0;top:0;transform-origin:50% 100%;transform-style:preserve-3d;pointer-events:none}
+.bb .spr{position:absolute;left:0;bottom:0;background-repeat:no-repeat;image-rendering:pixelated}
+.bb .shadow{position:absolute;left:50%;bottom:-8px;width:76%;height:18px;margin-left:-38%;border-radius:50%;background:radial-gradient(closest-side,rgba(60,30,10,.38),rgba(60,30,10,0));transform:rotateX(calc(var(--tilt)))}
+.mon{pointer-events:auto;cursor:pointer}
+.mon .bubble{position:absolute;left:50%;bottom:100%;margin-bottom:6px;transform:translateX(-50%) scale(0);transform-origin:50% 100%;display:flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:999px;background:rgba(34,40,58,.95);box-shadow:var(--shadow);color:#fff;font:900 13px/1 var(--ft);white-space:nowrap;transition:transform .18s cubic-bezier(.2,1.4,.4,1)}
+.mon .bubble img{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15)}
+.mon.talk .bubble{transform:translateX(-50%) scale(1)}
+.hzl{position:absolute;left:0;right:0;top:0;height:0;will-change:transform;transform:translateY(56vh)}
+.groundfill{position:absolute;left:-10%;right:-10%;top:-6px;height:70vh;background:url("assets/env/forest/ground.png") 0 0/40px 40px;image-rendering:pixelated;filter:saturate(.85) brightness(.97)}
+.fog{position:absolute;left:0;right:0;top:-80px;height:170px;background:linear-gradient(180deg,rgba(255,231,191,0),rgba(255,226,180,.82) 45%,rgba(255,231,191,0));pointer-events:none}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 58%,rgba(70,30,20,.38))}
+.hero-bottom{position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(180deg,rgba(20,24,38,0),#141826);pointer-events:none}
+
+.copy{position:absolute;left:0;right:0;top:9%;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;will-change:transform,opacity;pointer-events:none}
+.copy>*{pointer-events:auto}
+.logo{position:relative;margin:0;font:900 clamp(52px,8.4vw,112px)/.95 var(--ft);letter-spacing:-.01em;color:#fff;
+  text-shadow:0 7px 0 #2a2a7a,0 14px 30px rgba(20,10,60,.45)}
+.logo span{color:var(--yellow)}
+.splash{position:absolute;right:-1.3em;bottom:-.34em;z-index:2;font:900 .3em/1 var(--ft);color:#ffef3a;letter-spacing:.01em;white-space:nowrap;
+  text-shadow:.06em .06em 0 #3f3f00,0 0 18px rgba(255,220,60,.35);transform:rotate(-20deg);transform-origin:50% 50%;animation:splash .9s ease-in-out infinite alternate;pointer-events:none}
+@keyframes splash{from{transform:rotate(-20deg) scale(1)}to{transform:rotate(-20deg) scale(1.1)}}
+.logo .ball{position:absolute;right:-.42em;top:-.18em;width:.5em;height:.5em;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(14deg)}}
+.tag{display:inline-flex;align-items:center;gap:8px;margin-top:30px;padding:6px 16px 6px 8px;border-radius:999px;background:rgba(34,40,58,.94);box-shadow:0 3px 0 rgba(42,42,122,.35),var(--ring);font:800 15px/1 var(--f);color:var(--ink2)}
+.tag b{padding:5px 11px;border-radius:999px;background:linear-gradient(#ff8a4a,#e84a2a);color:#fff;font:900 13px/1 var(--f)}
+.lead{max-width:620px;margin:14px 0 0;color:#3a2440!important;font:800 clamp(16px,2vw,20px)/1.45 var(--f);color:#1f2550;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:20px}
+.meta{margin-top:12px;padding:6px 12px;border-radius:999px;background:rgba(255,244,226,.82);box-shadow:0 2px 8px rgba(120,60,20,.15);font:800 12.5px/1 var(--f);color:#5a3a3a}
+.scroll-hint{position:absolute;left:50%;bottom:22px;z-index:6;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font:900 12px/1 var(--ft);color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.5);text-decoration:none}
+.scroll-hint i{width:24px;height:36px;border-radius:12px;border:3px solid #fff;position:relative}
+.scroll-hint i::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:#fff;animation:wheel 1.6s infinite}
+@keyframes wheel{60%{transform:translateY(10px);opacity:0}}
+
+section.block{position:relative;padding:110px 20px;max-width:1180px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;background:var(--paper2);font:900 13px/1 var(--ft);color:var(--ink2);box-shadow:var(--ring)}
+.eyebrow img{width:24px;height:24px}
+h2{margin:16px 0 10px;font:900 clamp(32px,4.6vw,52px)/1.05 var(--ft);color:#fff;text-shadow:0 5px 0 #0c0f1c}
+h2 span{color:var(--yellow)}
+.sub{max-width:640px;margin:0;color:var(--ink2);font-size:17px}
+.center{text-align:center}.center .sub{margin:0 auto}
+
+.features{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:44px}
+.card{position:relative;border-radius:22px;background:var(--paper);box-shadow:var(--shadow),var(--ring);overflow:hidden;transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0)) translateY(var(--ty,0));transition:transform .25s ease-out;opacity:0;--ty:30px}
+.card.in{opacity:1;--ty:0px;transition:transform .25s ease-out,opacity .6s}
+.card .ribbon{display:flex;align-items:center;gap:10px;padding:14px 18px;color:#fff;font:900 19px/1.1 var(--ft);text-shadow:0 2px 0 rgba(0,0,0,.15);background:var(--stripes),linear-gradient(100deg,var(--red),var(--orange))}
+.card.blue .ribbon{background:var(--stripes),linear-gradient(100deg,var(--blue),#5fb0ff)}
+.card.green .ribbon{background:var(--stripes),linear-gradient(100deg,var(--green-d),var(--green))}
+.card.purple .ribbon{background:var(--stripes),linear-gradient(100deg,var(--purple-d),var(--purple))}
+.card .ribbon img{width:34px;height:34px;padding:4px;border-radius:50%;background:rgba(0,0,0,.18)}
+.card p{margin:0;padding:16px 18px 20px;color:var(--ink2);font-size:15px}
+.card p b{color:#fff}
+
+.show{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:40px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:2px;padding:4px;border-radius:999px;background:var(--paper2);box-shadow:inset 0 1px 3px rgba(0,0,0,.4)}
+.seg button{display:inline-flex;align-items:center;gap:7px;border:0;border-radius:999px;background:transparent;color:var(--ink2);font:900 14.5px/1 var(--ft);padding:10px 16px;cursor:pointer}
+.seg button img{width:20px;height:20px}
+.seg button:hover{color:#fff}
+.seg button.on{background:var(--pill);color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.35),0 4px 14px rgba(0,0,0,.3)}
+.stage3d{perspective:1400px}
+.frame{position:relative;border-radius:22px;padding:10px;background:var(--paper);box-shadow:0 30px 70px rgba(0,0,0,.55),var(--ring);transform:rotateX(var(--rx,6deg)) rotateY(var(--ry,-4deg));transition:transform .3s ease-out}
+.frame img{width:100%;height:auto;border-radius:14px}
+.frame .cap{position:absolute;left:24px;bottom:24px;max-width:380px;padding:12px 16px;border-radius:16px;background:rgba(26,31,46,.94);box-shadow:var(--shadow);font:800 14px/1.45 var(--f);color:var(--ink2)}
+.frame .cap b{display:block;color:#fff;font:900 16px/1.2 var(--ft);margin-bottom:3px}
+
+.discord{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center}
+.presence{max-width:420px;border-radius:16px;background:#232428;padding:14px 16px;box-shadow:0 30px 60px rgba(0,0,0,.5);transform:perspective(900px) rotateY(-10deg) rotateX(4deg)}
+.presence small{display:block;margin-bottom:10px;color:#b5bac1;font:800 12px/1 var(--f);text-transform:uppercase;letter-spacing:.04em}
+.presence .row{display:flex;gap:14px;align-items:center}
+.presence .thumb{position:relative;width:96px;height:96px;flex:0 0 96px;border-radius:10px;overflow:hidden}
+.presence .thumb img{position:absolute;inset:0;width:100%;height:100%;transition:opacity .6s}
+.presence b{display:block;color:#fff;font:800 16px/1.3 var(--f)}
+.presence span{display:block;color:#dbdee1;font:700 14px/1.4 var(--f)}
+.presence em{display:block;margin-top:4px;color:#23a55a;font:800 13px/1 var(--f);font-style:normal}
+.dots{display:flex;gap:6px;margin-top:14px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#4e5058}
+.dots i.on{background:#fff}
+
+.dl{position:relative;border-radius:28px;background:var(--paper);box-shadow:var(--shadow),var(--ring);overflow:hidden}
+.dl .ribbon{padding:22px 28px;background:var(--stripes),linear-gradient(100deg,var(--red),var(--orange));font:900 clamp(24px,3.4vw,34px)/1.1 var(--ft);color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.15)}
+.dl-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;padding:28px}
+.steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.steps li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:var(--paper2);font-size:15px;color:var(--ink2)}
+.steps li b{color:#fff}
+.steps .n{flex:0 0 30px;height:30px;display:grid;place-items:center;border-radius:50%;background:var(--yellow);color:#3a2a00;font:900 15px/1 var(--ft)}
+.dl-cta{display:flex;flex-direction:column;justify-content:center;gap:14px;align-items:flex-start}
+.dl-cta .btn{width:100%}
+.dl-cta small{color:var(--ink3);font-size:13px}
+
+footer{position:relative;padding:40px 20px 60px;text-align:center;color:var(--ink3);font-size:13px;max-width:900px;margin:0 auto}
+footer img{margin:0 auto 12px;width:36px;height:36px}
+
+.mon{cursor:grab;touch-action:none}
+body.grabbing,body.grabbing *{cursor:grabbing!important}
+.carry{position:fixed;left:0;top:0;z-index:45;display:none;pointer-events:none;will-change:transform}
+.carry .spr{background-repeat:no-repeat;image-rendering:pixelated;filter:drop-shadow(0 18px 10px rgba(40,20,10,.35))}
+.carry .bubble{position:absolute;left:50%;bottom:100%;margin-bottom:4px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:999px;background:rgba(34,40,58,.95);box-shadow:var(--shadow);color:#fff;font:900 13px/1 var(--ft);white-space:nowrap}
+.carry .bubble img{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15)}
+.hero.lite .rays,.hero.lite .motes{display:none}
+
+.pbcard{position:relative;border-radius:24px;background:var(--paper);box-shadow:var(--shadow),var(--ring);text-align:left;color:var(--ink);transition:transform .25s ease-out}
+.pbcard:hover{transform:translateY(-4px) rotate(-.4deg)}
+.pbcard .thumb{position:relative;flex:0 0 auto;width:84px;height:84px;border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18),0 4px 0 rgba(0,0,0,.3)}
+.pbcard .thumb img{position:absolute;inset:0;width:100%;height:100%;transition:opacity .6s}
+.pbc-act{display:flex;align-items:center;gap:14px;padding:12px;border-radius:18px;background:var(--paper2)}
+.pbc-lines{min-width:0;display:flex;flex-direction:column;gap:3px}
+.pbc-lines b{font:900 17px/1.1 var(--ft);color:#fff}
+.pbc-lines small{font:900 11px/1 var(--ft);text-transform:uppercase;letter-spacing:.05em;color:var(--yellow)}
+.pbc-lines span{font:800 14px/1.3 var(--f);color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbc-lines em{display:inline-flex;align-items:center;gap:6px;margin-top:2px;font:900 12.5px/1 var(--ft);font-style:normal;color:#7fe3a5}
+.pbc-lines em img{width:16px;height:16px}
+
+.pbcard.activity{max-width:470px;margin-left:auto;overflow:visible;transform:perspective(900px) rotateY(-8deg) rotateX(3deg)}
+.pbcard.activity:hover{transform:perspective(900px) rotateY(-3deg) rotateX(1deg) translateY(-4px)}
+.pbc-ribbon{display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:24px 24px 0 0;color:#fff;font:900 18px/1 var(--ft);text-shadow:0 2px 0 rgba(0,0,0,.15);background:var(--stripes),linear-gradient(100deg,var(--blue),#5fb0ff)}
+.pbc-ribbon img{width:28px;height:28px;padding:3px;border-radius:50%;background:rgba(0,0,0,.18)}
+.pbcard.activity .pbc-act{margin:16px;background:var(--paper2)}
+.pbcard.activity .thumb{width:118px;height:118px;flex-basis:118px;border-radius:18px}
+.pbcard.activity .dots{padding:0 18px 16px;margin:0}
+.dots i.on{background:var(--yellow)}
+
+.crew{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,380px));justify-content:center;gap:34px;margin-top:56px}
+.pbcard.profile{overflow:visible}
+.pbc-banner{height:118px;border-radius:24px 24px 0 0;background:var(--stripes),linear-gradient(100deg,color-mix(in srgb,var(--c1) 70%,transparent),color-mix(in srgb,var(--c2) 60%,transparent)),var(--bg) 0 0/64px 64px;image-rendering:pixelated;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.pbc-head{position:relative;height:58px;padding:0 20px}
+.pbc-avatar{position:absolute;left:20px;top:-56px;width:108px;height:108px;border-radius:50%;padding:6px;background:var(--paper);box-shadow:0 6px 0 rgba(0,0,0,.25)}
+.pbc-avatar>img:first-child{width:100%;height:100%;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--c1)}
+.pbc-status{position:absolute;right:2px;bottom:4px;width:30px;height:30px;padding:3px;border-radius:50%;background:var(--paper);animation:bob 2.4s ease-in-out infinite}
+.pbc-say{position:absolute;left:140px;top:-26px;max-width:calc(100% - 270px);padding:9px 14px;border-radius:16px 16px 16px 4px;background:var(--paper2);box-shadow:0 4px 0 rgba(0,0,0,.25),var(--ring);font:900 14px/1.2 var(--ft);color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbc-say::before{content:"";position:absolute;left:-7px;bottom:6px;width:12px;height:12px;border-radius:50%;background:var(--paper2)}
+.pbc-body{padding:0 20px 20px;display:flex;flex-direction:column;gap:10px}
+.pbc-body h3{margin:0;font:900 30px/1 var(--ft);color:#fff;text-shadow:0 4px 0 #0c0f1c}
+.pbc-handle{display:flex;align-items:center;gap:8px;font:800 15px/1 var(--f);color:var(--ink2)}
+.chip{display:inline-flex;align-items:center;padding:5px 11px;border-radius:999px;font:900 12px/1 var(--ft);color:#fff;box-shadow:inset 0 -2px 0 rgba(0,0,0,.2)}
+.chip.red{background:var(--stripes),linear-gradient(100deg,var(--red),var(--orange))}
+.chip.gold{background:var(--stripes),linear-gradient(100deg,#b97f00,#f2b705)}
+.chip.pink{background:var(--stripes),linear-gradient(100deg,#e05aa8,#ff7ac8)}
+.chip.purple{background:var(--stripes),linear-gradient(100deg,var(--purple-d),var(--purple))}
+.pbc-badges{display:inline-flex;align-self:flex-start;gap:6px;padding:6px 8px;border-radius:999px;background:var(--paper2)}
+.pbc-badges{position:relative;z-index:4}
+.badge{position:relative;display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:transparent;cursor:help;transition:transform .15s,background .15s}
+.badge img{width:26px;height:26px}
+.badge.type{margin-right:6px}
+.badge.type::before{content:"";position:absolute;right:-7px;top:6px;bottom:6px;width:2px;border-radius:2px;background:rgba(150,165,215,.25)}
+.badge:hover,.badge:focus-visible,.badge.on{background:var(--paper3);transform:translateY(-2px) scale(1.08);outline:none}
+.tip{position:absolute;left:50%;bottom:calc(100% + 10px);width:max-content;max-width:220px;padding:9px 12px;border-radius:14px;background:var(--paper);box-shadow:var(--shadow),var(--ring);color:var(--ink2);font:800 12.5px/1.4 var(--f);text-align:left;opacity:0;pointer-events:none;transform:translate(-50%,6px);transition:opacity .15s,transform .15s;z-index:10}
+.tip b{display:block;margin-bottom:2px;color:#fff;font:900 14px/1.2 var(--ft)}
+.tip::after{content:"";position:absolute;left:50%;top:100%;margin-left:-7px;border:7px solid transparent;border-top-color:var(--paper)}
+.badge:hover .tip,.badge:focus-visible .tip,.badge.on .tip{opacity:1;transform:translate(-50%,0)}
+.pbc-panel{display:flex;align-items:baseline;gap:10px;padding:10px 14px;border-radius:14px;background:var(--paper2)}
+.pbc-panel small{font:900 11px/1 var(--ft);text-transform:uppercase;letter-spacing:.05em;color:var(--ink3)}
+.pbc-panel b{font:900 15px/1 var(--ft);color:#fff}
+@media (max-width:820px){
+  .pbcard.activity{transform:none;margin:0 auto}
+  .crew{grid-template-columns:minmax(0,1fr)}
+}
+
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(1200px 700px at 15% 20%,rgba(58,140,255,.10),transparent 60%),radial-gradient(1000px 600px at 85% 70%,rgba(138,92,255,.12),transparent 60%),#141826}
+.below{position:relative;background:linear-gradient(180deg,#141826,#171c2c 40%,#141826)}
+.below::before{content:"";position:absolute;inset:0;z-index:0;opacity:.07;background:url("assets/env/forest/ground.png") 0 0/192px 192px;image-rendering:pixelated;-webkit-mask:linear-gradient(180deg,#000,transparent 30%,transparent 70%,#000);mask:linear-gradient(180deg,#000,transparent 30%,transparent 70%,#000)}
+.below>*{position:relative;z-index:1}
+.decos{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.deco{position:absolute;background-repeat:no-repeat;image-rendering:pixelated;will-change:transform}
+.deco.dim{opacity:.4}
+.perch{position:absolute;z-index:3;background-repeat:no-repeat;image-rendering:pixelated;pointer-events:auto;cursor:pointer}
+.card p{text-align:left}
+.presence{position:relative;max-width:500px;padding:18px 20px}
+.presence .thumb{width:124px;height:124px;flex-basis:124px;border-radius:12px}
+.presence b{font-size:18px}.presence span{font-size:15.5px}
+
+@media (max-width:820px){
+  .links{display:none}
+  .nav .dl-mini{margin-left:auto}
+  .discord,.dl-body{grid-template-columns:minmax(0,1fr)}
+  .presence{transform:none;margin:0 auto}
+  .frame{--rx:0deg!important;--ry:0deg!important}
+  .frame .cap{position:static;margin-top:10px;max-width:none}
+  .btn{height:56px;font-size:18px;padding:0 24px}
+  .copy{top:11%}
+  .nav .dl-mini span,.nav .dl-mini{font-size:0;gap:0;padding:0 11px}
+  .nav .dl-mini img{width:26px;height:26px}
+  .brand{font-size:14px}
+  .ctas{gap:10px;margin-top:16px}
+  .ctas .btn{height:50px;font-size:17px;padding:0 20px}
+  .ctas .btn img{width:24px;height:24px}
+  .ctas .btn kbd{display:none}
+  .lead{font-size:15px;margin-top:12px}
+  .tag{margin-top:16px;font-size:13px}
+  .meta{display:none}
+  .world-wrap{perspective-origin:50% 84%}
+  section.block{padding:80px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="#top"><img class="pix" src="assets/items/poke-ball.png" alt="">PokéBonk Toolkit</a>
+  <div class="links">
+    <a href="#features">Features</a>
+    <a href="#preview">Preview</a>
+    <a href="#discord">Discord</a>
+    <a href="#credits">Credits</a>
+    <a href="#download">Download</a>
+  </div>
+  <a class="btn sm dl-mini" data-link="download" href="#download"><img class="pix" src="assets/items/poke-ball.png" alt="">Download</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="rays" data-depth="0.05"></div>
+  <div class="sun" data-depth="0.05"></div>
+  <div class="clouds" data-depth="0.1"></div>
+  <div class="hzl" id="hzBack">
+    <div class="groundfill"></div>
+    <div class="range far" data-depth="0.18"><canvas></canvas></div>
+    <div class="range mid" data-depth="0.32"><canvas></canvas></div>
+  </div>
+  <div class="world-wrap"><div class="world" id="world"></div></div>
+  <div class="hzl" id="hzFront"><div class="fog"></div></div>
+  <div class="warm"></div>
+  <div class="glow"></div>
+  <div class="motes" id="motes"></div>
+  <div class="vignette"></div>
+
+  <div class="copy" id="copy">
+    <h1 class="logo">Poké<span>Bonk</span><img class="ball pix" src="assets/items/poke-ball.png" alt=""><i class="splash">Toolkit!</i></h1>
+    <div class="tag"><img class="pix" src="assets/ui/icons/research.png" alt="" width="26" height="26">The desktop app for PokéBonk</div>
+    <p class="lead">Play PokéBonk in its own window, with a Pokédex, the best partners for every map, every run you play tracked, and a Discord status that updates itself.</p>
+    <div class="ctas">
+      <a class="btn" data-link="download" href="#download"><img class="pix" src="assets/items/poke-ball.png" alt="">Download!<kbd>.exe</kbd></a>
+      <a class="btn green" data-link="apk" href="#download"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 1.5h10A2.5 2.5 0 0 1 19.5 4v16a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 20V4A2.5 2.5 0 0 1 7 1.5zm0 3V18h10V4.5H7zm5 15.2a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/></svg>Android<kbd>.apk</kbd></a>
+      <a class="btn dark" data-link="github" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>
+        GitHub</a>
+    </div>
+    <div class="meta">Windows 10 / 11 · Android 7+ · free · fan-made</div>
+  </div>
+  <a class="scroll-hint" href="#features"><i></i>Explore</a>
+  <div class="hero-bottom"></div>
+</header>
+
+<main class="below" id="below">
+<div class="decos" id="decos"></div>
+<section class="block center" id="features">
+  <span class="eyebrow"><img class="pix" src="assets/ui/icons/research.png" alt="">What's inside</span>
+  <h2>All your <span>PokéBonk</span>, in one place</h2>
+  <p class="sub">A menu that blends right into the game. Open it with <kbd>F2</kbd> any time, even mid-run.</p>
+  <div class="features">
+    <article class="card"><div class="ribbon"><img class="pix" src="assets/items/poke-ball.png" alt="">Pokédex</div>
+      <p>All <b>151 Pokémon</b> with their portraits, types and evolutions, plus what they hit hard and what hurts them, using PokéBonk's real multipliers.</p></article>
+    <article class="card green"><div class="ribbon"><img class="pix" src="assets/ui/icons/map-portal.png" alt="">Maps</div>
+      <p>Every region with its bosses, its mechanics and a <b>ranking of all 79 partners</b>: who to bring to Storm Coast or the Glacier, and why.</p></article>
+    <article class="card purple"><div class="ribbon"><img class="pix" src="assets/ui/icons/record.png" alt="">Progress</div>
+      <p>Every run is <b>saved on its own</b>: time, K.O.s, level, gold. Your records, your form over time and your stats per Pokémon and per map.</p></article>
+    <article class="card blue"><div class="ribbon"><img class="pix" src="assets/ui/types/electric.png" alt="">Discord status</div>
+      <p>Your friends see <b>your map and your Pokémon</b> in pixel art, with your level and K.O.s live. Nothing to set up.</p></article>
+  </div>
+</section>
+
+<section class="block" id="preview">
+  <div class="center">
+    <span class="eyebrow"><img class="pix" src="assets/ui/icons/check.png" alt="">Preview</span>
+    <h2>Made to <span>feel like the game</span></h2>
+    <p class="sub">Same colours, same fonts, same sprites. It looks like it was always part of PokéBonk.</p>
+  </div>
+  <div class="show">
+    <div class="center"><div class="seg" id="shotTabs">
+      <button class="on" data-shot="0"><img class="pix" src="assets/items/poke-ball.png" alt="">Pokédex</button>
+      <button data-shot="1"><img class="pix" src="assets/ui/icons/map-portal.png" alt="">Maps</button>
+      <button data-shot="2"><img class="pix" src="assets/ui/icons/record.png" alt="">Progress</button>
+      <button data-shot="3"><img class="pix" src="assets/ui/types/fire.png" alt="">A run</button>
+    </div></div>
+    <div class="stage3d"><div class="frame" id="frame">
+      <img id="shot" src="assets/shots/pokedex.png" alt="The toolkit's Pokédex" width="1590" height="1140">
+      <div class="cap" id="shotCap"><b>Pokédex</b>All 151 Pokémon in Pokédex order, with pixel-art portraits straight from the game.</div>
+    </div></div>
+  </div>
+</section>
+
+<section class="block" id="discord">
+  <div class="discord">
+    <div>
+      <span class="eyebrow"><img class="pix" src="assets/ui/types/electric.png" alt="">Discord status</span>
+      <h2>Show <span>who you're playing</span></h2>
+      <p class="sub">As soon as you start a run, your profile shows the map with your Pokémon right in the middle, in pixel art, plus your mode, level and K.O.s. Back to the menu? The status follows on its own.</p>
+    </div>
+    <div class="pbcard activity" id="presence">
+      <div class="pbc-ribbon"><img class="pix" src="assets/ui/types/electric.png" alt="">Playing PokéBonk</div>
+      <div class="pbc-act">
+        <div class="thumb" id="pthumb"><img class="pix" src="assets/shots/forest-25.png" alt=""></div>
+        <div class="pbc-lines"><b>PokéBonk</b><span id="pl1">Survival · Viridian Forest</span><span id="pl2">Pikachu · Lv. 24 · 1,312 K.O.</span><em><img class="pix" src="assets/ui/icons/record.png" alt="">18:42 elapsed</em></div>
+      </div>
+      <div class="dots" id="pdots"><i class="on"></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<section class="block center" id="credits">
+  <span class="eyebrow"><img class="pix" src="assets/items/nugget.png" alt="">Credits</span>
+  <h2>Made by <span>two trainers</span></h2>
+  <p class="sub">Built by fans, for fans. Say hi on Discord!</p>
+  <div class="crew">
+    <article class="pbcard profile" data-partner="197" style="--c1:#f2b705;--c2:#5a4cd8;--bg:url('assets/env/graveyard/ground.png')">
+      <div class="pbc-banner"></div>
+      <div class="pbc-head">
+        <div class="pbc-avatar"><img src="assets/credits/deepexe.png" alt="Deepexe's avatar"><img class="pbc-status pix" src="assets/items/poke-ball.png" alt=""></div>
+        <div class="pbc-say">Press F2!</div>
+      </div>
+      <div class="pbc-body">
+        <h3>Deepexe</h3>
+        <div class="pbc-handle">deepexe <span class="chip gold">Creator</span></div>
+        <div class="pbc-badges"><button type="button" class="badge type" aria-label="Dark type: Umbreon, his partner, is a Dark type."><img class="pix" src="assets/ui/types/dark.png" alt=""><span class="tip"><b>Dark type</b>Umbreon, his partner, is a Dark type.</span></button><button type="button" class="badge" aria-label="Creator: Started the PokéBonk Toolkit project."><img class="pix" src="assets/ui/icons/crown.png" alt=""><span class="tip"><b>Creator</b>Started the PokéBonk Toolkit project.</span></button><button type="button" class="badge" aria-label="Toolkit dev: Built the app, its menu and the run tracker."><img class="pix" src="assets/ui/icons/research.png" alt=""><span class="tip"><b>Toolkit dev</b>Built the app, its menu and the run tracker.</span></button><button type="button" class="badge" aria-label="Bug squasher: Hunts down and fixes what breaks."><img class="pix" src="assets/ui/icons/bug.png" alt=""><span class="tip"><b>Bug squasher</b>Hunts down and fixes what breaks.</span></button></div>
+        <div class="pbc-act">
+          <div class="thumb"><img class="pix" src="assets/shots/graveyard-197.png" alt=""></div>
+          <div class="pbc-lines"><small>Partner Pokémon</small><b>Umbreon</b><span>#197 · Dark type</span></div>
+        </div>
+      </div>
+    </article>
+    <article class="pbcard profile" data-partner="700" style="--c1:#ff7ac8;--c2:#6fc3ff;--bg:url('assets/env/glacier/ground.png')">
+      <div class="pbc-banner"></div>
+      <div class="pbc-head">
+        <div class="pbc-avatar"><img src="assets/credits/kanami.png" alt="Kanami's avatar"><img class="pbc-status pix" src="assets/items/poke-ball.png" alt=""></div>
+        <div class="pbc-say">osu?</div>
+      </div>
+      <div class="pbc-body">
+        <h3>Kanami</h3>
+        <div class="pbc-handle">_kanamii_ <span class="chip pink">Co-creator</span></div>
+        <div class="pbc-badges"><button type="button" class="badge type" aria-label="Fairy type: Sylveon, her partner, is a Fairy type."><img class="pix" src="assets/ui/types/fairy.png" alt=""><span class="tip"><b>Fairy type</b>Sylveon, her partner, is a Fairy type.</span></button><button type="button" class="badge" aria-label="Artist: Shapes the look and feel."><img class="pix" src="assets/ui/icons/brush.png" alt=""><span class="tip"><b>Artist</b>Shapes the look and feel.</span></button><button type="button" class="badge" aria-label="Idea machine: Comes up with new features."><img class="pix" src="assets/ui/icons/idea.png" alt=""><span class="tip"><b>Idea machine</b>Comes up with new features.</span></button><button type="button" class="badge" aria-label="Tester: Tries every build before it ships."><img class="pix" src="assets/ui/icons/check.png" alt=""><span class="tip"><b>Tester</b>Tries every build before it ships.</span></button></div>
+        <div class="pbc-act">
+          <div class="thumb"><img class="pix" src="assets/shots/glacier-700.png" alt=""></div>
+          <div class="pbc-lines"><small>Partner Pokémon</small><b>Sylveon</b><span>#700 · Fairy type</span></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="block" id="download">
+  <div class="dl">
+    <div class="ribbon">Ready to play?</div>
+    <div class="dl-body">
+      <ol class="steps">
+        <li><span class="n">1</span><span><b>Download</b> PokeBonkApp.exe (Windows 10 or 11) or PokeBonk.apk (Android 7+). On Android, allow your browser to <b>install unknown apps</b> when asked.</span></li>
+        <li><span class="n">2</span><span><b>Run it.</b> If Windows says "Windows protected your PC", click <b>More info</b> then <b>Run anyway</b>. The app isn't signed, which is normal for a fan project.</span></li>
+        <li><span class="n">3</span><span><b>Play.</b> <kbd>F2</kbd> opens the toolkit, and Discord updates on its own if it's running.</span></li>
+      </ol>
+      <div class="dl-cta">
+        <a class="btn" data-link="download" href="#"><img class="pix" src="assets/items/poke-ball.png" alt="">Download for Windows</a>
+        <a class="btn green" data-link="apk" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 1.5h10A2.5 2.5 0 0 1 19.5 4v16a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 20V4A2.5 2.5 0 0 1 7 1.5zm0 3V18h10V4.5H7zm5 15.2a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/></svg>Download for Android</a>
+        <a class="btn dark" data-link="github" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>
+          View on GitHub</a>
+        <small>Your runs stay on your device. No account, no ads. On Android the toolkit opens with its button, and Back works like Esc. The Discord status is PC only: Discord does not allow it on phones.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img class="pix" src="assets/items/poke-ball.png" alt="">
+  Made with care by <b>Deepexe</b> &amp; <b>Kanami</b>.<br>
+  PokéBonk Toolkit is a free, unofficial fan tool. It is not made or endorsed by the PokéBonk team.
+  PokéBonk is made by Charcher (pokebonk.com). Sprites and portraits (Umbreon and Sylveon included): PMD SpriteCollab (CC BY-NC 4.0).
+  Pokémon © Nintendo / Creatures Inc. / GAME FREAK inc.
+</footer>
+</main>
+
+<script src="assets/sprites.js"></script>
+<script src="assets/extra-sprites.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var LINKS = {
+    download: "download/PokeBonkApp.exe",
+    apk: "download/PokeBonk.apk",
+    github: "https://github.com/Deepexee"
+  };
+  document.querySelectorAll("[data-link]").forEach(function (a) {
+    var k = a.getAttribute("data-link");
+    if (a.getAttribute("href") === "#download") return;
+    a.href = LINKS[k];
+  });
+
+  if (/Android/i.test(navigator.userAgent)) {
+    document.querySelectorAll(".ctas,.dl-cta").forEach(function (box) {
+      var apk = box.querySelector('[data-link="apk"]');
+      if (apk) box.insertBefore(apk, box.firstChild);
+    });
+  }
+
+  var REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var MOBILE = innerWidth < 820;
+  var SHEETS = window.PB_SHEETS || {};
+  var ATLAS = window.PB_ATLAS || {};
+  var NAMES = { 1: "Bulbasaur", 4: "Charmander", 7: "Squirtle", 25: "Pikachu", 39: "Jigglypuff", 133: "Eevee",
+    54: "Psyduck", 43: "Oddish", 16: "Pidgey", 52: "Meowth", 35: "Clefairy", 60: "Poliwag", 143: "Snorlax", 74: "Geodude", 95: "Onix",
+    197: "Umbreon", 700: "Sylveon" };
+  var SCALE = 4;
+  var TILT = 76;
+  var PERSP = 1100;
+  var RAD = Math.PI / 180;
+  document.documentElement.style.setProperty("--tilt", TILT + "deg");
+  var hero = document.querySelector(".hero");
+  var wrap = document.querySelector(".world-wrap");
+  var world = document.getElementById("world");
+  var copy = document.getElementById("copy");
+  var hzBack = document.getElementById("hzBack"), hzFront = document.getElementById("hzFront");
+  var W = 4800, H = 2800;
+  var CX = W / 2, CY = H - 900, RX = 900, RY = 560;
+  world.style.width = W + "px";
+  world.style.marginLeft = -W / 2 + "px";
+
+  function load(src) {
+    return new Promise(function (res) { var i = new Image(); i.onload = function () { res(i); }; i.onerror = function () { res(null); }; i.src = src; });
+  }
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  var geo = {};
+  var cam = { ty: 0, a: TILT * RAD, b: 0 };
+  function measure() {
+    geo.w = hero.clientWidth;
+    geo.h = hero.clientHeight;
+    var po = getComputedStyle(wrap).perspectiveOrigin.split(" ");
+    geo.ox = parseFloat(po[0]);
+    geo.oy = parseFloat(po[1]);
+    geo.cx0 = geo.w / 2;
+    geo.cy0 = geo.h + 240;
+  }
+  function project(px, py) {
+    var x = px - W / 2, y = py - H;
+    var cb = Math.cos(cam.b), sb = Math.sin(cam.b), ca = Math.cos(cam.a), sa = Math.sin(cam.a);
+    var x1 = x * cb - y * sb, y1 = x * sb + y * cb;
+    var X = geo.cx0 + x1, Y = geo.cy0 + y1 * ca + cam.ty, Z = y1 * sa;
+    var k = PERSP / (PERSP - Z);
+    return { x: geo.ox + (X - geo.ox) * k, y: geo.oy + (Y - geo.oy) * k, k: k };
+  }
+  function unproject(sx, sy) {
+    var ca = Math.cos(cam.a), sa = Math.sin(cam.a), cb = Math.cos(cam.b), sb = Math.sin(cam.b);
+    var y1 = PERSP * ((sy - geo.oy) - (geo.cy0 + cam.ty - geo.oy)) / (PERSP * ca + (sy - geo.oy) * sa);
+    var k = PERSP / (PERSP - y1 * sa);
+    var x1 = (sx - geo.ox) / k + geo.ox - geo.cx0;
+    return { x: x1 * cb + y1 * sb + W / 2, y: -x1 * sb + y1 * cb + H };
+  }
+  measure();
+
+  function billboard(x, y, w, h, extraClass, withShadow) {
+    var el = document.createElement("div");
+    el.className = "bb" + (extraClass ? " " + extraClass : "");
+    el.style.width = w + "px";
+    el.style.height = h + "px";
+    el.innerHTML = (withShadow ? '<div class="shadow"></div>' : "") + '<div class="spr"></div>';
+    world.appendChild(el);
+    place(el, x, y, w, h);
+    return el;
+  }
+  function place(el, x, y, w, h) {
+    el.style.transform = "translate3d(" + (x - w / 2).toFixed(1) + "px," + (y - h).toFixed(1) + "px,0) rotateX(" + (-TILT) + "deg)";
+  }
+
+  var BIG = ["tree0", "tree1", "tree3", "tree4", "tree5", "oak"];
+  var SMALL = ["bush", "berrybush", "tallgrass", "fern", "flowersA", "flowersB", "sunflower", "mushrooms", "rocks", "stump", "tree2", "boulder"];
+  function visibleSpot(x, y, h) {
+    var p = project(x, y);
+    return p.x > -260 && p.x < geo.w + 260 && p.y - h * p.k < geo.h + 60 && p.y > -40;
+  }
+  function prop(name, x, y, s) {
+    var a = ATLAS[name];
+    if (!a) return;
+    var w = a.w * s, h = a.h * s;
+    if (!visibleSpot(x, y, h)) return;
+    var el = billboard(x, y, w, h, "prop", h >= 90);
+    var spr = el.lastChild;
+    spr.style.width = w + "px";
+    spr.style.height = h + "px";
+    spr.style.backgroundImage = "url(assets/env/forest/atlas.png)";
+    spr.style.backgroundSize = 2048 * s + "px " + 128 * s + "px";
+    spr.style.backgroundPosition = -a.x * s + "px " + -a.y * s + "px";
+  }
+  function inClearing(x, y, pad) {
+    var dx = (x - CX) / (RX + (pad || 0)), dy = (y - CY) / (RY + (pad || 0));
+    return dx * dx + dy * dy < 1;
+  }
+  function sideOk(x, y) {
+    var corridor = 420 + (y / H) * 700;
+    return Math.abs(x - CX) > corridor;
+  }
+  function scatter(names, count, sMin, sMax, big) {
+    var tries = 0;
+    while (count > 0 && tries++ < count * 40) {
+      var x = rnd(60, W - 60), y = rnd(260, H - 120);
+      if (inClearing(x, y, big ? 160 : 0) || (big && !sideOk(x, y))) continue;
+      prop(names[(Math.random() * names.length) | 0], x, y, rnd(sMin, sMax));
+      count--;
+    }
+  }
+  for (var row = 0; row < 2; row++) {
+    for (var tx = rnd(0, 60); tx < W; tx += rnd(85, 135)) prop(BIG[(Math.random() * BIG.length) | 0], tx, 40 + row * 90 + rnd(0, 50), rnd(3.4, 4.4));
+  }
+  scatter(BIG, MOBILE ? 20 : 34, 3, 4, true);
+  for (var k = 0; k < (MOBILE ? 22 : 38); k++) {
+    var t = rnd(0, Math.PI * 2);
+    var ring = rnd(1.12, 1.5);
+    if (Math.sin(t) > 0.35 && Math.abs(Math.cos(t)) < 0.8) continue;
+    prop(BIG[(Math.random() * BIG.length) | 0], CX + Math.cos(t) * RX * ring, CY + Math.sin(t) * RY * ring, rnd(2.8, 3.8));
+  }
+  for (var k2 = 0; k2 < (MOBILE ? 14 : 24); k2++) {
+    var t2 = rnd(0, Math.PI * 2), ring2 = rnd(0.9, 1.1);
+    prop(SMALL[(Math.random() * 8) | 0], CX + Math.cos(t2) * RX * ring2, CY + Math.sin(t2) * RY * ring2, rnd(2.2, 2.8));
+  }
+  scatter(SMALL, MOBILE ? 30 : 60, 2.2, 3);
+
+  var atlasImg = null;
+  function paintRanges() {
+    var img = atlasImg;
+    if (!img) return;
+    document.querySelectorAll(".range canvas").forEach(function (cv, li) {
+      var r = cv.getBoundingClientRect();
+      cv.width = Math.max(1, Math.round(r.width));
+      cv.height = Math.max(1, Math.round(r.height));
+      var g = cv.getContext("2d");
+      g.imageSmoothingEnabled = false;
+      var s = li === 0 ? 1.05 : 1.45;
+      for (var x = -20; x < cv.width; x += rnd(18, 34) * s) {
+        var a = ATLAS[BIG[(Math.random() * BIG.length) | 0]];
+        var w = a.w * s, h = a.h * s;
+        g.drawImage(img, a.x, a.y, a.w, a.h, Math.round(x), Math.round(cv.height - h - rnd(0, 14)), Math.round(w), Math.round(h));
+      }
+    });
+  }
+  load("assets/env/forest/atlas.png").then(function (img) { atlasImg = img; paintRanges(); });
+  addEventListener("resize", function () {
+    clearTimeout(paintRanges.t);
+    paintRanges.t = setTimeout(function () { measure(); paintRanges(); }, 200);
+  });
+
+  var motes = document.getElementById("motes");
+  for (var m = 0; m < (MOBILE ? 10 : 20); m++) {
+    var mo = document.createElement("i");
+    mo.className = "mote";
+    mo.style.left = rnd(0, 100) + "%";
+    mo.style.top = rnd(35, 100) + "%";
+    mo.style.setProperty("--dx", rnd(-60, 60).toFixed(0) + "px");
+    mo.style.animationDuration = rnd(6, 12) + "s";
+    mo.style.animationDelay = -rnd(0, 12) + "s";
+    var sz = rnd(6, 12);
+    mo.style.width = mo.style.height = sz + "px";
+    motes.appendChild(mo);
+  }
+
+  var clouds = document.querySelector(".clouds");
+  for (var c = 0; c < 6; c++) {
+    var cl = document.createElement("div");
+    cl.className = "cloud";
+    cl.style.top = rnd(2, 26) + "%";
+    cl.style.width = rnd(90, 190) + "px";
+    cl.style.animationDuration = rnd(70, 140) + "s";
+    cl.style.animationDelay = -rnd(0, 140) + "s";
+    clouds.appendChild(cl);
+  }
+
+  var OCT_TO_ROW = [2, 1, 0, 7, 6, 5, 4, 3];
+  var walkers = [];
+  var ids = Object.keys(SHEETS).map(Number).filter(function (id) { return id <= 151; });
+  if (MOBILE) ids = ids.slice(0, 9);
+
+  ids.forEach(function (id) {
+    var sh = SHEETS[id];
+    if (!sh || !sh.walk) return;
+    load("assets/pmd/" + id + ".png").then(function (img) {
+      if (!img) return;
+      var big = id === 143 || id === 95;
+      var s = big ? SCALE + 1 : SCALE;
+      var maxW = Math.max(sh.walk.fw, (sh.idle || sh.walk).fw) * s;
+      var maxH = Math.max(sh.walk.fh, (sh.idle || sh.walk).fh) * s;
+      var x = CX + rnd(-RX, RX) * 0.6, y = CY + rnd(-RY, RY) * 0.6;
+      var el = billboard(x, y, maxW, maxH, "mon", true);
+      var bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.innerHTML = '<img class="pix" src="assets/portraits/' + id + '.png" alt=""><span>' + (NAMES[id] || "") + "</span>";
+      var spr = el.querySelector(".spr");
+      spr.appendChild(bubble);
+      spr.style.backgroundImage = "url(assets/pmd/" + id + ".png)";
+      spr.style.backgroundSize = img.naturalWidth * s + "px " + img.naturalHeight * s + "px";
+      var w = { id: id, el: el, spr: spr, bubble: bubble, sh: sh, s: s, img: img, x: x, y: y, tx: x, ty: y,
+        speed: rnd(55, 95) * (big ? 0.6 : 1), wait: rnd(0, 2), row: 0, frame: 0, ft: 0, anim: "idle",
+        w: maxW, h: maxH, hop: 0, dizzy: 0, key: "", pos: "", sprT: "" };
+      el.addEventListener("pointerdown", function (e) { pressOn(w, e); });
+      el.addEventListener("mouseenter", function () { if (!carried) el.classList.add("talk"); });
+      el.addEventListener("mouseleave", function () { if (!w.talkT) el.classList.remove("talk"); });
+      walkers.push(w);
+      paint(w);
+    });
+  });
+
+  function pickTarget(w) {
+    for (var i = 0; i < 20; i++) {
+      var x = CX + rnd(-RX, RX), y = CY + rnd(-RY, RY);
+      if (inClearing(x, y, -60)) { w.tx = x; w.ty = y; return; }
+    }
+  }
+
+  function anim(w, name) { return name === "walk" ? w.sh.walk : (w.sh.idle || w.sh.walk); }
+
+  function paint(w) {
+    var a = anim(w, w.anim), s = w.s;
+    var key = w.anim + w.row;
+    if (key !== w.key) {
+      w.key = key;
+      w.spr.style.width = a.fw * s + "px";
+      w.spr.style.height = a.fh * s + "px";
+      w.spr.style.left = (w.w - a.fw * s) / 2 + "px";
+      w.spr.style.bottom = -((a.pad && a.pad[w.row]) || 0) * s + "px";
+      w.bgFrame = -1;
+    }
+    var f = w.frame % a.n;
+    if (f !== w.bgFrame) {
+      w.bgFrame = f;
+      w.spr.style.backgroundPosition = -f * a.fw * s + "px " + -(a.y + w.row * a.fh) * s + "px";
+    }
+    var hopY = w.hop > 0 ? Math.sin(w.hop * Math.PI) * 34 * (w.hopH || 1) : 0;
+    var sprT = hopY ? "translateY(" + (-hopY).toFixed(1) + "px)" : "";
+    if (sprT !== w.sprT) { w.sprT = sprT; w.spr.style.transform = sprT; }
+    var pos = w.x.toFixed(1) + "," + w.y.toFixed(1);
+    if (pos !== w.pos) { w.pos = pos; place(w.el, w.x, w.y, w.w, w.h); }
+  }
+
+  function step(w, dt) {
+    var prevAnim = w.anim;
+    if (w.hop > 0) w.hop = Math.max(0, w.hop - dt * 2.4);
+    if (w.dizzy > 0) {
+      w.dizzy -= dt;
+      w.anim = "idle";
+      w.row = ((Math.floor(w.dizzy * 6) % 8) + 8) % 8;
+      if (w.dizzy <= 0) { w.row = 0; pickTarget(w); w.wait = 0; }
+    } else if (w.wait > 0) {
+      w.wait -= dt;
+      w.anim = "idle";
+      if (w.wait <= 0) pickTarget(w);
+    } else {
+      var dx = w.tx - w.x, dy = w.ty - w.y, d = Math.hypot(dx, dy);
+      if (d < 4) { w.wait = rnd(1, 4); w.anim = "idle"; }
+      else {
+        w.anim = "walk";
+        var v = Math.min(d, w.speed * dt);
+        w.x += dx / d * v;
+        w.y += dy / d * v;
+        var ang = Math.atan2(dy, dx) * 180 / Math.PI;
+        w.row = OCT_TO_ROW[((Math.round(ang / 45) % 8) + 8) % 8];
+      }
+    }
+    var a = anim(w, w.anim);
+    if (w.anim !== prevAnim) { w.frame = 0; w.ft = 0; }
+    w.ft += dt * 60;
+    var dur = (a.d && a.d[w.frame % a.n]) || 6;
+    if (w.ft >= dur) { w.ft -= dur; w.frame = (w.frame + 1) % a.n; }
+  }
+
+  var press = null, carried = null;
+  var carryEl = document.createElement("div");
+  carryEl.className = "carry";
+  carryEl.innerHTML = '<div class="spr"></div><div class="bubble"><img class="pix" alt=""><span></span></div>';
+  document.body.appendChild(carryEl);
+  var carrySpr = carryEl.firstChild;
+  var pointer = { x: 0, y: 0 };
+
+  function talk(w, text, ms) {
+    var label = w.bubble.querySelector("span");
+    label.textContent = text || NAMES[w.id] || "";
+    w.el.classList.add("talk");
+    clearTimeout(w.talkT);
+    w.talkT = setTimeout(function () {
+      w.talkT = 0;
+      w.el.classList.remove("talk");
+      label.textContent = NAMES[w.id] || "";
+    }, ms || 1800);
+  }
+
+  function pressOn(w, e) {
+    if (e.button && e.button !== 0) return;
+    e.preventDefault();
+    press = { w: w, x: e.clientX, y: e.clientY };
+    pointer.x = e.clientX; pointer.y = e.clientY;
+  }
+
+  function startCarry(w) {
+    var a = w.sh.walk, s = w.s * 1.15;
+    carried = { w: w, x: pointer.x, y: pointer.y, px: pointer.x, ang: 0, va: 0, frame: 0, ft: 0, s: s, fall: null };
+    w.el.classList.remove("talk");
+    w.el.style.visibility = "hidden";
+    carrySpr.style.width = a.fw * s + "px";
+    carrySpr.style.height = a.fh * s + "px";
+    carrySpr.style.backgroundImage = "url(assets/pmd/" + w.id + ".png)";
+    carrySpr.style.backgroundSize = w.img.naturalWidth * s + "px " + w.img.naturalHeight * s + "px";
+    carryEl.querySelector("img").src = "assets/portraits/" + w.id + ".png";
+    carryEl.querySelector("span").textContent = (NAMES[w.id] || "") + " !?";
+    carryEl.style.display = "block";
+    document.body.classList.add("grabbing");
+  }
+
+  function dropCarry() {
+    var c = carried, w = c.w;
+    var a = w.sh.walk;
+    var heroTop = -scrollY;
+    var feetY = c.y + a.fh * c.s * 0.8 - heroTop;
+    var hz = project(W / 2, 0).y;
+    var gy = clamp(feetY, hz + 40, geo.h - 30);
+    var g = unproject(clamp(c.x, 20, geo.w - 20), gy);
+    g.x = clamp(g.x, CX - RX * 1.7, CX + RX * 1.7);
+    g.y = clamp(g.y, CY - RY * 1.9, H - 80);
+    var land = project(g.x, g.y);
+    c.fall = { vy: 0, toY: land.y + heroTop, toX: land.x, gx: g.x, gy: g.y, k: land.k };
+    document.body.classList.remove("grabbing");
+  }
+
+  function land() {
+    var c = carried, w = c.w;
+    w.x = c.fall.gx; w.y = c.fall.gy;
+    w.tx = w.x; w.ty = w.y;
+    w.hop = 1; w.hopH = 0.5;
+    w.dizzy = 1.6;
+    w.el.style.visibility = "";
+    w.pos = "";
+    carryEl.style.display = "none";
+    carried = null;
+    talk(w, "@_@ " + (NAMES[w.id] || ""), 1600);
+  }
+
+  function updateCarry(dt) {
+    var c = carried, w = c.w, a = w.sh.walk;
+    var s = c.s;
+    if (c.fall) {
+      c.fall.vy += 2600 * dt;
+      c.y += c.fall.vy * dt;
+      c.x += (c.fall.toX - c.x) * Math.min(1, dt * 10);
+      c.ang *= 0.85;
+      var targetS = w.s * c.fall.k;
+      s = c.s = c.s + (targetS - c.s) * Math.min(1, dt * 8);
+      if (c.y + a.fh * s * 0.8 >= c.fall.toY) { land(); return; }
+    } else {
+      c.x += (pointer.x - c.x) * Math.min(1, dt * 22);
+      c.y += (pointer.y - c.y) * Math.min(1, dt * 22);
+      var vx = (c.x - c.px) / Math.max(dt, 0.001);
+      c.px = c.x;
+      c.va += (clamp(-vx * 0.035, -55, 55) - c.ang) * 40 * dt;
+      c.va *= Math.pow(0.02, dt);
+      c.ang += c.va * dt;
+    }
+    c.ft += dt * 120;
+    var dur = (a.d && a.d[c.frame % a.n]) || 6;
+    if (c.ft >= dur) { c.ft -= dur; c.frame = (c.frame + 1) % a.n; }
+    carrySpr.style.width = a.fw * s + "px";
+    carrySpr.style.height = a.fh * s + "px";
+    carrySpr.style.backgroundSize = w.img.naturalWidth * s + "px " + w.img.naturalHeight * s + "px";
+    carrySpr.style.backgroundPosition = -c.frame * a.fw * s + "px " + -(a.y) * s + "px";
+    carryEl.style.transform = "translate3d(" + (c.x - a.fw * s / 2).toFixed(1) + "px," + (c.y - 18).toFixed(1) + "px,0) rotate(" + c.ang.toFixed(1) + "deg)";
+    carryEl.style.transformOrigin = (a.fw * s / 2).toFixed(0) + "px 18px";
+  }
+
+  addEventListener("pointermove", function (e) {
+    pointer.x = e.clientX; pointer.y = e.clientY;
+    if (press && !carried && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 6) startCarry(press.w);
+  }, { passive: true });
+  addEventListener("pointerup", function () {
+    if (carried && !carried.fall) dropCarry();
+    else if (press && !carried) { press.w.hop = 1; press.w.hopH = 1; talk(press.w); }
+    press = null;
+  });
+  addEventListener("pointercancel", function () { if (carried && !carried.fall) dropCarry(); press = null; });
+
+  var mx = 0, my = 0, cx = 0, cy = 0, scrollY = window.scrollY;
+  var layers = [].slice.call(document.querySelectorAll("[data-depth]")).map(function (l) {
+    return { el: l, d: parseFloat(l.getAttribute("data-depth")), t: "" };
+  });
+  addEventListener("mousemove", function (e) {
+    mx = e.clientX / innerWidth * 2 - 1;
+    my = e.clientY / innerHeight * 2 - 1;
+  }, { passive: true });
+  addEventListener("scroll", function () { scrollY = window.scrollY; }, { passive: true });
+
+  var lite = REDUCED;
+  var fpsT = 0, fpsN = 0, fpsChecked = false;
+  var last = performance.now();
+  var lastWorld = "", lastCopy = "", lastHz = -1;
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    if (!fpsChecked && scrollY < 50 && now > 2500) {
+      fpsT += dt; fpsN++;
+      if (fpsT > 3) {
+        fpsChecked = true;
+        if (fpsN / fpsT < 32) { lite = true; hero.classList.add("lite"); }
+      }
+    }
+    var inView = scrollY < geo.h;
+    if (inView) {
+      if (!lite) { cx += (mx - cx) * 0.06; cy += (my - cy) * 0.06; }
+      var sp = Math.min(1, scrollY / geo.h);
+      cam.ty = sp * 160;
+      cam.a = (TILT + sp * 10 + cy * 2) * RAD;
+      cam.b = cx * -2.5 * RAD;
+      var wt = "translateY(" + cam.ty.toFixed(1) + "px) rotateX(" + (cam.a / RAD).toFixed(2) + "deg) rotateZ(" + (cam.b / RAD).toFixed(2) + "deg)";
+      if (wt !== lastWorld) {
+        lastWorld = wt;
+        world.style.transform = wt;
+        layers.forEach(function (l) {
+          var t = "translate3d(" + (cx * -120 * l.d).toFixed(1) + "px," + (cy * -40 * l.d + scrollY * l.d * 0.9).toFixed(1) + "px,0)";
+          if (t !== l.t) { l.t = t; l.el.style.transform = t; }
+        });
+        var hz = Math.round(project(W / 2, 0).y);
+        if (hz !== lastHz) {
+          lastHz = hz;
+          hzBack.style.transform = hzFront.style.transform = "translate3d(0," + hz + "px,0)";
+        }
+      }
+      var ct = "translate3d(" + (cx * 10).toFixed(1) + "px," + (scrollY * 0.35 + cy * 6).toFixed(1) + "px,0)";
+      if (ct !== lastCopy) {
+        lastCopy = ct;
+        copy.style.transform = ct;
+        copy.style.opacity = String(Math.max(0, 1 - sp * 1.6));
+      }
+      if (!REDUCED) walkers.forEach(function (w) { if (!carried || carried.w !== w) { step(w, dt); paint(w); } });
+    }
+    if (carried) updateCarry(dt);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  var decos = document.getElementById("decos");
+  var below = document.getElementById("below");
+  var decoEls = [];
+  function atlasDiv(name, s, cls) {
+    var a = ATLAS[name];
+    var d = document.createElement("div");
+    d.className = "deco" + (cls ? " " + cls : "");
+    d.style.width = a.w * s + "px";
+    d.style.height = a.h * s + "px";
+    d.style.backgroundImage = "url(assets/env/forest/atlas.png)";
+    d.style.backgroundSize = 2048 * s + "px " + 128 * s + "px";
+    d.style.backgroundPosition = -a.x * s + "px " + -a.y * s + "px";
+    return d;
+  }
+  function addDecos() {
+    decos.innerHTML = "";
+    decoEls = [];
+    var h = below.offsetHeight;
+    var sideW = Math.max(0, (innerWidth - 1180) / 2);
+    var step = MOBILE ? 520 : 300;
+    for (var y = 120; y < h - 200; y += rnd(step * 0.7, step * 1.3)) {
+      [0, 1].forEach(function (side) {
+        var far = Math.random() < 0.45;
+        var name = far ? BIG[(Math.random() * BIG.length) | 0] : (Math.random() < 0.6 ? BIG : SMALL)[(Math.random() * 6) | 0];
+        var s = far ? rnd(1.6, 2.2) : rnd(2.6, 3.6);
+        var d = atlasDiv(name, s, far ? "dim" : "");
+        var wpx = parseFloat(d.style.width);
+        var room = MOBILE ? 30 : Math.max(40, sideW - 20);
+        if (!far && sideW < 140) { far = true; d.className = "deco dim"; }
+        var x = side ? innerWidth - rnd(-wpx * 0.35, room) : rnd(-wpx * 0.35, room) - wpx;
+        if (side === 0) x = Math.max(-wpx * 0.45, x);
+        d.style.left = x.toFixed(0) + "px";
+        d.style.top = y.toFixed(0) + "px";
+        decos.appendChild(d);
+        decoEls.push({ el: d, speed: far ? -0.18 : 0.22, y: y });
+      });
+    }
+  }
+
+  function perch(id, anchor, css, row) {
+    var sh = SHEETS[id];
+    if (!sh || !anchor) return;
+    load("assets/pmd/" + id + ".png").then(function (img) {
+      if (!img) return;
+      var a = sh.idle || sh.walk, s = 3, f = 0, t = 0;
+      var el = document.createElement("div");
+      el.className = "perch";
+      el.style.cssText += css;
+      el.style.width = a.fw * s + "px";
+      el.style.height = a.fh * s + "px";
+      el.style.top = (-a.fh * s + ((a.pad && a.pad[row || 0]) || 0) * s) + "px";
+      el.style.backgroundImage = "url(assets/pmd/" + id + ".png)";
+      el.style.backgroundSize = img.naturalWidth * s + "px " + img.naturalHeight * s + "px";
+      el.title = NAMES[id] || "";
+      anchor.appendChild(el);
+      var hop = 0;
+      el.addEventListener("click", function () { hop = 1; });
+      var lastT = performance.now();
+      (function tickPerch(now) {
+        var dt = Math.min(0.05, (now - lastT) / 1000);
+        lastT = now;
+        t += dt * 60;
+        var dur = (a.d && a.d[f % a.n]) || 8;
+        if (t >= dur) { t -= dur; f = (f + 1) % a.n; }
+        el.style.backgroundPosition = -f * a.fw * s + "px " + -(a.y + (row || 0) * a.fh) * s + "px";
+        if (hop > 0) { hop = Math.max(0, hop - dt * 2.4); }
+        el.style.transform = hop ? "translateY(" + (-Math.sin(hop * Math.PI) * 30).toFixed(1) + "px)" : "";
+        if (!REDUCED) requestAnimationFrame(tickPerch);
+      })(lastT);
+    });
+  }
+  var dlPanel = document.querySelector(".dl");
+  dlPanel.style.overflow = "visible";
+  dlPanel.querySelector(".ribbon").style.borderRadius = "28px 28px 0 0";
+  perch(25, dlPanel, "right:56px;");
+  perch(143, document.querySelector("footer"), "right:4%;");
+  perch(39, document.getElementById("presence"), "right:28px;", 1);
+  perch(133, document.querySelector(".features"), "left:36px;", 1);
+  document.querySelectorAll(".pbcard.profile").forEach(function (card) {
+    perch(+card.getAttribute("data-partner"), card.querySelector(".pbc-head"), "right:22px;");
+  });
+
+  function layoutDecos() { addDecos(); scrollDecos(); }
+  addEventListener("load", layoutDecos);
+  addEventListener("resize", function () { clearTimeout(layoutDecos.t); layoutDecos.t = setTimeout(layoutDecos, 200); });
+  function scrollDecos() {
+    var top = below.getBoundingClientRect().top;
+    decoEls.forEach(function (d) {
+      var mid = top + d.y - innerHeight / 2;
+      d.el.style.transform = "translate3d(0," + (mid * d.speed).toFixed(1) + "px,0)";
+    });
+  }
+  addEventListener("scroll", scrollDecos, { passive: true });
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".badge");
+    document.querySelectorAll(".badge.on").forEach(function (x) { if (x !== b) x.classList.remove("on"); });
+    if (b) b.classList.toggle("on");
+  });
+
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e, i) {
+      if (e.isIntersecting) { setTimeout(function () { e.target.classList.add("in"); }, i * 90); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll(".card").forEach(function (c) {
+    io.observe(c);
+    c.addEventListener("mousemove", function (e) {
+      var r = c.getBoundingClientRect();
+      c.style.setProperty("--ry", ((e.clientX - r.left) / r.width - 0.5) * 10 + "deg");
+      c.style.setProperty("--rx", ((e.clientY - r.top) / r.height - 0.5) * -10 + "deg");
+    });
+    c.addEventListener("mouseleave", function () { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); });
+  });
+
+  var SHOTS = [
+    ["assets/shots/pokedex.png", "Pokédex", "All 151 Pokémon in Pokédex order, with pixel-art portraits straight from the game."],
+    ["assets/shots/map.png", "Maps", "Bosses, terrain mechanics and the best partners for every region."],
+    ["assets/shots/progress.png", "Progress", "Your records and your form, run after run."],
+    ["assets/shots/run.png", "A run", "One run, minute by minute: K.O.s and level over time."]
+  ];
+  var shot = document.getElementById("shot"), cap = document.getElementById("shotCap"), frameEl = document.getElementById("frame");
+  SHOTS.forEach(function (s) { load(s[0]); });
+  document.getElementById("shotTabs").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    var s = SHOTS[+b.getAttribute("data-shot")];
+    document.querySelectorAll("#shotTabs button").forEach(function (x) { x.classList.toggle("on", x === b); });
+    shot.src = s[0];
+    shot.alt = s[1];
+    cap.innerHTML = "<b>" + s[1] + "</b>" + s[2];
+  });
+  frameEl.parentElement.addEventListener("mousemove", function (e) {
+    var r = frameEl.getBoundingClientRect();
+    frameEl.style.setProperty("--ry", ((e.clientX - r.left) / r.width - 0.5) * 8 + "deg");
+    frameEl.style.setProperty("--rx", ((e.clientY - r.top) / r.height - 0.5) * -6 + "deg");
+  });
+  frameEl.parentElement.addEventListener("mouseleave", function () {
+    frameEl.style.setProperty("--rx", "6deg");
+    frameEl.style.setProperty("--ry", "-4deg");
+  });
+
+  var PRES = [
+    ["assets/shots/forest-25.png", "Survival · Viridian Forest", "Pikachu · Lv. 24 · 1,312 K.O."],
+    ["assets/shots/coast-7.png", "Classic · Storm Coast", "Squirtle · Lv. 31 · 2,080 K.O."],
+    ["assets/shots/glacier-133.png", "Survival · Celestial Glacier", "Eevee · Lv. 18 · 954 K.O."]
+  ];
+  PRES.forEach(function (p) { load(p[0]); });
+  var pi = 0, pthumb = document.getElementById("pthumb");
+  setInterval(function () {
+    pi = (pi + 1) % PRES.length;
+    pthumb.firstChild.src = PRES[pi][0];
+    document.getElementById("pl1").textContent = PRES[pi][1];
+    document.getElementById("pl2").textContent = PRES[pi][2];
+    document.querySelectorAll("#pdots i").forEach(function (d, i) { d.classList.toggle("on", i === pi); });
+  }, 3200);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+import fs from "node:fs";
+const [, , port, url, out] = process.argv;
+const list = await (await fetch(`http://127.0.0.1:${port}/json`)).json();
+const ws = new WebSocket(list.find(p => p.type === "page").webSocketDebuggerUrl);
+await new Promise(r => (ws.onopen = r));
+let id = 0; const wait = {};
+ws.onmessage = e => { const m = JSON.parse(e.data); if (wait[m.id]) wait[m.id](m); };
+const send = (method, params = {}) => new Promise(r => { const i = ++id; wait[i] = r; ws.send(JSON.stringify({ id: i, method, params })); });
+await send("Emulation.setDeviceMetricsOverride", { width: 512, height: 512, deviceScaleFactor: 1, mobile: false });
+await send("Page.navigate", { url });
+await new Promise(r => setTimeout(r, 2500));
+await send("Runtime.evaluate", { expression: "document.fonts.ready.then(()=>1)", awaitPromise: true });
+const r = await send("Page.captureScreenshot", { format: "png", clip: { x: 0, y: 0, width: 512, height: 512, scale: 1 } });
+fs.writeFileSync(out, Buffer.from(r.result.data, "base64"));
+console.log("saved", out);
+process.exit(0);
