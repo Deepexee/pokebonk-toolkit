@@ -1,0 +1,7 @@
+{
+  "app": "1.1.0",
+  "toolkit": 1,
+  "toolkit_min_app": "1.1.0",
+  "toolkit_min_android": 2,
+  "android": { "code": 2, "name": "1.1" }
+}

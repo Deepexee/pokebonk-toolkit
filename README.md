@@ -11,6 +11,8 @@ Pokédex, type chart, map guides, run history with progress charts, and an autom
 - **Run tracking**: every run is saved (map, Pokémon, level, K.O., time, result). The Progress page shows your stats and how they change over time.
 - **Discord status**: shows the map and your Pokémon in pixel art, live level and K.O. count, and a VICTORY picture after a win.
 - **Real fullscreen** with F11 or the game's button, and a volume control.
+- **Light on weak PCs**: the graphics card is used even when WebView2 blocklists it, the game's requests no longer go through Python, and the game's processes run at above-normal priority without Windows efficiency mode.
+- **Auto-update**: the toolkit updates silently; a new app version downloads in the background and installs on restart (or when the app closes). On Android, a button opens the new APK.
 
 ## Repository
 
@@ -41,11 +43,36 @@ Needs JDK 21 and the Android SDK (`platforms;android-35`, `build-tools;35.0.0`).
 
 ```powershell
 cd android
-.\build_apk.ps1 -VersionCode 2 -VersionName 1.1
+.\build_apk.ps1
 ```
 
-The script copies `hub.js`, `typedex.json` and `maps.json` from `PokeBonk/`, then writes `android/PokeBonk.apk`.
+The version comes from `PokeBonk/version.json`. The script copies the toolkit files from `PokeBonk/`, then writes `android/PokeBonk.apk`.
 On the first build it creates a signing key (`pokebonk.keystore` and `keystore.properties`). Keep them safe and out of git: updates must be signed with the same key.
+
+## Publishing an update
+
+Versions live in `PokeBonk/version.json`:
+
+- `app`: Windows app version. Raise it to ship a new exe.
+- `toolkit`: toolkit build. Raise it to ship new `hub.js` / data files without a new exe or APK.
+- `toolkit_min_app` / `toolkit_min_android`: oldest app versions that can run this toolkit build.
+- `android`: APK version code (must always go up) and name.
+
+Build, generate the update folder, then upload it to `/var/www/pokebonk-toolkit/update/` on the server:
+
+```bat
+py PokeBonk\tools\publish_update.py site\update --exe PokeBonk\dist\PokeBonkApp.exe --apk android\PokeBonk.apk
+```
+
+Leave out `--exe` or `--apk` to keep the previous ones. The app reads `https://pokebonk.deepexe.fr/update/latest.json`.
+
+## Settings
+
+`%LOCALAPPDATA%\PokeBonk\settings.json` can turn features off, for example on a PC with GPU driver problems:
+
+```json
+{ "gpu_boost": false, "priority_boost": false, "auto_update": false }
+```
 
 ## Credits
 

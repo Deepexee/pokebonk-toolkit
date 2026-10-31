@@ -1,17 +1,23 @@
 param(
-    [string]$VersionName = "1.0",
-    [int]$VersionCode = 1
+    [string]$VersionName = "",
+    [int]$VersionCode = 0
 )
 $ErrorActionPreference = "Continue"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$toolkit = Join-Path $here "..\PokeBonk"
 $env:JAVA_HOME = "C:\Program Files\Java\jdk-21.0.11"
 $sdk = "$env:LOCALAPPDATA\Android\Sdk"
 $bt = "$sdk\build-tools\35.0.0"
 $jar = "$sdk\platforms\android-35\android.jar"
 $out = Join-Path $here "build"
 
-foreach ($f in "hub.js", "typedex.json", "maps.json") {
-    Copy-Item (Join-Path $here "..\PokeBonk\$f") (Join-Path $here "assets\$f") -Force
+$version = Get-Content (Join-Path $toolkit "version.json") -Raw | ConvertFrom-Json
+if (-not $VersionName) { $VersionName = $version.android.name }
+if (-not $VersionCode) { $VersionCode = [int]$version.android.code }
+Write-Host "PokeBonk $VersionName (code $VersionCode), toolkit build $($version.toolkit)"
+
+foreach ($f in "hub.js", "typedex.json", "maps.json", "rpc_index.json", "version.json") {
+    Copy-Item (Join-Path $toolkit $f) (Join-Path $here "assets\$f") -Force
 }
 
 if (Test-Path $out) { Remove-Item $out -Recurse -Force }

@@ -1,9 +1,13 @@
+import hashlib
 import json
 import os
+import shutil
 import struct
+import subprocess
 import sys
 import threading
 import time
+import urllib.request
 import uuid
 import webview
 from urllib.parse import quote, urlparse
@@ -15,6 +19,11 @@ DATA_DIR = os.environ.get("POKEBONK_DATA_DIR") or os.path.join(
     os.environ.get("LOCALAPPDATA", os.path.expanduser("~")), "PokeBonk")
 os.makedirs(DATA_DIR, exist_ok=True)
 RUNS_FILE = os.path.join(DATA_DIR, "runs.json")
+SETTINGS_FILE = os.path.join(DATA_DIR, "settings.json")
+TOOLKIT_DIR = os.path.join(DATA_DIR, "toolkit")
+UPDATE_DIR = os.path.join(DATA_DIR, "update")
+UPDATE_URL = os.environ.get("POKEBONK_UPDATE_URL") or "https://pokebonk.deepexe.fr/update/latest.json"
+FROZEN = getattr(sys, "frozen", False)
 
 LOG_FILE = os.path.join(DATA_DIR, "log.txt")
 _last_log = None
@@ -30,10 +39,11 @@ def log(msg):
     except Exception:
         pass
 
-try:
-    open(LOG_FILE, "w", encoding="utf-8").close()
-except Exception:
-    pass
+if "--after-update" not in sys.argv:
+    try:
+        open(LOG_FILE, "w", encoding="utf-8").close()
+    except Exception:
+        pass
 
 DISCORD_CLIENT_ID = "1564177251061207051"
 
@@ -94,11 +104,12 @@ VOLUME_JS = r"""
     return g;
   }
   AudioNode.prototype.connect = function (dest) {
-    var args = Array.prototype.slice.call(arguments);
     if (dest instanceof AudioDestinationNode && !this.__pbMaster) {
+      var args = Array.prototype.slice.call(arguments);
       args[0] = masterFor(dest.context);
+      return origConnect.apply(this, args);
     }
-    return origConnect.apply(this, args);
+    return origConnect.apply(this, arguments);
   };
 
   function setVol(v) {
@@ -156,36 +167,91 @@ def resource_path(name):
     base = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base, name)
 
+def read_json(path, default=None):
+    try:
+        with open(path, encoding="utf-8-sig") as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+def version_tuple(v):
+    try:
+        return tuple(int(x) for x in str(v).split("."))
+    except ValueError:
+        return (0,)
+
+def sha256_file(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+VERSION_INFO = read_json(resource_path("version.json"), {})
+APP_VERSION = VERSION_INFO.get("app", "1.0.0")
+TOOLKIT_BUILD = int(VERSION_INFO.get("toolkit", 0))
+SETTINGS = {"gpu_boost": True, "priority_boost": True, "auto_update": True}
+SETTINGS.update(read_json(SETTINGS_FILE, {}) or {})
+
+TOOLKIT_FILES = (TYPEDEX_FILE, MAPS_FILE, HUB_FILE, "rpc_index.json")
+
+def installed_toolkit():
+    m = read_json(os.path.join(TOOLKIT_DIR, "manifest.json"))
+    if not isinstance(m, dict) or int(m.get("build", 0)) <= TOOLKIT_BUILD:
+        return None
+    if version_tuple(m.get("min_app", "0")) > version_tuple(APP_VERSION):
+        return None
+    files = m.get("files") or {}
+    for name in TOOLKIT_FILES:
+        path = os.path.join(TOOLKIT_DIR, name)
+        if name not in files or not os.path.exists(path) or sha256_file(path) != files[name]["sha256"]:
+            return None
+    return m
+
+def toolkit_build():
+    m = installed_toolkit()
+    return int(m["build"]) if m else TOOLKIT_BUILD
+
 TYPEDEX = None
 MAPS = None
 HUB_JS = ""
 
 RPC_BASE = "https://raw.githubusercontent.com/Deepexee/PokebonkImage/main/"
 RPC_INDEX = {}
-try:
-    with open(resource_path("rpc_index.json"), encoding="utf-8") as f:
-        RPC_INDEX = {k: set(v) for k, v in json.load(f).items()}
-except Exception as e:
-    log("Discord: no picture list (%r), using map + portrait" % (e,))
-try:
-    with open(resource_path(TYPEDEX_FILE), encoding="utf-8") as f:
-        TYPEDEX = json.load(f)
-    with open(resource_path(MAPS_FILE), encoding="utf-8") as f:
-        MAPS = json.load(f)
-    with open(resource_path(HUB_FILE), encoding="utf-8") as f:
-        HUB_JS = f.read()
-    log("Hub: loaded %d Pokemon (data %s) and %d regions (data %s)"
-        % (len(TYPEDEX.get("pokemon", {})), TYPEDEX.get("version", "?"),
-           len(MAPS.get("regions", [])), MAPS.get("version", "?")))
-except Exception as e:
-    log("Hub: could not load the data files (%r)" % (e,))
+
+def load_toolkit():
+    global TYPEDEX, MAPS, HUB_JS, RPC_INDEX
+    m = installed_toolkit()
+    where = TOOLKIT_DIR if m else None
+    path = (lambda name: os.path.join(where, name)) if where else resource_path
+    try:
+        with open(path("rpc_index.json"), encoding="utf-8") as f:
+            RPC_INDEX = {k: set(v) for k, v in json.load(f).items()}
+    except Exception as e:
+        log("Discord: no picture list (%r), using map + portrait" % (e,))
+    try:
+        with open(path(TYPEDEX_FILE), encoding="utf-8") as f:
+            TYPEDEX = json.load(f)
+        with open(path(MAPS_FILE), encoding="utf-8") as f:
+            MAPS = json.load(f)
+        with open(path(HUB_FILE), encoding="utf-8") as f:
+            HUB_JS = f.read()
+        log("Hub: toolkit build %d (%s), %d Pokemon, %d regions"
+            % (int(m["build"]) if m else TOOLKIT_BUILD, "update" if m else "bundled",
+               len(TYPEDEX.get("pokemon", {})), len(MAPS.get("regions", []))))
+    except Exception as e:
+        log("Hub: could not load the data files (%r)" % (e,))
+
+load_toolkit()
 
 def inject_hub():
+    load_toolkit()
     if not (TYPEDEX and HUB_JS):
         return
+    app = {"version": APP_VERSION, "toolkit": toolkit_build(), "platform": "windows"}
     try:
-        window.evaluate_js("window.__PBTypedex=%s;window.__PBMaps=%s;%s"
-                           % (json.dumps(TYPEDEX), json.dumps(MAPS) if MAPS else "null", HUB_JS))
+        window.evaluate_js("window.__PBApp=%s;window.__PBTypedex=%s;window.__PBMaps=%s;%s"
+                           % (json.dumps(app), json.dumps(TYPEDEX), json.dumps(MAPS) if MAPS else "null", HUB_JS))
         ready = window.evaluate_js("!!(window.__PBHub && document.getElementById('pb-hub-host'))")
         log("Hub: overlay %s" % ("ready" if ready else "did not start"))
     except Exception as e:
@@ -238,6 +304,18 @@ class Api:
             os.startfile(DATA_DIR)
         except Exception as e:
             log("Runs: could not open the folder (%r)" % (e,))
+
+    def update_info(self):
+        ready = UPDATE["ready"]
+        if not ready or UPDATE["installed"]:
+            return None
+        return {"version": ready["version"], "action": "restart"}
+
+    def apply_update(self):
+        if not UPDATE["ready"]:
+            return False
+        threading.Thread(target=install_update, args=(True,), daemon=True).start()
+        return True
 
 def set_window_icon():
     try:
@@ -545,6 +623,277 @@ def discord_status():
             if stop.wait(30):
                 return
 
+UPDATE = {"ready": None, "installed": False}
+UPDATE_EVERY = 6 * 3600
+
+def http_get(url, timeout=20):
+    req = urllib.request.Request(url, headers={"User-Agent": "PokeBonkToolkit/" + APP_VERSION, "Cache-Control": "no-cache"})
+    return urllib.request.urlopen(req, timeout=timeout)
+
+def download(url, dest, sha256):
+    if os.path.exists(dest) and sha256_file(dest) == sha256:
+        return True
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    part = dest + ".part"
+    h = hashlib.sha256()
+    with http_get(url, timeout=60) as r, open(part, "wb") as f:
+        for chunk in iter(lambda: r.read(1 << 16), b""):
+            h.update(chunk)
+            f.write(chunk)
+            if stop.is_set():
+                break
+    if stop.is_set() or h.hexdigest() != sha256:
+        os.remove(part)
+        if not stop.is_set():
+            log("Update: checksum mismatch for %s" % url)
+        return False
+    os.replace(part, dest)
+    return True
+
+def update_toolkit(t):
+    if not isinstance(t, dict) or int(t.get("build", 0)) <= toolkit_build():
+        return
+    if version_tuple(t.get("min_app", "0")) > version_tuple(APP_VERSION):
+        log("Update: toolkit build %s needs app %s" % (t.get("build"), t.get("min_app")))
+        return
+    staging = os.path.join(TOOLKIT_DIR, "staging")
+    files = t.get("files") or {}
+    for name in TOOLKIT_FILES:
+        if name not in files or not download(t["base"] + name, os.path.join(staging, name), files[name]["sha256"]):
+            return
+    os.makedirs(TOOLKIT_DIR, exist_ok=True)
+    for name in TOOLKIT_FILES:
+        os.replace(os.path.join(staging, name), os.path.join(TOOLKIT_DIR, name))
+    with open(os.path.join(TOOLKIT_DIR, "manifest.json"), "w", encoding="utf-8") as f:
+        json.dump({"build": t["build"], "min_app": t.get("min_app", "0"), "files": files}, f)
+    log("Update: toolkit build %s installed, used from the next page load" % t["build"])
+
+def update_app(a):
+    if not FROZEN or not isinstance(a, dict) or version_tuple(a.get("version")) <= version_tuple(APP_VERSION):
+        return
+    dest = os.path.join(UPDATE_DIR, "PokeBonkApp-%s.exe" % a["version"])
+    log("Update: downloading app %s" % a["version"])
+    if download(a["url"], dest, a["sha256"]):
+        UPDATE["ready"] = {"version": a["version"], "path": dest, "sha256": a["sha256"]}
+        log("Update: app %s ready" % a["version"])
+        try:
+            window.evaluate_js("window.__PBUpdateCheck && window.__PBUpdateCheck()")
+        except Exception:
+            pass
+
+def updater():
+    if not SETTINGS.get("auto_update", True):
+        log("Update: turned off in settings.json")
+        return
+    while not stop.is_set():
+        try:
+            with http_get("%s?t=%d" % (UPDATE_URL, time.time())) as r:
+                info = json.loads(r.read().decode("utf-8"))
+            update_toolkit(info.get("toolkit"))
+            if not UPDATE["ready"] and not stop.wait(15):
+                update_app(info.get("app"))
+        except Exception as e:
+            log("Update: check failed (%r)" % (e,))
+        if stop.wait(UPDATE_EVERY):
+            return
+
+def hide_file(path):
+    try:
+        import ctypes
+        ctypes.windll.kernel32.SetFileAttributesW(path, 0x2)
+    except Exception:
+        pass
+
+def install_update(relaunch):
+    ready = UPDATE["ready"]
+    if not ready or UPDATE["installed"]:
+        return False
+    exe = sys.executable
+    folder, name = os.path.split(exe)
+    new = os.path.join(folder, "." + name + ".new")
+    old = os.path.join(folder, "." + name + ".old")
+    try:
+        shutil.copyfile(ready["path"], new)
+        if sha256_file(new) != ready["sha256"]:
+            raise ValueError("copy does not match")
+        if os.path.exists(old):
+            try:
+                os.remove(old)
+            except OSError:
+                old += "-%d" % int(time.time())
+        os.replace(exe, old)
+        try:
+            os.replace(new, exe)
+        except Exception:
+            os.replace(old, exe)
+            raise
+        hide_file(old)
+    except Exception as e:
+        log("Update: could not install %s (%r)" % (ready["version"], e))
+        try:
+            os.remove(new)
+        except OSError:
+            pass
+        return False
+    UPDATE["installed"] = True
+    log("Update: app %s installed" % ready["version"])
+    if relaunch:
+        env = {k: v for k, v in os.environ.items() if not k.startswith(("_MEI", "_PYI"))}
+        env["PYINSTALLER_RESET_ENVIRONMENT"] = "1"
+        if ORIGINAL_BROWSER_ARGS is None:
+            env.pop("WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS", None)
+        else:
+            env["WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS"] = ORIGINAL_BROWSER_ARGS
+        try:
+            subprocess.Popen([exe, "--after-update", str(os.getpid())], env=env, cwd=folder,
+                             creationflags=0x00000008 | 0x00000200, close_fds=True)
+        except Exception as e:
+            log("Update: could not restart (%r)" % (e,))
+        try:
+            window.destroy()
+        except Exception:
+            pass
+        threading.Timer(5, shutdown).start()
+    return True
+
+def clean_old_versions():
+    if not FROZEN:
+        return
+    folder, name = os.path.split(sys.executable)
+    for f in os.listdir(folder):
+        if f.startswith("." + name + ".old") or f == "." + name + ".new":
+            try:
+                os.remove(os.path.join(folder, f))
+            except OSError:
+                pass
+    if os.path.isdir(UPDATE_DIR):
+        for f in os.listdir(UPDATE_DIR):
+            v = f[len("PokeBonkApp-"):-len(".exe")] if f.startswith("PokeBonkApp-") and f.endswith(".exe") else None
+            if f.endswith(".part") or (v and version_tuple(v) <= version_tuple(APP_VERSION)):
+                try:
+                    os.remove(os.path.join(UPDATE_DIR, f))
+                except OSError:
+                    pass
+
+def wait_for_previous():
+    if "--after-update" not in sys.argv:
+        return
+    try:
+        import ctypes
+        pid = int(sys.argv[sys.argv.index("--after-update") + 1])
+        handle = ctypes.windll.kernel32.OpenProcess(0x00100000, False, pid)
+        if handle:
+            ctypes.windll.kernel32.WaitForSingleObject(handle, 15000)
+            ctypes.windll.kernel32.CloseHandle(handle)
+        time.sleep(1.0)
+        log("Update: started after updating from process %d" % pid)
+    except Exception as e:
+        log("Update: could not wait for the old version (%r)" % (e,))
+
+ORIGINAL_BROWSER_ARGS = os.environ.get("WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS")
+
+def set_browser_args():
+    args = ["--disable-features=ElasticOverscroll,msSmartScreenProtection"]
+    if SETTINGS.get("gpu_boost", True):
+        args += ["--ignore-gpu-blocklist", "--enable-gpu-rasterization", "--force_high_performance_gpu"]
+    if ORIGINAL_BROWSER_ARGS:
+        args.append(ORIGINAL_BROWSER_ARGS)
+    os.environ["WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS"] = " ".join(args)
+    log("WebView: %s" % os.environ["WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS"])
+
+def drop_request_hooks(*_):
+    try:
+        from webview.platforms import edgechromium as ec
+    except Exception as e:
+        log("WebView: request hooks kept (%r)" % (e,))
+        return
+    ready = ec.EdgeChrome.on_webview_ready
+
+    def on_webview_ready(self, sender, args):
+        ready(self, sender, args)
+        try:
+            core = sender.CoreWebView2
+            core.RemoveWebResourceRequestedFilter("*", ec.CoreWebView2WebResourceContext.All)
+            core.WebResourceRequested -= self.on_web_resource_request
+            core.WebResourceResponseReceived -= self.on_web_resource_response
+            log("WebView: request hooks removed")
+        except Exception as e:
+            log("WebView: could not remove the request hooks (%r)" % (e,))
+
+    ec.EdgeChrome.on_webview_ready = on_webview_ready
+    ec.EdgeChrome.on_web_resource_request = lambda self, sender, args: None
+    ec.EdgeChrome.on_web_resource_response = lambda self, sender, args: None
+
+def boost_processes():
+    import ctypes
+    from ctypes import wintypes
+
+    class Entry(ctypes.Structure):
+        _fields_ = [("dwSize", wintypes.DWORD), ("cntUsage", wintypes.DWORD), ("th32ProcessID", wintypes.DWORD),
+                    ("th32DefaultHeapID", ctypes.c_size_t), ("th32ModuleID", wintypes.DWORD),
+                    ("cntThreads", wintypes.DWORD), ("th32ParentProcessID", wintypes.DWORD),
+                    ("pcPriClassBase", wintypes.LONG), ("dwFlags", wintypes.DWORD), ("szExeFile", wintypes.WCHAR * 260)]
+
+    class Throttling(ctypes.Structure):
+        _fields_ = [("Version", wintypes.ULONG), ("ControlMask", wintypes.ULONG), ("StateMask", wintypes.ULONG)]
+
+    k32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    k32.CreateToolhelp32Snapshot.restype = wintypes.HANDLE
+    k32.CreateToolhelp32Snapshot.argtypes = [wintypes.DWORD, wintypes.DWORD]
+    k32.Process32FirstW.argtypes = [wintypes.HANDLE, ctypes.POINTER(Entry)]
+    k32.Process32NextW.argtypes = [wintypes.HANDLE, ctypes.POINTER(Entry)]
+    k32.OpenProcess.restype = wintypes.HANDLE
+    k32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+    k32.SetPriorityClass.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+    k32.SetProcessInformation.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD]
+    k32.CloseHandle.argtypes = [wintypes.HANDLE]
+
+    snap = k32.CreateToolhelp32Snapshot(0x2, 0)
+    if not snap or snap == wintypes.HANDLE(-1).value:
+        return 0
+    children = {}
+    entry = Entry()
+    entry.dwSize = ctypes.sizeof(Entry)
+    ok = k32.Process32FirstW(snap, ctypes.byref(entry))
+    while ok:
+        children.setdefault(entry.th32ParentProcessID, []).append(entry.th32ProcessID)
+        ok = k32.Process32NextW(snap, ctypes.byref(entry))
+    k32.CloseHandle(snap)
+
+    tree, todo = set(), [os.getpid()]
+    while todo:
+        pid = todo.pop()
+        if pid and pid not in tree:
+            tree.add(pid)
+            todo.extend(children.get(pid, ()))
+    state = Throttling(1, 0x1, 0)
+    for pid in tree:
+        handle = k32.OpenProcess(0x0200 | 0x1000, False, pid)
+        if not handle:
+            continue
+        k32.SetPriorityClass(handle, 0x8000)
+        k32.SetProcessInformation(handle, 4, ctypes.byref(state), ctypes.sizeof(state))
+        k32.CloseHandle(handle)
+    return len(tree)
+
+def priority_keeper():
+    if os.name != "nt" or not SETTINGS.get("priority_boost", True):
+        return
+    if stop.wait(5):
+        return
+    first = True
+    while True:
+        try:
+            n = boost_processes()
+            if first:
+                log("Performance: %d processes set to above normal priority, no efficiency mode" % n)
+                first = False
+        except Exception as e:
+            log("Performance: could not set the priority (%r)" % (e,))
+            return
+        if stop.wait(30):
+            return
+
 _shutdown_lock = threading.Lock()
 _shutting_down = False
 
@@ -554,6 +903,8 @@ def shutdown():
         if _shutting_down:
             return
         _shutting_down = True
+    if UPDATE["ready"] and not UPDATE["installed"]:
+        install_update(False)
     log("Shutdown: clearing the status")
     stop.set()
     pipe = discord_pipe["pipe"]
@@ -643,17 +994,24 @@ def show_start_error(err):
     except Exception as e:
         log("Fatal: no message box (%r)" % (e,))
 
+log("PokeBonk %s (toolkit %d), Python %s, file: %s"
+    % (APP_VERSION, toolkit_build(), sys.version.split()[0], sys.executable))
+wait_for_previous()
+clean_old_versions()
+set_browser_args()
 WIN_W, WIN_H = window_size()
 log("Window size %dx%d" % (WIN_W, WIN_H))
-window = webview.create_window(TITLE, HOME, width=WIN_W, height=WIN_H, js_api=Api())
+window = webview.create_window(TITLE, HOME, width=WIN_W, height=WIN_H, js_api=Api(), background_color="#1A1630")
+window.events.initialized += drop_request_hooks
 window.events.loaded += on_loaded
 window.events.shown += set_window_icon
 try:
     window.events.closed += shutdown
 except Exception as e:
     log("Could not hook the close event: %r" % (e,))
-log("App started, Python %s, file: %s" % (sys.version.split()[0], sys.executable))
 threading.Thread(target=discord_status, daemon=True).start()
+threading.Thread(target=updater, daemon=True).start()
+threading.Thread(target=priority_keeper, daemon=True).start()
 try:
     webview.start(private_mode=False, storage_path=DATA_DIR)
 except Exception as e:

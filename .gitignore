@@ -13,3 +13,5 @@ android/keystore.properties
 android/assets/hub.js
 android/assets/typedex.json
 android/assets/maps.json
+android/assets/rpc_index.json
+android/assets/version.json

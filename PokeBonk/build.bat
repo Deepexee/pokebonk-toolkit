@@ -8,7 +8,7 @@ if exist dist rmdir /s /q dist
 if exist build rmdir /s /q build
 py -m pip install pywebview pyinstaller
 py -m PyInstaller --onefile --noconsole --name PokeBonkApp --icon pokebonk.ico ^
- --add-data "pokebonk.ico;." --add-data "typedex.json;." --add-data "maps.json;." --add-data "hub.js;." --add-data "rpc_index.json;." ^
+ --add-data "pokebonk.ico;." --add-data "typedex.json;." --add-data "maps.json;." --add-data "hub.js;." --add-data "rpc_index.json;." --add-data "version.json;." ^
  pokebonk.py
 if errorlevel 1 goto error
 if not exist "dist\PokeBonkApp.exe" goto error

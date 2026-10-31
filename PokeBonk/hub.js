@@ -61,7 +61,10 @@
       timeline: "Przebieg gry", timelineHint: "K.O. i poziom w czasie",
       endMenu: "zakończona", endClosed: "przerwana", endRestart: "restart", live: "w trakcie",
       exportB: "Otwórz folder z zapisami", minHp: "Najniższe PV", tools: "Narzędzia", lvl: "Poz.", ago: "{n} temu", now: "teraz", plays: "{n} gier",
-      saved: "Zapis: %LOCALAPPDATA%\\PokeBonk\\runs.json"
+      saved: "Zapis: %LOCALAPPDATA%\\PokeBonk\\runs.json",
+      updRestart: "Aktualizacja {v} · Uruchom ponownie", updDownload: "Aktualizacja {v} · Pobierz",
+      updRestartT: "Nowa wersja jest gotowa. Zainstaluje się też po zamknięciu aplikacji.",
+      updDownloadT: "Pobiera nową wersję aplikacji.", updBusy: "Ponowne uruchamianie…"
     },
     en: {
       nav: "Progress", sub: "{n} runs saved", subNone: "No runs saved yet",
@@ -75,7 +78,10 @@
       timeline: "Run timeline", timelineHint: "K.O.s and level over time",
       endMenu: "finished", endClosed: "interrupted", endRestart: "restarted", live: "live",
       exportB: "Open the save folder", minHp: "Lowest HP", tools: "Toolkit", lvl: "Lv.", ago: "{n} ago", now: "now", plays: "{n} runs",
-      saved: "Saved in %LOCALAPPDATA%\\PokeBonk\\runs.json"
+      saved: "Saved in %LOCALAPPDATA%\\PokeBonk\\runs.json",
+      updRestart: "Update {v} · Restart", updDownload: "Update {v} · Download",
+      updRestartT: "A new version is ready. It also installs when you close the app.",
+      updDownloadT: "Downloads the new version of the app.", updBusy: "Restarting…"
     },
     fr: {
       nav: "Progression", sub: "{n} parties enregistrées", subNone: "Aucune partie enregistrée",
@@ -89,7 +95,10 @@
       timeline: "Déroulé de la partie", timelineHint: "K.O. et niveau au fil du temps",
       endMenu: "terminée", endClosed: "interrompue", endRestart: "relancée", live: "en cours",
       exportB: "Ouvrir le dossier des sauvegardes", minHp: "PV les plus bas", tools: "Outils", lvl: "N.", ago: "il y a {n}", now: "à l'instant", plays: "{n} parties",
-      saved: "Enregistré dans %LOCALAPPDATA%\\PokeBonk\\runs.json"
+      saved: "Enregistré dans %LOCALAPPDATA%\\PokeBonk\\runs.json",
+      updRestart: "Mise à jour {v} · Redémarrer", updDownload: "Mise à jour {v} · Télécharger",
+      updRestartT: "Une nouvelle version est prête. Elle s'installe aussi quand tu fermes l'appli.",
+      updDownloadT: "Télécharge la nouvelle version de l'appli.", updBusy: "Redémarrage…"
     }
   };
 
@@ -1293,6 +1302,7 @@
   }
 
   function tick() {
+    if (document.hidden) return;
     var h = null;
     try { h = readHud(); } catch (e) {}
     var now = Date.now();
@@ -1635,6 +1645,9 @@ kbd{display:inline-grid;place-items:center;min-width:22px;height:20px;padding:0 
 .dk.on kbd{background:rgba(0,0,0,.25);color:#fff}
 .dock.inrun .ltext,.dock.inrun .dk kbd{display:none}
 .dock.inrun .dk{padding:0 9px}
+.dk.upd{color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.25);background:var(--stripes),linear-gradient(100deg,var(--green-d),var(--green));box-shadow:0 4px 0 #13703a,0 4px 14px rgba(0,0,0,.45)}
+.dk.upd:hover{background:var(--stripes),linear-gradient(100deg,#25b25a,#4fdc80)}
+.dk.upd[hidden],.dock.inrun .dk.upd{display:none}
 .vol{position:relative;display:flex;align-items:center;height:40px;border-radius:999px;background:rgba(34,40,58,.95);box-shadow:0 4px 14px rgba(0,0,0,.45),var(--ring);padding:0 4px}
 .vol[hidden]{display:none}
 .vbtn{display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
@@ -1908,6 +1921,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     '<div class="dock" id="dock">' +
       '<div class="vol" id="vol" hidden><button type="button" class="vbtn" id="vbtn">' + SPEAKER + "</button>" +
         '<input type="range" class="vrange" id="vrange" min="0" max="100" step="1"></div>' +
+      '<button type="button" class="dk upd" id="upd" data-update hidden>' + uiIcon("ui/icons/record.png", 22) + '<span id="updText"></span></button>' +
       '<button type="button" class="dk" id="launcher" data-open>' + uiIcon("ui/icons/research.png", 24) +
         '<span class="ltext">Menu</span><kbd>F2</kbd></button>' +
     "</div>" +
@@ -2037,7 +2051,9 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       el.textContent = n.label();
     });
     root.querySelector('.pill[data-view="maps"]').hidden = !HAS_MAPS;
-    root.getElementById("ver").textContent = "PokeBonk Toolkit" + (VERSION ? " · data " + VERSION : "");
+    var app = window.__PBApp || {};
+    root.getElementById("ver").textContent = "PokeBonk Toolkit" + (app.version ? " " + app.version : "") +
+      (app.toolkit ? " · build " + app.toolkit : "") + (VERSION ? " · data " + VERSION : "");
     root.getElementById("footHint").textContent = S("tools") + " · Esc";
     closeBtn.title = T("close");
     clearBtn.title = T("clear");
@@ -2247,6 +2263,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if ((el = e.target.closest("[data-metric]"))) { stx.metric = el.getAttribute("data-metric"); renderContent(); return; }
     if ((el = e.target.closest("[data-stmon]"))) { stx.mon = el.getAttribute("data-stmon"); renderContent(); content.scrollTop = 0; return; }
     if ((el = e.target.closest("[data-stmap]"))) { stx.map = el.getAttribute("data-stmap"); renderContent(); content.scrollTop = 0; return; }
+    if ((el = e.target.closest("[data-update]"))) { applyUpdate(); return; }
     if ((el = e.target.closest("[data-folder]"))) { openFolder(); return; }
     if ((el = e.target.closest("[data-run]"))) { openRun(el.getAttribute("data-run")); return; }
     if ((el = e.target.closest("[data-view]"))) { setView(el.getAttribute("data-view")); return; }
@@ -2306,6 +2323,38 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   document.addEventListener("fullscreenchange", ensureHost);
   document.addEventListener("visibilitychange", ensureHost);
   setInterval(ensureHost, 4000);
+
+  var updBtn = root.getElementById("upd");
+  var updText = root.getElementById("updText");
+  var updInfo = null;
+  function paintUpdate() {
+    updBtn.hidden = !updInfo;
+    if (!updInfo) return;
+    var download = updInfo.action === "download";
+    updText.textContent = tmpl(S(download ? "updDownload" : "updRestart"), { v: updInfo.version });
+    updBtn.title = S(download ? "updDownloadT" : "updRestartT");
+  }
+  function checkUpdate() {
+    var a = pyApi();
+    if (!a || !a.update_info || updBtn.disabled) return;
+    a.update_info().then(function (info) {
+      updInfo = info && info.version ? info : null;
+      paintUpdate();
+    }).catch(function () {});
+  }
+  function applyUpdate() {
+    var a = pyApi();
+    if (!a || !a.apply_update || !updInfo) return;
+    if (updInfo.action !== "download") {
+      updText.textContent = S("updBusy");
+      updBtn.disabled = true;
+    }
+    a.apply_update();
+  }
+  window.addEventListener("pywebviewready", checkUpdate);
+  window.__PBUpdateCheck = checkUpdate;
+  setTimeout(checkUpdate, 4000);
+  setInterval(checkUpdate, 60000);
 
   renderLauncher();
   setInterval(tick, 1000);

@@ -2,6 +2,7 @@ package fr.deepexe.pokebonk;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -19,18 +20,26 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 public class MainActivity extends Activity {
 
     private static final String HOME = "https://pokebonk.com";
+    private static final String UPDATE_URL = "https://pokebonk.deepexe.fr/update/latest.json";
+    private static final String[] TOOLKIT_FILES = {"hub.js", "typedex.json", "maps.json", "rpc_index.json"};
+
     private WebView web;
-    private String inject = "";
+    private volatile JSONObject apkUpdate;
 
     @Override
     protected void onCreate(Bundle state) {
@@ -51,12 +60,14 @@ public class MainActivity extends Activity {
         s.setDomStorageEnabled(true);
         s.setDatabaseEnabled(true);
         s.setMediaPlaybackRequiresUserGesture(false);
-        s.setUserAgentString(s.getUserAgentString() + " PokeBonkToolkit/1.0");
+        s.setUseWideViewPort(true);
+        s.setLoadWithOverviewMode(true);
+        s.setTextZoom(100);
+        s.setUserAgentString(s.getUserAgentString() + " PokeBonkToolkit/" + versionName());
 
         CookieManager.getInstance().setAcceptCookie(true);
         CookieManager.getInstance().setAcceptThirdPartyCookies(web, true);
 
-        inject = buildInject();
         web.addJavascriptInterface(new Bridge(), "PBAndroid");
         web.setWebChromeClient(new WebChromeClient());
         web.setWebViewClient(new WebViewClient() {
@@ -64,16 +75,17 @@ public class MainActivity extends Activity {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest req) {
                 Uri u = req.getUrl();
                 if (isGame(u)) return false;
-                try { startActivity(new Intent(Intent.ACTION_VIEW, u)); } catch (Exception ignored) { }
+                openInBrowser(u);
                 return true;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                if (isGame(Uri.parse(url))) view.evaluateJavascript(inject, null);
+                if (isGame(Uri.parse(url))) view.evaluateJavascript(buildInject(), null);
             }
         });
 
+        checkUpdates();
         if (state != null) web.restoreState(state);
         else web.loadUrl(HOME);
     }
@@ -83,24 +95,157 @@ public class MainActivity extends Activity {
         return h != null && (h.equals("pokebonk.com") || h.endsWith(".pokebonk.com"));
     }
 
+    private void openInBrowser(Uri u) {
+        try { startActivity(new Intent(Intent.ACTION_VIEW, u)); } catch (Exception ignored) { }
+    }
+
+    private static byte[] readAll(InputStream in) throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buf = new byte[16384];
+        int n;
+        while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
+        return out.toByteArray();
+    }
+
     private String asset(String name) {
         try (InputStream in = getAssets().open(name)) {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            byte[] buf = new byte[16384];
-            int n;
-            while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
-            return out.toString("UTF-8");
+            return new String(readAll(in), StandardCharsets.UTF_8);
         } catch (Exception e) {
             return "";
         }
     }
 
+    private static String readFile(File f) {
+        try (InputStream in = new FileInputStream(f)) {
+            return new String(readAll(in), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private static void writeFile(File f, byte[] data) throws Exception {
+        try (FileOutputStream out = new FileOutputStream(f)) {
+            out.write(data);
+        }
+    }
+
+    private static String sha256(byte[] data) throws Exception {
+        StringBuilder hex = new StringBuilder();
+        for (byte b : MessageDigest.getInstance("SHA-256").digest(data)) hex.append(String.format("%02x", b));
+        return hex.toString();
+    }
+
+    private static String sha256(File f) {
+        try (InputStream in = new FileInputStream(f)) {
+            return sha256(readAll(in));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private int versionCode() {
+        try {
+            PackageInfo p = getPackageManager().getPackageInfo(getPackageName(), 0);
+            return Build.VERSION.SDK_INT >= 28 ? (int) p.getLongVersionCode() : p.versionCode;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private String versionName() {
+        try {
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            return "?";
+        }
+    }
+
+    private int bundledToolkit() {
+        try {
+            return new JSONObject(asset("version.json")).optInt("toolkit", 0);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private File toolkitDir() { return new File(getFilesDir(), "toolkit"); }
+
+    private JSONObject installedToolkit() {
+        try {
+            JSONObject m = new JSONObject(readFile(new File(toolkitDir(), "manifest.json")));
+            if (m.optInt("build") <= bundledToolkit() || m.optInt("min_android") > versionCode()) return null;
+            JSONObject files = m.getJSONObject("files");
+            for (String name : TOOLKIT_FILES) {
+                File f = new File(toolkitDir(), name);
+                if (!f.exists() || !sha256(f).equals(files.getJSONObject(name).getString("sha256"))) return null;
+            }
+            return m;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     private String buildInject() {
-        String typedex = asset("typedex.json");
-        String maps = asset("maps.json");
-        return "window.__PBTypedex=" + (typedex.isEmpty() ? "null" : typedex) + ";"
+        JSONObject update = installedToolkit();
+        int build = update != null ? update.optInt("build") : bundledToolkit();
+        String typedex = update != null ? readFile(new File(toolkitDir(), "typedex.json")) : asset("typedex.json");
+        String maps = update != null ? readFile(new File(toolkitDir(), "maps.json")) : asset("maps.json");
+        String hub = update != null ? readFile(new File(toolkitDir(), "hub.js")) : asset("hub.js");
+        String app = "{\"version\":" + JSONObject.quote(versionName()) + ",\"toolkit\":" + build + ",\"platform\":\"android\"}";
+        return "window.__PBApp=" + app + ";"
+                + "window.__PBTypedex=" + (typedex.isEmpty() ? "null" : typedex) + ";"
                 + "window.__PBMaps=" + (maps.isEmpty() ? "null" : maps) + ";\n"
-                + asset("android_shim.js") + "\n" + asset("hub.js");
+                + asset("android_shim.js") + "\n" + hub;
+    }
+
+    private static byte[] httpGet(String url) throws Exception {
+        HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
+        c.setConnectTimeout(15000);
+        c.setReadTimeout(30000);
+        c.setRequestProperty("Cache-Control", "no-cache");
+        try (InputStream in = c.getInputStream()) {
+            return readAll(in);
+        } finally {
+            c.disconnect();
+        }
+    }
+
+    private void checkUpdates() {
+        new Thread(() -> {
+            try {
+                JSONObject latest = new JSONObject(new String(
+                        httpGet(UPDATE_URL + "?t=" + System.currentTimeMillis()), StandardCharsets.UTF_8));
+                JSONObject toolkit = latest.optJSONObject("toolkit");
+                if (toolkit != null) updateToolkit(toolkit);
+                JSONObject apk = latest.optJSONObject("android");
+                if (apk != null && apk.optInt("code") > versionCode()) apkUpdate = apk;
+            } catch (Exception ignored) { }
+        }).start();
+    }
+
+    private void updateToolkit(JSONObject t) throws Exception {
+        JSONObject installed = installedToolkit();
+        int current = installed != null ? installed.optInt("build") : bundledToolkit();
+        if (t.optInt("build") <= current || t.optInt("min_android") > versionCode()) return;
+        File dir = toolkitDir();
+        File staging = new File(dir, "staging");
+        if (!staging.isDirectory() && !staging.mkdirs()) return;
+        JSONObject files = t.getJSONObject("files");
+        for (String name : TOOLKIT_FILES) {
+            byte[] data = httpGet(t.getString("base") + name);
+            if (!sha256(data).equals(files.getJSONObject(name).getString("sha256"))) return;
+            writeFile(new File(staging, name), data);
+        }
+        for (String name : TOOLKIT_FILES) {
+            File target = new File(dir, name);
+            if (target.exists() && !target.delete()) return;
+            if (!new File(staging, name).renameTo(target)) return;
+        }
+        JSONObject manifest = new JSONObject();
+        manifest.put("build", t.optInt("build"));
+        manifest.put("min_android", t.optInt("min_android"));
+        manifest.put("files", files);
+        writeFile(new File(dir, "manifest.json"), manifest.toString().getBytes(StandardCharsets.UTF_8));
     }
 
     private void hideSystemBars() {
@@ -157,8 +302,8 @@ public class MainActivity extends Activity {
         public boolean saveRuns(String text) {
             File f = runsFile();
             File tmp = new File(f.getPath() + ".tmp");
-            try (FileOutputStream out = new FileOutputStream(tmp)) {
-                out.write(text.getBytes(StandardCharsets.UTF_8));
+            try {
+                writeFile(tmp, text.getBytes(StandardCharsets.UTF_8));
             } catch (Exception e) {
                 return false;
             }
@@ -169,15 +314,8 @@ public class MainActivity extends Activity {
         public String loadRuns() {
             File f = runsFile();
             if (!f.exists()) return "[]";
-            try (FileInputStream in = new FileInputStream(f)) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                byte[] buf = new byte[16384];
-                int n;
-                while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
-                return out.toString("UTF-8");
-            } catch (Exception e) {
-                return "[]";
-            }
+            String text = readFile(f);
+            return text.isEmpty() ? "[]" : text;
         }
 
         @JavascriptInterface
@@ -187,6 +325,19 @@ public class MainActivity extends Activity {
             send.putExtra(Intent.EXTRA_SUBJECT, "pokebonk-runs.json");
             send.putExtra(Intent.EXTRA_TEXT, text);
             startActivity(Intent.createChooser(send, "PokéBonk runs"));
+        }
+
+        @JavascriptInterface
+        public String updateInfo() {
+            JSONObject apk = apkUpdate;
+            if (apk == null) return "null";
+            return "{\"version\":" + JSONObject.quote(apk.optString("name")) + ",\"action\":\"download\"}";
+        }
+
+        @JavascriptInterface
+        public void applyUpdate() {
+            JSONObject apk = apkUpdate;
+            if (apk != null) runOnUiThread(() -> openInBrowser(Uri.parse(apk.optString("url"))));
         }
     }
 }

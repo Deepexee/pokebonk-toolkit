@@ -34,7 +34,13 @@
           A.shareRuns(t);
           return Promise.resolve();
         },
-        set_fullscreen: function () { return Promise.resolve(true); }
+        set_fullscreen: function () { return Promise.resolve(true); },
+        update_info: function () {
+          var info = null;
+          try { info = JSON.parse(A.updateInfo()); } catch (e) {}
+          return Promise.resolve(info);
+        },
+        apply_update: function () { A.applyUpdate(); return Promise.resolve(true); }
       }
     };
     window.dispatchEvent(new Event("pywebviewready"));
