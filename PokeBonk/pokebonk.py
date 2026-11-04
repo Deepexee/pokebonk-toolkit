@@ -9,6 +9,7 @@ import threading
 import time
 import urllib.request
 import uuid
+import webbrowser
 import webview
 from urllib.parse import quote, urlparse
 
@@ -335,6 +336,14 @@ class Api:
             return True
         except Exception as e:
             log("Config: could not save (%r)" % (e,))
+            return False
+
+    def open_download(self):
+        try:
+            webbrowser.open(CLIENT_URL + "/download/PokeBonkApp.exe")
+            return True
+        except Exception as e:
+            log("Update: could not open the download (%r)" % (e,))
             return False
 
     def open_config(self):

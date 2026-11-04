@@ -73,7 +73,7 @@
       uiEdit: "Edytuj interfejs", uiReset: "Resetuj", uiCount: "Zapisane zmiany: {n}",
       edHint: "Kliknij część ekranu i przeciągnij, aby ją przesunąć · Esc kończy", edDone: "Gotowe", edHide: "Ukryj", edShow: "Pokaż", edReset: "Resetuj",
       cfgT: "Plik konfiguracji", cfgH: "Opcje toolkitu i część opcji gry (kalibracja pada, grafika…) są zapisane w tym pliku. Edytuj go dowolnym edytorem tekstu i uruchom ponownie aplikację.",
-      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Otwórz plik konfiguracji",
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Otwórz plik konfiguracji", updT: "Aktualizacja", updH: "Jeśli automatyczna aktualizacja nie zadziałała, pobierz najnowszą wersję aplikacji i zastąp nią stary plik.", updGet: "Pobierz najnowszą wersję",
       rkLabel: "Ranking", rkNeed: "{n} K.O. aby wejść", qT: "Zadania", qDaily: "Dzienne", qWeekly: "Tygodniowe", journal: "Dziennik gry", jt_lvl: "Poziom", jt_zone: "Strefa", jt_atk: "Atak", jt_atkUp: "Ulepszenie", jt_relic: "Relikwia", jt_vit: "Witamina", jt_item: "Przedmiot", jt_boss: "Boss", jt_bossEnd: "Boss pokonany", jt_toast: "Info", itemsNav: "Przedmioty", vitT: "Witaminy i wzmocnienia", vitH: "To nie są przedmioty: zajmują miejsca na witaminy i działają jak ulepszenia statystyk.", itemsSub: "Wszystkie przedmioty i ile jeszcze zostało", itemsSearch: "Szukaj przedmiotu…", itemsLoad: "Wczytywanie przedmiotów…", itemsHave: "W tej grze", itemsLeft: "Do zdobycia", itemsTotal: "Wszystkie", itemsHint: "Lista odświeża się, gdy otworzysz pauzę w grze (tam widać Twoje przedmioty).", itemsIdle: "Zacznij grę i otwórz pauzę, aby zobaczyć, które przedmioty już masz.", rankT: "Pozycja w rankingu", rankH: "Pokazuje na żywo Twoje miejsce w rankingu K.O. sezonu pod licznikiem K.O.", questT: "Śledzenie zadań", questH: "Pokazuje postęp dziennych i tygodniowych zadań w trakcie gry.", logT: "Dziennik gry", logH: "Zapisuje z czasem ataki, przedmioty, relikwie, bossów i poziomy. Widać go w szczegółach gry.", ultT: "Powiadomienie o ultimate", ultH: "Wyświetla komunikat, gdy ultimate jest gotowe."
     },
     en: {
@@ -100,7 +100,7 @@
       uiEdit: "Edit the interface", uiReset: "Reset", uiCount: "{n} change(s) saved",
       edHint: "Click a part of the screen and drag it to move it · Esc to finish", edDone: "Done", edHide: "Hide", edShow: "Show", edReset: "Reset",
       cfgT: "Config file", cfgH: "Your toolkit options and some game options (controller calibration, graphics…) are saved in this file. Edit it with any text editor, then restart the app.",
-      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Open the config file",
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Open the config file", updT: "Update", updH: "If the automatic update did not work, download the latest version of the app and replace the old file with it.", updGet: "Download the latest version",
       rkLabel: "Rank", rkNeed: "{n} K.O. to enter", qT: "Quests", qDaily: "Daily", qWeekly: "Weekly", journal: "Run log", jt_lvl: "Level", jt_zone: "Zone", jt_atk: "Attack", jt_atkUp: "Upgrade", jt_relic: "Relic", jt_vit: "Vitamin", jt_item: "Item", jt_boss: "Boss", jt_bossEnd: "Boss down", jt_toast: "Info", itemsNav: "Items", vitT: "Vitamins and boosts", vitH: "These are not items: they use the vitamin slots and work as stat upgrades.", itemsSub: "Every item and how many are left to find", itemsSearch: "Search items…", itemsLoad: "Loading items…", itemsHave: "This run", itemsLeft: "Left to find", itemsTotal: "Total", itemsHint: "The list updates whenever you open the game's pause screen (it shows your items).", itemsIdle: "Start a run and open the pause screen to see which items you already have.", rankT: "Live ranking", rankH: "Shows your live position in the season's K.O. ranking under the K.O. counter.", questT: "Quest tracker", questH: "Shows the progress of your daily and weekly quests during a run.", logT: "Run log", logH: "Records attacks, items, relics, bosses and levels with timestamps. See it in a run's details.", ultT: "Ultimate notification", ultH: "Shows the message when your ultimate is ready."
     },
     fr: {
@@ -127,7 +127,7 @@
       uiEdit: "Modifier l'interface", uiReset: "Réinitialiser", uiCount: "{n} modification(s) enregistrée(s)",
       edHint: "Clique sur une partie de l'écran et glisse-la pour la déplacer · Échap pour finir", edDone: "Terminé", edHide: "Cacher", edShow: "Afficher", edReset: "Réinitialiser",
       cfgT: "Fichier de config", cfgH: "Tes options du toolkit et certaines options du jeu (calibration manette, graphismes…) sont enregistrées dans ce fichier. Modifie-le avec n'importe quel éditeur de texte puis redémarre l'appli.",
-      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Ouvrir le fichier de config",
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Ouvrir le fichier de config", updT: "Mise à jour", updH: "Si la mise à jour automatique n'a pas marché, télécharge la dernière version de l'appli et remplace l'ancien fichier.", updGet: "Télécharger la dernière version",
       rkLabel: "Rang", rkNeed: "{n} K.O. pour entrer", qT: "Missions", qDaily: "Du jour", qWeekly: "De la semaine", journal: "Journal de partie", jt_lvl: "Niveau", jt_zone: "Zone", jt_atk: "Attaque", jt_atkUp: "Amélioration", jt_relic: "Relique", jt_vit: "Vitamine", jt_item: "Objet", jt_boss: "Boss", jt_bossEnd: "Boss vaincu", jt_toast: "Info", itemsNav: "Objets", vitT: "Vitamines et boosts", vitH: "Ce ne sont pas des objets : ils occupent les emplacements de vitamines et améliorent tes statistiques.", itemsSub: "Tous les objets et combien il en reste à trouver", itemsSearch: "Chercher un objet…", itemsLoad: "Chargement des objets…", itemsHave: "Cette partie", itemsLeft: "Restants", itemsTotal: "Total", itemsHint: "La liste se met à jour quand tu ouvres l'écran de pause du jeu (il montre tes objets).", itemsIdle: "Lance une partie et ouvre la pause pour voir quels objets tu as déjà.", rankT: "Classement en direct", rankH: "Montre ta position en direct dans le classement K.O. de la saison, sous le compteur de K.O.", questT: "Suivi des missions", questH: "Montre la progression de tes missions du jour et de la semaine pendant une partie.", logT: "Journal de partie", logH: "Enregistre attaques, objets, reliques, boss et niveaux avec l'heure. Visible dans le détail d'une partie.", ultT: "Notification d'ultimate", ultH: "Affiche le message quand ton ultimate est prête."
     }
   };
@@ -3001,7 +3001,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function cfgView() {
     var n = Object.keys(prefs.ui).length;
-    return '<div class="panel">' + cfgRow(S("koT"), S("koH"), swHtml(prefs.ko, "ko")) +
+    var appv = window.__PBApp || {};
+    return '<div class="panel"><div class="panel-t">' + esc(S("updT")) + "</div>" +
+        '<p class="hint2">' + esc(S("updH")) + "</p>" +
+        '<div class="crow"><div class="ctx"><span>' + esc("PokeBonk" + (appv.version ? " " + appv.version : "") + (appv.toolkit ? " · build " + appv.toolkit : "")) + "</span></div>" +
+          '<button type="button" class="btn" data-cfg="getupdate">' + esc(S("updGet")) + "</button></div></div>" +
+      '<div class="panel">' + cfgRow(S("koT"), S("koH"), swHtml(prefs.ko, "ko")) +
         cfgRow(S("rankT"), S("rankH"), swHtml(prefs.rank, "rank")) +
         cfgRow(S("questT"), S("questH"), swHtml(prefs.quests, "quests")) +
         cfgRow(S("logT"), S("logH"), swHtml(prefs.journal, "journal")) + "</div>" +
@@ -3018,6 +3023,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   function cfgAction(what) {
     if (what === "ko") { prefs.ko = !prefs.ko; savePrefs(); }
     else if (what === "rank" || what === "quests" || what === "journal") { prefs[what] = !prefs[what]; savePrefs(); lvqSig = ""; }
+    else if (what === "getupdate") {
+      var ap = pyApi();
+      if (ap && ap.open_download) ap.open_download();
+      else window.open("https://pokebonk.deepexe.fr/download/" + (/android/i.test(navigator.userAgent) ? "PokeBonk.apk" : "PokeBonkApp.exe"), "_blank");
+      return;
+    }
     else if (what === "uireset") { prefs.ui = {}; savePrefs(); applyUiEdits(); }
     else if (what === "uiedit") { startEdit(); return; }
     else if (what === "opencfg") {
