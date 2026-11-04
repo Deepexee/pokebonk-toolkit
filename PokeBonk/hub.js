@@ -73,7 +73,8 @@
       uiEdit: "Edytuj interfejs", uiReset: "Resetuj", uiCount: "Zapisane zmiany: {n}",
       edHint: "Kliknij część ekranu · Esc kończy", edDone: "Gotowe", edHide: "Ukryj", edShow: "Pokaż", edReset: "Resetuj",
       cfgT: "Plik konfiguracji", cfgH: "Opcje toolkitu i część opcji gry (kalibracja pada, grafika…) są zapisane w tym pliku. Edytuj go dowolnym edytorem tekstu i uruchom ponownie aplikację.",
-      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Otwórz plik konfiguracji"
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Otwórz plik konfiguracji",
+      rkLabel: "Ranking", rkNeed: "{n} K.O. aby wejść", qT: "Zadania", qDaily: "Dzienne", qWeekly: "Tygodniowe", journal: "Dziennik gry", jt_lvl: "Poziom", jt_zone: "Strefa", jt_atk: "Atak", jt_atkUp: "Ulepszenie", jt_relic: "Relikwia", jt_vit: "Witamina", jt_item: "Przedmiot", jt_boss: "Boss", jt_bossEnd: "Boss pokonany", jt_toast: "Info", itemsNav: "Przedmioty", itemsSub: "Wszystkie przedmioty i ile jeszcze zostało", itemsSearch: "Szukaj przedmiotu…", itemsLoad: "Wczytywanie przedmiotów…", itemsHave: "W tej grze", itemsLeft: "Do zdobycia", itemsTotal: "Wszystkie", itemsHint: "Lista odświeża się, gdy otworzysz pauzę w grze (tam widać Twoje przedmioty).", itemsIdle: "Zacznij grę i otwórz pauzę, aby zobaczyć, które przedmioty już masz.", rankT: "Pozycja w rankingu", rankH: "Pokazuje na żywo Twoje miejsce w rankingu K.O. sezonu pod licznikiem K.O.", questT: "Śledzenie zadań", questH: "Pokazuje postęp dziennych i tygodniowych zadań w trakcie gry.", logT: "Dziennik gry", logH: "Zapisuje z czasem ataki, przedmioty, relikwie, bossów i poziomy. Widać go w szczegółach gry.", ultT: "Powiadomienie o ultimate", ultH: "Wyświetla komunikat, gdy ultimate jest gotowe."
     },
     en: {
       nav: "Progress", sub: "{n} runs saved", subNone: "No runs saved yet",
@@ -99,7 +100,8 @@
       uiEdit: "Edit the interface", uiReset: "Reset", uiCount: "{n} change(s) saved",
       edHint: "Click a part of the screen · Esc to finish", edDone: "Done", edHide: "Hide", edShow: "Show", edReset: "Reset",
       cfgT: "Config file", cfgH: "Your toolkit options and some game options (controller calibration, graphics…) are saved in this file. Edit it with any text editor, then restart the app.",
-      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Open the config file"
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Open the config file",
+      rkLabel: "Rank", rkNeed: "{n} K.O. to enter", qT: "Quests", qDaily: "Daily", qWeekly: "Weekly", journal: "Run log", jt_lvl: "Level", jt_zone: "Zone", jt_atk: "Attack", jt_atkUp: "Upgrade", jt_relic: "Relic", jt_vit: "Vitamin", jt_item: "Item", jt_boss: "Boss", jt_bossEnd: "Boss down", jt_toast: "Info", itemsNav: "Items", itemsSub: "Every item and how many are left to find", itemsSearch: "Search items…", itemsLoad: "Loading items…", itemsHave: "This run", itemsLeft: "Left to find", itemsTotal: "Total", itemsHint: "The list updates whenever you open the game's pause screen (it shows your items).", itemsIdle: "Start a run and open the pause screen to see which items you already have.", rankT: "Live ranking", rankH: "Shows your live position in the season's K.O. ranking under the K.O. counter.", questT: "Quest tracker", questH: "Shows the progress of your daily and weekly quests during a run.", logT: "Run log", logH: "Records attacks, items, relics, bosses and levels with timestamps. See it in a run's details.", ultT: "Ultimate notification", ultH: "Shows the message when your ultimate is ready."
     },
     fr: {
       nav: "Progression", sub: "{n} parties enregistrées", subNone: "Aucune partie enregistrée",
@@ -125,7 +127,8 @@
       uiEdit: "Modifier l'interface", uiReset: "Réinitialiser", uiCount: "{n} modification(s) enregistrée(s)",
       edHint: "Clique sur une partie de l'écran · Échap pour finir", edDone: "Terminé", edHide: "Cacher", edShow: "Afficher", edReset: "Réinitialiser",
       cfgT: "Fichier de config", cfgH: "Tes options du toolkit et certaines options du jeu (calibration manette, graphismes…) sont enregistrées dans ce fichier. Modifie-le avec n'importe quel éditeur de texte puis redémarre l'appli.",
-      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Ouvrir le fichier de config"
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Ouvrir le fichier de config",
+      rkLabel: "Rang", rkNeed: "{n} K.O. pour entrer", qT: "Missions", qDaily: "Du jour", qWeekly: "De la semaine", journal: "Journal de partie", jt_lvl: "Niveau", jt_zone: "Zone", jt_atk: "Attaque", jt_atkUp: "Amélioration", jt_relic: "Relique", jt_vit: "Vitamine", jt_item: "Objet", jt_boss: "Boss", jt_bossEnd: "Boss vaincu", jt_toast: "Info", itemsNav: "Objets", itemsSub: "Tous les objets et combien il en reste à trouver", itemsSearch: "Chercher un objet…", itemsLoad: "Chargement des objets…", itemsHave: "Cette partie", itemsLeft: "Restants", itemsTotal: "Total", itemsHint: "La liste se met à jour quand tu ouvres l'écran de pause du jeu (il montre tes objets).", itemsIdle: "Lance une partie et ouvre la pause pour voir quels objets tu as déjà.", rankT: "Classement en direct", rankH: "Montre ta position en direct dans le classement K.O. de la saison, sous le compteur de K.O.", questT: "Suivi des missions", questH: "Montre la progression de tes missions du jour et de la semaine pendant une partie.", logT: "Journal de partie", logH: "Enregistre attaques, objets, reliques, boss et niveaux avec l'heure. Visible dans le détail d'une partie.", ultT: "Notification d'ultimate", ultH: "Affiche le message quand ton ultimate est prête."
     }
   };
 
@@ -1176,7 +1179,9 @@
     var src = img.getAttribute("src") || "";
     if (/(^|\s)lk-/.test(img.className)) return "look";
     if (/shiny/.test(src)) return "shiny";
-    if (src.indexOf("data:") === 0) return "shiny";
+    if (src.indexOf("data:") === 0 || src.indexOf("blob:") === 0) return "shiny";
+    if (img.style && img.style.filter && /hue|invert|sepia/.test(img.style.filter)) return "look";
+    if (img.closest && img.closest("[class*=\"spectral\"],[data-skin]")) return "look";
     return "";
   }
 
@@ -1184,7 +1189,8 @@
     var top = document.querySelector(".hud-top");
     var biomeEl = top && top.querySelector(".ht-biome");
     if (!biomeEl || !visible(top)) return null;
-    var t = parseClock(text(".timer", top));
+    var t = parseClock(text(".runclock b", top));
+    if (t == null) t = parseClock(text(".timer", top));
     if (t == null) return null;
     var tier = top.querySelector(".ht-tier");
     var portrait = document.querySelector(".hud-tl .tl-portrait");
@@ -1223,6 +1229,7 @@
       dur: h.t, lvl: h.lvl, kills: h.kills, gold: h.gold, phase: h.phase,
       minHp: h.hp == null ? 100 : h.hp,
       pts: [[h.t, h.lvl, h.kills, h.gold]],
+      log: [],
       end: ""
     };
   }
@@ -1235,6 +1242,7 @@
     c.gold = h.gold;
     if (h.phase) c.phase = h.phase;
     if (h.sp) c.sp = h.sp;
+    if (h.skin) c.skin = h.skin;
     if (h.spName) c.spName = h.spName;
     if (h.hp != null && h.hp < c.minHp) c.minHp = h.hp;
     var last = c.pts[c.pts.length - 1];
@@ -1295,7 +1303,7 @@
         id: c.id, at: Date.now(), result: r.outcome,
         biome: c.biome, biomeName: c.biomeName, mode: c.mode, modeName: c.modeName,
         sp: c.sp, spName: c.spName || NAME_BY_ID[c.sp] || "", lvl: c.lvl,
-        kills: c.kills, killsText: r.killsText, time: r.time || fmtDur(c.dur), dmgText: r.dmgText
+        kills: c.kills, killsText: r.killsText, time: r.time || fmtDur(c.dur), dmgText: r.dmgText, skin: c.skin || ""
       };
     }
   }
@@ -1311,7 +1319,7 @@
         mode: lastResult.mode, modeName: lastResult.modeName,
         sp: lastResult.sp, spName: lastResult.spName, lvl: lastResult.lvl,
         kills: lastResult.kills, killsText: lastResult.killsText, time: lastResult.time,
-        dmgText: lastResult.dmgText, mapImg: biomeGround(lastResult.biome), monImg: portraitUrl(lastResult.sp)
+        dmgText: lastResult.dmgText, skin: lastResult.skin, mapImg: biomeGround(lastResult.biome), monImg: portraitUrl(lastResult.sp)
       };
     } else if (h && cur) {
       s = {
@@ -1352,6 +1360,7 @@
     setDockMode(!!h);
     koSample(h, now);
     paintKos(h);
+    liveTick(h, now);
     refreshLiveCard();
   }
 
@@ -1640,6 +1649,7 @@
       "</div>";
     html += '<div class="panel"><div class="panel-t">' + esc(S("timeline")) + ' <span class="hint">' + esc(S("timelineHint")) + "</span></div>" +
       timelineSvg(r) + "</div>";
+    html += journalHtml(r);
     return html;
   }
 
@@ -1964,6 +1974,36 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 .edbtns button{height:34px;min-width:34px;padding:0 12px;border:0;border-radius:999px;background:var(--pill);color:#fff;font:900 14px/1 var(--ft);cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.4)}
 .edbtns button:hover{filter:brightness(1.12)}
 .edbtns span{min-width:46px;text-align:center;font:900 13px var(--ft)}
+.rk b{color:#7fe3a0}
+.lvq{position:absolute;width:236px;padding:8px 10px 9px;border-radius:14px;background:rgba(34,40,58,.9);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.35),var(--ring);pointer-events:none;display:flex;flex-direction:column;gap:6px}
+.lvq[hidden]{display:none}
+.qtitle{font:900 11px/1 var(--ft);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.qh{margin:10px 0 2px;font:900 11px/1 var(--ft);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.qr .qt{display:flex;justify-content:space-between;gap:8px;font:800 12px/1.2 var(--f)}
+.qr .qt b{font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qr .qt span{flex:0 0 auto;color:var(--yellow);font-weight:900}
+.qr i{display:block;height:5px;margin-top:3px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
+.qr u{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green-d),var(--green));text-decoration:none}
+.qr.ok .qt span{color:var(--green)}
+.qlist{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.qlist .qh{grid-column:1/-1}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.itm{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px 8px;border-radius:14px;background:var(--paper2);box-shadow:var(--ring);opacity:.5;text-align:center}
+.itm img{width:40px;height:40px;image-rendering:pixelated}
+.itm span{font:800 11px/1.15 var(--f);color:var(--ink2)}
+.itm.have{opacity:1;background:var(--paper3);box-shadow:inset 0 0 0 2px var(--green)}
+.itm.have span{color:#fff}
+.itm b{position:absolute;top:4px;right:6px;font:900 12px/1 var(--ft);color:var(--yellow)}
+.jlist{display:flex;flex-direction:column;gap:3px;max-height:420px;overflow:auto}
+.jr{display:grid;grid-template-columns:52px 96px 1fr;gap:8px;align-items:baseline;padding:5px 8px;border-radius:9px;background:var(--paper2);font:700 12px/1.25 var(--f)}
+.jr time{font:900 12px/1 var(--ft);color:var(--ink3)}
+.jr b{font:900 11px/1 var(--ft);text-transform:uppercase;letter-spacing:.04em;color:var(--ink2)}
+.jr.j-boss b,.jr.j-bossEnd b{color:var(--red)}
+.jr.j-lvl b{color:var(--yellow)}
+.jr.j-item b,.jr.j-relic b{color:var(--green)}
+.jr.j-atk b,.jr.j-atkUp b{color:var(--orange)}
+.jr.j-vit b{color:var(--blue)}
+.ribbon.rb-items{background:var(--stripes),linear-gradient(100deg,#c26a12,var(--orange))}
 `;
 
   var GEAR = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6a.5.5 0 0 0 .1-.6l-2-3.4a.5.5 0 0 0-.6-.2l-2.3 1a7 7 0 0 0-1.7-1l-.4-2.5a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1a.5.5 0 0 0-.6.2l-2 3.4a.5.5 0 0 0 .1.6l2 1.6a7.5 7.5 0 0 0 0 2l-2 1.6a.5.5 0 0 0-.1.6l2 3.4c.1.2.4.3.6.2l2.3-1a7 7 0 0 0 1.7 1l.4 2.5c0 .2.3.4.5.4h4c.3 0 .5-.2.5-.4l.4-2.5a7 7 0 0 0 1.7-1l2.3 1c.2.1.5 0 .6-.2l2-3.4a.5.5 0 0 0-.1-.6zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg>';
@@ -1974,6 +2014,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     { v: "dex", icon: "items/poke-ball.png", label: function () { return T("navDex"); }, rb: "rb-dex" },
     { v: "types", icon: "ui/types/fire.png", label: function () { return T("navTypes"); }, rb: "rb-types" },
     { v: "maps", icon: "ui/icons/map-portal.png", label: function () { return T("navMaps"); }, rb: "rb-maps" },
+    { v: "items", icon: "items/leftovers.png", label: function () { return S("itemsNav"); }, rb: "rb-items" },
     { v: "stats", icon: "ui/icons/record.png", label: function () { return S("nav"); }, rb: "rb-stats" },
     { v: "cfg", svg: GEAR, label: function () { return S("cfgNav"); }, rb: "rb-cfg" }
   ];
@@ -1996,6 +2037,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
         '<span class="ltext">Menu</span><kbd>F2</kbd></button>' +
     "</div>" +
     '<div class="kos" id="kos" hidden><b id="kosV">0.0</b><small>K.O./s</small><i id="kosA"></i></div>' +
+    '<div class="kos rk" id="rk" hidden><b id="rkV">#1</b><small id="rkS"></small></div>' +
+    '<div class="lvq" id="lvq" hidden></div>' +
     '<div class="edbar" id="edbar" hidden><span id="edHint"></span><button type="button" class="btn" id="edDone" data-ed="done"></button></div>' +
     '<div class="edbox" id="edbox" hidden></div><div class="edbox sel" id="edsel" hidden></div>' +
     '<div class="edpanel" id="edpanel" hidden><b id="edName"></b><div class="edbtns">' +
@@ -2091,6 +2134,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   function headerTexts() {
     if (state.view === "cfg") return [S("cfgNav"), S("cfgSub")];
+    if (state.view === "items") return [S("itemsNav"), S("itemsSub")];
     if (state.view === "stats" || state.view === "run") {
       return [S("nav"), runs.length ? fill(S("sub"), runs.length) : S("subNone")];
     }
@@ -2134,7 +2178,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     root.getElementById("footHint").textContent = S("tools") + " · Esc";
     closeBtn.title = T("close");
     clearBtn.title = T("clear");
-    q.placeholder = state.view === "maps" ? T("searchMaps") : T("searchPoke");
+    q.placeholder = state.view === "maps" ? T("searchMaps") : state.view === "items" ? S("itemsSearch") : T("searchPoke");
 
     var h = headerTexts();
     hTitle.textContent = h[0];
@@ -2164,7 +2208,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     else if (state.view === "map" && REGION_BY_ID[state.sel]) html = mapView(state.sel);
     else if (state.view === "run") html = runView(state.sel);
     else if (state.view === "cfg") html = cfgView();
-    else if (state.view === "stats") html = statsView();
+    else if (state.view === "items") html = itemsView();
+    else if (state.view === "stats") html = questsTabHtml() + statsView();
     else if (state.view === "maps") html = mapsView();
     else html = state.view === "types" ? typesView() : dexView();
     content.innerHTML = '<div class="view">' + html + "</div>";
@@ -2190,7 +2235,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
 
   function setView(v) {
-    if (v !== "dex" && v !== "types" && v !== "maps" && v !== "stats" && v !== "cfg") return;
+    if (v !== "dex" && v !== "types" && v !== "maps" && v !== "stats" && v !== "cfg" && v !== "items") return;
     if (v === "maps" && !HAS_MAPS) return;
     hist = [];
     state.view = v;
@@ -2273,7 +2318,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if (!lostLock) return;
     lostLock = false;
     setTimeout(function () {
-      var b = document.querySelector(".sm-modal .actions .btn.green.big");
+      var pz = document.querySelector(".sm-modal .pz-end");
+      var b = pz && pz.closest(".sm-modal").querySelector(".actions .btn.green.big");
       if (b && b.offsetParent) b.click();
     }, 150);
   }
@@ -2435,7 +2481,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   var GAME_KEYS = /^(pb-render-res|pb-battery|pb-fs-off|pb-pad-cal|pb-padtold|pb-pad-first|pb\.coop\.mute|pb\.coop\.quick|pb\.boardFilter)$/;
   var PREF_KEY = "pokebonk_hub_prefs";
-  var prefs = { ko: true, wheelUp: "", wheelDown: "", ui: {} };
+  var prefs = { ko: true, rank: true, quests: true, journal: true, ult: true, wheelUp: "", wheelDown: "", ui: {} };
   try {
     var savedPrefs = JSON.parse(localStorage.getItem(PREF_KEY) || "null");
     if (savedPrefs && typeof savedPrefs === "object") {
@@ -2500,7 +2546,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function configObject() {
     var o = {
-      toolkit: { language: lang, ko_per_second: !!prefs.ko, wheel_up: prefs.wheelUp || "", wheel_down: prefs.wheelDown || "" },
+      toolkit: { language: lang, ko_per_second: !!prefs.ko, live_rank: !!prefs.rank, quest_tracker: !!prefs.quests, run_journal: !!prefs.journal, ultimate_notice: !!prefs.ult, wheel_up: prefs.wheelUp || "", wheel_down: prefs.wheelDown || "" },
       "interface": {},
       game: gameStorage()
     };
@@ -2531,6 +2577,10 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   function applyConfig(o) {
     var t = o.toolkit || {}, changedGame = false;
     if (typeof t.ko_per_second === "boolean") prefs.ko = t.ko_per_second;
+    if (typeof t.live_rank === "boolean") prefs.rank = t.live_rank;
+    if (typeof t.quest_tracker === "boolean") prefs.quests = t.quest_tracker;
+    if (typeof t.run_journal === "boolean") prefs.journal = t.run_journal;
+    if (typeof t.ultimate_notice === "boolean") prefs.ult = t.ultimate_notice;
     if (typeof t.wheel_up === "string") prefs.wheelUp = t.wheel_up;
     if (typeof t.wheel_down === "string") prefs.wheelDown = t.wheel_down;
     var ui = {}, iface = o["interface"] || {};
@@ -2587,8 +2637,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     koHist.push([now, h.kills]);
     while (koHist.length > 2 && now - koHist[0][0] > 15000) koHist.shift();
   }
+  function gameModal() {
+    var m = document.querySelector("#ui .modal");
+    return !!(m && visible(m));
+  }
   function paintKos(h) {
-    var counter = h && prefs.ko && !isOpen && !editing && koHist.length > 1 ? document.querySelector(".hud-tr .counter") : null;
+    var counter = h && prefs.ko && !isOpen && !editing && !gameModal() && koHist.length > 1 ? document.querySelector(".hud-tr .counter") : null;
     var r = counter && counter.getBoundingClientRect();
     if (!r || !r.width) { if (!kosEl.hidden) kosEl.hidden = true; return; }
     var a = koHist[0], b = koHist[koHist.length - 1];
@@ -2830,7 +2884,11 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function cfgView() {
     var n = Object.keys(prefs.ui).length;
-    return '<div class="panel">' + cfgRow(S("koT"), S("koH"), swHtml(prefs.ko, "ko")) + "</div>" +
+    return '<div class="panel">' + cfgRow(S("koT"), S("koH"), swHtml(prefs.ko, "ko")) +
+        cfgRow(S("rankT"), S("rankH"), swHtml(prefs.rank, "rank")) +
+        cfgRow(S("questT"), S("questH"), swHtml(prefs.quests, "quests")) +
+        cfgRow(S("logT"), S("logH"), swHtml(prefs.journal, "journal")) +
+        cfgRow(S("ultT"), S("ultH"), swHtml(prefs.ult, "ult")) + "</div>" +
       '<div class="panel"><div class="panel-t">' + esc(S("wheelT")) + "</div>" +
         '<p class="hint2">' + esc(S("wheelH")) + "</p>" +
         cfgRow(S("wheelUp"), "", keyBtn("wheelUp")) + cfgRow(S("wheelDown"), "", keyBtn("wheelDown")) + "</div>" +
@@ -2846,6 +2904,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function cfgAction(what) {
     if (what === "ko") { prefs.ko = !prefs.ko; savePrefs(); }
+    else if (what === "rank" || what === "quests" || what === "journal" || what === "ult") { prefs[what] = !prefs[what]; savePrefs(); lvqSig = ""; }
     else if (what === "bind-wheelUp" || what === "bind-wheelDown") { capturing = what.slice(5); }
     else if (what === "clear-wheelUp" || what === "clear-wheelDown") { prefs[what.slice(6)] = ""; savePrefs(); }
     else if (what === "uireset") { prefs.ui = {}; savePrefs(); applyUiEdits(); }
@@ -2890,6 +2949,327 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   window.__PBUpdateCheck = checkUpdate;
   setTimeout(checkUpdate, 4000);
   setInterval(checkUpdate, 60000);
+
+  var QUEST_DEFS = {"d-kills":["Limpieza del bosque","Derrota a 500 Pokémon salvajes.","kills",500],"d-runs":["Doble turno","Juega 2 partidas.","runs",2],"d-chests":["Buscador de tesoros","Abre 6 Poké Balls de objetos.","chests",6],"d-rocks":["Golpe Roca","Rompe 8 rocas de oro.","rocks",8],"d-time":["Resistencia","Sobrevive 8 minutos en una partida.","time",480],"d-gold":["Bolsillos llenos","Consigue 1.200 ₽ en partidas.","gold",1200],"d-mutation":["Mutante del día","Juega la Mutación del día.","mutation",1],"d-dojo":["Primer cinturón","Supera un reto del Dojo Karate.","dojo",1],"d-ults":["Poder desatado","Lanza 10 Ultimates.","ultimates",10],"d-incense":["Aroma misterioso","Abre 3 Grietas con el Incienso.","riftsOpened",3],"d-johto":["Aires de Johto","Juega una partida con un Pokémon de Johto.","johtoRuns",1],"d-alphas":["Caza mayor","Derrota o captura 2 Pokémon Alfa.","alphas",2],"d-react":["Química elemental","Provoca 60 reacciones elementales.","reactions",60],"d-burn":["Fuego cruzado","Quema a 150 Pokémon.","burned",150],"d-para":["Alta tensión","Paraliza a 120 Pokémon.","paralyzed",120],"d-soak":["Chaparrón","Moja a 200 Pokémon.","soaked",200],"d-freeze":["Ola de frío","Congela a 100 Pokémon.","frozen",100],"d-poison":["Picadura tóxica","Envenena a 150 Pokémon.","poisoned",150],"d-crits":["Puntería","Asesta 400 golpes críticos.","crits",400],"d-boss":["Guardián caído","Derrota a un guardián.","bosses",1],"d-zone2":["Más adentro","Llega a la zona 2.","stage",2],"d-challenge":["Desafío aceptado","Supera 2 altares de desafío.","challenges",2],"d-rift":["Al otro lado","Vence a 2 Alfas de grieta.","rifts",2],"d-johto2":["Paso firme","Llega a la zona 2 con un Pokémon de Johto.","johtoStage",2],"d-runkills":["Imparable","Consigue 1.500 bajas en una sola partida.","runKills",1500],"d-ally":["Nuevo aliado","Captura un Alfa de apoyo.","alphaCaught",1],"d-zone3":["Tierra adentro","Llega a la zona 3.","stage",3],"d-bosses":["Doble guardia","Derrota a 2 guardianes.","bosses",2],"d-level":["Entrenamiento duro","Alcanza el nivel 22 en una partida.","level",22],"d-evo":["¡Qué está pasando!","Evoluciona 2 veces.","evolutions",2],"d-dojo3":["Maestro del tatami","Supera 3 retos del Dojo Karate.","dojo",3],"d-rifts":["Explorador de grietas","Vence a 4 Alfas de grieta.","rifts",4],"d-johto3":["Corazón de Johto","Llega a la zona 3 con un Pokémon de Johto.","johtoStage",3],"w-kills":["Temporada de caza","Derrota a 8.000 Pokémon salvajes.","kills",8],"w-runs":["Constancia","Juega 12 partidas.","runs",12],"w-play":["Vida de entrenador","Juega 90 minutos.","playtime",5400],"w-chests":["Coleccionista de Poké Balls","Abre 50 Poké Balls de objetos.","chests",50],"w-ults":["Maestro de la Ultimate","Lanza 100 Ultimates.","ultimates",100],"w-dojo":["Alumno del dojo","Supera 8 retos del Dojo Karate.","dojo",8],"w-mutation":["Mutación constante","Juega 4 partidas de la Mutación del día.","mutation",4],"w-johto":["Ruta de Johto","Juega 6 partidas con Pokémon de Johto.","johtoRuns",6],"w-alphas":["Rey de los Alfas","Derrota o captura 12 Pokémon Alfa.","alphas",12],"w-allies":["Equipo de ensueño","Captura 5 Alfas de apoyo.","alphaCaught",5],"w-react":["Alquimia salvaje","Provoca 600 reacciones elementales.","reactions",600],"w-bosses":["Sin guardia","Derrota a 8 guardianes.","bosses",8],"w-challenges":["Sin miedo al desafío","Supera 12 altares de desafío.","challenges",12],"w-blackbelt":["Cinturón negro","Supera 2 retos de cinturón negro del Dojo Karate.","dojoBlack",2],"w-rifts":["Cazagrietas","Vence a 12 Alfas de grieta.","rifts",12],"w-relics":["Coleccionista de Reliquias","Consigue 15 Reliquias.","relics",15],"w-win":["Campeón regional","Completa un mapa.","wins",1],"w-legend":["Leyenda viva","Derrota al legendario del santuario.","legendaries",1],"w-shiny":["Brillo raro","Captura un Pokémon variocolor.","shinies",1],"w-level":["Maestría","Alcanza el nivel 30 en una partida.","level",30],"w-runkills":["Marea salvaje","Consigue 3.000 bajas en una sola partida.","runKills",3],"w-mutwin":["Mutación dominada","Completa la Mutación del día.","mutationWins",1],"w-riftrun":["Noche de grietas","Vence a 6 Alfas de grieta en una sola partida.","riftsRun",6],"w-johtowin":["Campeón de Johto","Completa un mapa con un Pokémon de Johto.","johtoWins",1]};
+  var GAME_API = "https://api.pokebonk.com";
+  var LIVE = { board: null, boardAt: 0, profile: null, profileAt: 0, busyB: false, busyP: false, tr: null, trKey: "", items: null, itemsBusy: false, owned: {}, ownedRun: "", sig: {}, sigRun: "", boss: 0, bossName: "", lastLvl: 0, lastPhase: "" };
+
+  function gameToken() {
+    try {
+      var s = JSON.parse(localStorage.getItem("pb.session") || "null");
+      return s && s.token ? s.token : "";
+    } catch (e) { return ""; }
+  }
+  function gameGet(path) {
+    var t = gameToken();
+    if (!t) return Promise.reject(new Error("no session"));
+    return fetch(GAME_API + path, { headers: { Authorization: "Bearer " + t }, cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error("http " + r.status);
+      return r.json();
+    });
+  }
+
+  function gameLang() {
+    var l = (document.documentElement.lang || "").toLowerCase();
+    return l || "es";
+  }
+  function loadTr() {
+    var l = gameLang();
+    if (LIVE.trKey === l) return;
+    LIVE.trKey = l;
+    LIVE.tr = null;
+    var url = "";
+    var list = performance.getEntriesByType("resource");
+    var re = new RegExp("/" + l + "-[^/]*\\.js");
+    for (var i = 0; i < list.length; i++) {
+      if (re.test(list[i].name)) { url = list[i].name; break; }
+    }
+    if (!url) return;
+    try {
+      import(url).then(function (m) { if (LIVE.trKey === l) { LIVE.tr = m.default || null; refreshLive(); } }).catch(function () {});
+    } catch (e) {}
+  }
+  function tr(s) { return (LIVE.tr && LIVE.tr[s]) || s; }
+
+  function pollGame(h, now) {
+    if (!gameToken()) return;
+    loadTr();
+    var wantBoard = prefs.rank && now - LIVE.boardAt > (h ? 45000 : 120000);
+    if (wantBoard && !LIVE.busyB) {
+      LIVE.busyB = true;
+      gameGet("/leaderboard").then(function (j) { LIVE.board = j; LIVE.boardAt = Date.now(); }).catch(function () { LIVE.boardAt = Date.now() - 20000; }).then(function () { LIVE.busyB = false; });
+    }
+    var wantProf = prefs.quests && now - LIVE.profileAt > 90000;
+    if (wantProf && !LIVE.busyP) {
+      LIVE.busyP = true;
+      gameGet("/profile").then(function (j) { LIVE.profile = j && j.profile; LIVE.profileAt = Date.now(); }).catch(function () { LIVE.profileAt = Date.now() - 60000; }).then(function () { LIVE.busyP = false; });
+    }
+  }
+
+  function rankInfo(h) {
+    var b = LIVE.board;
+    if (!b || !b.entries) return null;
+    var out = {};
+    if (h && cur) {
+      var kills = cur.kills;
+      var above = 0;
+      var worst = b.entries.length ? b.entries[b.entries.length - 1].kills : 0;
+      b.entries.forEach(function (e) { if (!e.me && e.kills > kills) above++; });
+      out.rank = above + 1;
+      out.out = b.entries.length >= 50 && kills < worst;
+      out.worst = worst;
+    } else if (b.me && b.me.rank) {
+      out.rank = b.me.rank;
+    } else return null;
+    return out;
+  }
+
+  var rkEl = root.getElementById("rk");
+  var rkV = root.getElementById("rkV");
+  var rkS = root.getElementById("rkS");
+  var lvq = root.getElementById("lvq");
+  function paintRank(h) {
+    var counter = h && prefs.rank && !isOpen && !editing && !gameModal() ? document.querySelector(".hud-tr .counter") : null;
+    var info = counter ? rankInfo(h) : null;
+    var c = counter && counter.getBoundingClientRect();
+    if (!info || !c || !c.width) { if (!rkEl.hidden) rkEl.hidden = true; return; }
+    var below = c.bottom;
+    if (!kosEl.hidden) below = kosEl.getBoundingClientRect().bottom;
+    rkEl.style.top = Math.round(below + 6) + "px";
+    rkEl.style.right = Math.max(4, Math.round(innerWidth - c.right)) + "px";
+    if (info.out) {
+      rkV.textContent = "> 50";
+      rkS.textContent = tmpl(S("rkNeed"), { n: fmtNum(info.worst) });
+    } else {
+      rkV.textContent = "#" + info.rank;
+      rkS.textContent = S("rkLabel");
+    }
+    rkEl.hidden = false;
+  }
+
+  function stageOf(phase) {
+    var m = String(phase || "").match(/(\d+)\s*\/\s*\d+/);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+  function liveValue(metric, base, h) {
+    base = base || 0;
+    if (!h || !cur) return base;
+    if (metric === "kills") return base + cur.kills;
+    if (metric === "runKills") return Math.max(base, cur.kills);
+    if (metric === "level") return Math.max(base, cur.lvl);
+    if (metric === "time") return Math.max(base, Math.floor(cur.dur));
+    if (metric === "playtime") return base + Math.floor(cur.dur);
+    if (metric === "gold") return base + cur.gold;
+    if (metric === "stage") return Math.max(base, stageOf(cur.phase));
+    if (metric === "johtoStage") return (cur.sp >= 152 && cur.sp <= 251) ? Math.max(base, stageOf(cur.phase)) : base;
+    return base;
+  }
+  function questRows(h) {
+    var p = LIVE.profile;
+    if (!p) return [];
+    var rows = [];
+    [["daily", p.daily], ["weekly", p.weekly]].forEach(function (pair) {
+      var blk = pair[1];
+      if (!blk || !blk.ids) return;
+      blk.ids.forEach(function (id, i) {
+        var d = QUEST_DEFS[id];
+        if (!d) return;
+        var goal = d[3];
+        var val = Math.min(goal, liveValue(d[2], (blk.prog || [])[i], h));
+        rows.push({ kind: pair[0], name: tr(d[0]), desc: tr(d[1]), val: val, goal: goal, done: val >= goal });
+      });
+    });
+    return rows;
+  }
+  function fmtQ(v, goal) {
+    return goal >= 1000 ? fmtNum(v) + " / " + fmtNum(goal) : v + " / " + goal;
+  }
+  function questHtml(x) {
+    return '<div class="qr' + (x.done ? " ok" : "") + '" title="' + esc(x.desc) + '"><div class="qt"><b>' + esc(x.name) + "</b><span>" +
+      (x.done ? "&#10003;" : esc(fmtQ(x.val, x.goal))) + '</span></div><i><u style="width:' + Math.round(x.val / x.goal * 100) + '%"></u></i></div>';
+  }
+  var lvqSig = "";
+  function paintQuests(h) {
+    var anchor = h && prefs.quests && !isOpen && !editing && !gameModal() ? document.querySelector(".hud-tl") : null;
+    var rows = anchor ? questRows(h) : [];
+    var pending = rows.filter(function (x) { return !x.done; }).slice(0, 5);
+    var r = anchor && anchor.getBoundingClientRect();
+    if (!pending.length || !r || !r.width) { if (!lvq.hidden) lvq.hidden = true; return; }
+    var sig = pending.map(function (x) { return x.name + x.val; }).join("|");
+    if (sig !== lvqSig) {
+      lvqSig = sig;
+      lvq.innerHTML = '<div class="qtitle">' + esc(S("qT")) + "</div>" + pending.map(questHtml).join("");
+    }
+    lvq.style.top = Math.round(r.bottom + 10) + "px";
+    lvq.style.left = Math.max(4, Math.round(r.left)) + "px";
+    lvq.hidden = false;
+  }
+
+  function refreshLive() {
+    lvqSig = "";
+    if (isOpen && (state.view === "items" || state.view === "run")) renderContent();
+  }
+
+  function addLog(type, txt, t) {
+    if (!cur || !prefs.journal) return;
+    if (!cur.log) cur.log = [];
+    if (cur.log.length >= 600) return;
+    cur.log.push([Math.round(t == null ? cur.dur : t), type, String(txt).slice(0, 120)]);
+  }
+  function snapNames(sel) {
+    var out = {};
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+      var k = (el.getAttribute("title") || "").split(" — ")[0].trim();
+      if (k) out[k] = 1;
+    });
+    return out;
+  }
+  function diffSet(key, now, onNew) {
+    var prev = LIVE.sig[key];
+    LIVE.sig[key] = now;
+    if (!prev) return;
+    Object.keys(now).forEach(function (k) { if (!(k in prev)) onNew(k); });
+  }
+  function readOwned() {
+    var els = document.querySelectorAll(".pk-items .pk-item");
+    if (!els.length) return null;
+    var out = {};
+    Array.prototype.forEach.call(els, function (el) {
+      var name = (el.getAttribute("title") || el.getAttribute("aria-label") || "").trim();
+      if (!name) return;
+      var b = el.querySelector("b");
+      var n = b ? parseInt((b.textContent || "").replace(/\D/g, ""), 10) : 1;
+      out[name] = n || 1;
+    });
+    return out;
+  }
+  function logTick(h) {
+    if (LIVE.sigRun !== cur.id) { LIVE.sig = {}; LIVE.sigRun = cur.id; LIVE.lastLvl = h.lvl; LIVE.lastPhase = h.phase; LIVE.boss = 0; LIVE.owned = {}; }
+    if (h.lvl > LIVE.lastLvl) addLog("lvl", h.lvl, h.t);
+    LIVE.lastLvl = h.lvl;
+    if (h.phase && h.phase !== LIVE.lastPhase) addLog("zone", h.phase, h.t);
+    LIVE.lastPhase = h.phase;
+
+    var atk = {};
+    Array.prototype.forEach.call(document.querySelectorAll(".hud-bl .bl-row .slots .slot"), function (el) {
+      var nm = el.querySelector(".nm");
+      if (!nm) return;
+      var lv = el.querySelector(".lvl");
+      atk[(nm.textContent || "").trim()] = lv ? (lv.textContent || "").trim() : "1";
+    });
+    var prevA = LIVE.sig.atk;
+    LIVE.sig.atk = atk;
+    if (prevA) Object.keys(atk).forEach(function (k) {
+      if (!(k in prevA)) addLog("atk", k, h.t);
+      else if (prevA[k] !== atk[k]) addLog("atkUp", k + " · " + atk[k], h.t);
+    });
+
+    diffSet("relic", snapNames(".hud-tl .rl-med:not(.empty)"), function (k) { addLog("relic", k, h.t); });
+    diffSet("mini", snapNames(".hud-bl > .slots .slot.mini:not(.empty)"), function (k) { addLog("vit", k, h.t); });
+
+    var bossEl = document.querySelector(".bossbar:not(.mini)");
+    var on = bossEl && visible(bossEl);
+    if (on && !LIVE.boss) {
+      LIVE.boss = h.t || 0.01;
+      LIVE.bossName = ((bossEl.querySelector(".bb-body") || bossEl).textContent || "").trim().replace(/\s+/g, " ").slice(0, 60);
+      addLog("boss", LIVE.bossName, h.t);
+    } else if (!on && LIVE.boss) {
+      addLog("bossEnd", (LIVE.bossName ? LIVE.bossName + " · " : "") + fmtDur(Math.max(0, h.t - LIVE.boss)), h.t);
+      LIVE.boss = 0;
+    }
+
+    var owned = readOwned();
+    if (owned) {
+      Object.keys(owned).forEach(function (k) {
+        if (owned[k] > (LIVE.owned[k] || 0)) addLog("item", k + (owned[k] > 1 ? " ×" + owned[k] : ""), h.t);
+      });
+      LIVE.owned = owned;
+    }
+  }
+
+  var toastsBound = null;
+  function onToast(el) {
+    var txt = (el.textContent || "").trim();
+    if (!txt) return;
+    var low = txt.toLowerCase();
+    var base = String(tr("¡Ultimate lista!")).replace(/[¡!]/g, "").trim().toLowerCase();
+    var ult = low.indexOf("ultimate") >= 0 || (base.length > 4 && low.indexOf(base) >= 0);
+    if (ult && !prefs.ult) { el.style.display = "none"; return; }
+    if (!ult && cur) addLog("toast", txt);
+  }
+  function bindToasts() {
+    var el = document.querySelector(".toasts");
+    if (!el || toastsBound === el) return;
+    toastsBound = el;
+    new MutationObserver(function (list) {
+      list.forEach(function (m) {
+        Array.prototype.forEach.call(m.addedNodes, function (n) { if (n.nodeType === 1) onToast(n); });
+      });
+    }).observe(el, { childList: true });
+  }
+
+  function liveTick(h, now) {
+    try {
+      pollGame(h, now);
+      bindToasts();
+      if (h && cur) logTick(h);
+      paintRank(h);
+      paintQuests(h);
+    } catch (e) {}
+  }
+
+  function loadItems() {
+    if (LIVE.items || LIVE.itemsBusy) return;
+    LIVE.itemsBusy = true;
+    fetch(location.origin + "/data/items.json").then(function (r) { return r.json(); }).then(function (j) {
+      LIVE.items = Object.keys(j).map(function (k) { var d = j[k]; return { key: k, name: d.name, icon: d.icon, desc: d.desc }; });
+      refreshLive();
+    }).catch(function () { LIVE.itemsBusy = false; });
+  }
+  function itemsView() {
+    loadItems();
+    loadTr();
+    if (!LIVE.items) return '<div class="panel"><p class="hint2">' + esc(S("itemsLoad")) + "</p></div>";
+    var owned = cur ? LIVE.owned || {} : {};
+    var term = norm(state.query);
+    var have = 0;
+    var cards = LIVE.items.map(function (it) {
+      var nm = tr(it.name);
+      var n = owned[nm] || 0;
+      if (n) have++;
+      return { it: it, nm: nm, n: n };
+    });
+    var shown = cards.filter(function (c) { return !term || norm(c.nm).indexOf(term) >= 0; });
+    var html = '<div class="panel"><div class="stiles">' +
+      statTile(S("itemsHave"), String(have)) + statTile(S("itemsLeft"), String(cards.length - have)) + statTile(S("itemsTotal"), String(cards.length)) +
+      '</div><p class="hint2">' + esc(S(cur ? "itemsHint" : "itemsIdle")) + "</p></div>";
+    html += '<div class="igrid">' + shown.map(function (c) {
+      return '<div class="itm' + (c.n ? " have" : "") + '" title="' + esc(c.nm + " — " + tr(c.it.desc || "")) + '"><img class="pix" src="' + asset(c.it.icon) + '" alt="" draggable="false" loading="lazy">' +
+        "<span>" + esc(c.nm) + "</span>" + (c.n ? "<b>×" + c.n + "</b>" : "") + "</div>";
+    }).join("") + "</div>";
+    return html;
+  }
+
+  function journalHtml(r) {
+    var log = r.log;
+    if (!log || !log.length) return "";
+    var rows = log.map(function (e) {
+      return '<div class="jr j-' + esc(e[1]) + '"><time>' + esc(fmtDur(e[0])) + "</time><b>" + esc(S("jt_" + e[1]) || "") + "</b><span>" + esc(e[2]) + "</span></div>";
+    }).join("");
+    return '<div class="panel"><div class="panel-t">' + esc(S("journal")) + ' <span class="hint">' + log.length + '</span></div><div class="jlist">' + rows + "</div></div>";
+  }
+
+  function questsTabHtml() {
+    var rows = questRows(null);
+    if (!rows.length) return "";
+    var html = "";
+    var last = "";
+    rows.forEach(function (r) {
+      if (r.kind !== last) { last = r.kind; html += '<div class="qh">' + esc(S(r.kind === "daily" ? "qDaily" : "qWeekly")) + "</div>"; }
+      html += questHtml(r);
+    });
+    return '<div class="panel"><div class="panel-t">' + esc(S("qT")) + '</div><div class="qlist">' + html + "</div></div>";
+  }
 
   renderLauncher();
   setInterval(tick, 1000);

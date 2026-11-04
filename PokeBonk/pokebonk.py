@@ -507,6 +507,8 @@ def build_activity(st, texts, last, started):
     activity = {}
     if run.get("result"):
         name = run.get("spName") or "?"
+        if run.get("skin"):
+            name = "✦ " + name
         where = run.get("biomeName") or run.get("biome") or ""
         kills = run.get("killsText") or short_count(run.get("kills"))
         result = run["result"]
@@ -544,6 +546,8 @@ def build_activity(st, texts, last, started):
         mode = run.get("modeName") or "PokeBonk"
         where = run.get("biomeName") or run.get("biome") or ""
         name = run.get("spName") or "?"
+        if run.get("skin"):
+            name = "✦ " + name
         activity["details"] = (mode + (" · " + where if where else ""))[:128]
         activity["state"] = ("%s · %s %s · %s K.O." % (
             name, texts["lvl"], run.get("lvl", 1), short_count(run.get("kills")))).strip()[:128]
