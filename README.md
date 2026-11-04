@@ -84,7 +84,13 @@ Everything is saved in `%LOCALAPPDATA%\PokeBonk\config.yml` (a copy of your tool
 { "gpu_boost": false, "high_performance_gpu": true, "priority_boost": false, "auto_update": false }
 ```
 
-If OBS shows a black window, use **Window Capture** with the *Windows 10 (1903 and up)* capture method, The app no longer forces the faster graphics card by default (it made OBS capture black on laptops with two graphics cards); set `"high_performance_gpu": true` to force it.
+If OBS shows a black window, use **Window Capture** with the *Windows 10 (1903 and up)* capture method. The app no longer forces the faster graphics card by default (it made OBS capture black on laptops with two graphics cards); set `"high_performance_gpu": true` to force it.
+
+`fps_cap` limits how often the page is redrawn. The game itself has no frame limit on desktop, so on a 144 or 165 Hz screen it renders at the full refresh rate (about 2.7x the work of a 60 Hz screen). The default is `60`: the app keeps an even frame pace and never goes below 56 fps, so it runs at 60 on a 120 or 240 Hz screen, 72 on 144 Hz and 82.5 on 165 Hz. A 60, 75 or 100 Hz screen is not affected. Values below 60 are raised to 60, because the game lowers its enemy count when it measures under about 55 fps (use the game's own *Límite de FPS* setting to go lower). `0` turns the limiter off:
+
+```json
+{ "fps_cap": 0 }
+```
 
 ## Credits
 

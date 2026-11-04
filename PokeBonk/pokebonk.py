@@ -191,8 +191,17 @@ def sha256_file(path):
 VERSION_INFO = read_json(resource_path("version.json"), {})
 APP_VERSION = VERSION_INFO.get("app", "1.0.0")
 TOOLKIT_BUILD = int(VERSION_INFO.get("toolkit", 0))
-SETTINGS = {"gpu_boost": True, "high_performance_gpu": False, "priority_boost": True, "auto_update": True}
+SETTINGS = {"gpu_boost": True, "high_performance_gpu": False, "priority_boost": True, "auto_update": True, "fps_cap": 60}
 SETTINGS.update(read_json(SETTINGS_FILE, {}) or {})
+
+MIN_FPS_CAP = 60
+
+def fps_cap():
+    try:
+        cap = int(SETTINGS.get("fps_cap", MIN_FPS_CAP))
+    except (TypeError, ValueError):
+        return MIN_FPS_CAP
+    return 0 if cap <= 0 else min(360, max(MIN_FPS_CAP, cap))
 
 TOOLKIT_FILES = (TYPEDEX_FILE, MAPS_FILE, HUB_FILE, "rpc_index.json")
 
@@ -1010,13 +1019,100 @@ FULLSCREEN_JS = r"""
 })();
 """
 
+FPS_LIMIT_JS = r"""
+(function () {
+  if (window.__pbFps) return;
+  window.__pbFps = true;
+
+  var CAP = __PB_FPS_CAP__;
+  var MIN_FPS = 56;
+  var BASE = 1e9;
+  var nativeRaf = window.requestAnimationFrame.bind(window);
+  var nativeCancel = window.cancelAnimationFrame.bind(window);
+  var report = window.reportError ? window.reportError.bind(window) : function (e) { setTimeout(function () { throw e; }); };
+  var queue = [];
+  var live = new Map();
+  var nextId = BASE;
+  var armed = false;
+  var samples = new Float64Array(30);
+  var count = 0;
+  var prev = 0, vsync = 0, divisor = 1, lastRun = -1e9;
+
+  function pick(ms) {
+    var hz = 1000 / ms;
+    var n = Math.max(1, Math.round(hz / CAP));
+    while (n > 1 && hz / n < MIN_FPS) n--;
+    return n;
+  }
+
+  function onFrame(ts) {
+    armed = false;
+    var d = ts - prev;
+    prev = ts;
+    if (d > 1 && d < 50) {
+      samples[count++] = d;
+      if (count === samples.length) {
+        var sorted = Array.prototype.slice.call(samples).sort(function (a, b) { return a - b; });
+        vsync = sorted[count >> 1];
+        divisor = pick(vsync);
+        count = 0;
+      }
+    }
+    if (divisor <= 1 || ts - lastRun >= divisor * vsync - vsync * 0.5) {
+      lastRun = ts;
+      var batch = queue;
+      queue = [];
+      for (var i = 0; i < batch.length; i++) {
+        var e = batch[i];
+        if (!e.cb) continue;
+        live.delete(e.id);
+        try { e.cb(ts); } catch (err) { report(err); }
+      }
+    }
+    if (queue.length && !armed) {
+      armed = true;
+      nativeRaf(onFrame);
+    }
+  }
+
+  window.requestAnimationFrame = function (cb) {
+    if (typeof cb !== "function") return nativeRaf(cb);
+    var e = { id: ++nextId, cb: cb };
+    live.set(e.id, e);
+    queue.push(e);
+    if (!armed) {
+      armed = true;
+      nativeRaf(onFrame);
+    }
+    return e.id;
+  };
+
+  window.cancelAnimationFrame = function (id) {
+    var e = live.get(id);
+    if (e) {
+      e.cb = null;
+      live.delete(id);
+    } else if (id < BASE) {
+      nativeCancel(id);
+    }
+  };
+
+  window.__pbFpsInfo = function () {
+    return { vsync: vsync, hz: vsync ? 1000 / vsync : 0, divisor: divisor, fps: vsync ? 1000 / vsync / divisor : 0 };
+  };
+})();
+"""
+
+FPS_CAP = fps_cap()
+FPS_LIMIT = FPS_LIMIT_JS.replace("__PB_FPS_CAP__", str(FPS_CAP)) if FPS_CAP else ""
+
 def on_loaded():
     url = window.get_current_url()
     if url and urlparse(url).hostname not in ALLOWED:
         window.load_url(HOME)
         return
     try:
-        window.evaluate_js(FULLSCREEN_JS + "\n" + VOLUME_JS + "\n" + PROBE_JS)
+        window.evaluate_js(FULLSCREEN_JS + "\n" + VOLUME_JS + "\n" + PROBE_JS + "\n" + FPS_LIMIT)
     except Exception as e:
         log("Probe: injection failed (%r)" % (e,))
     inject_hub()
@@ -1050,6 +1146,7 @@ log("PokeBonk %s (toolkit %d), Python %s, file: %s"
 wait_for_previous()
 clean_old_versions()
 set_browser_args()
+log("Performance: frame limiter %s" % ("%d fps (when the screen is faster)" % FPS_CAP if FPS_CAP else "off"))
 WIN_W, WIN_H = window_size()
 log("Window size %dx%d" % (WIN_W, WIN_H))
 window = webview.create_window(TITLE, HOME, width=WIN_W, height=WIN_H, js_api=Api(), background_color="#1A1630")
