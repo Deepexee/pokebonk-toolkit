@@ -65,7 +65,7 @@
       updRestart: "Aktualizacja {v} · Uruchom ponownie", updDownload: "Aktualizacja {v} · Pobierz",
       updRestartT: "Nowa wersja jest gotowa. Zainstaluje się też po zamknięciu aplikacji.",
       updDownloadT: "Pobiera nową wersję aplikacji.", updBusy: "Ponowne uruchamianie…",
-      cfgNav: "Ustawienia", cfgSub: "Opcje toolkitu i plik konfiguracji", kosAvg: "śr.",
+      cfgNav: "Ustawienia", cfgSub: "Opcje toolkitu i plik konfiguracji", kosAvg: "śr.", kosTotal: "łącznie",
       koT: "Licznik K.O./s", koH: "Pokazuje, jak szybko pokonujesz Pokémony, pod licznikiem K.O. w grze podczas gry.",
       wheelT: "Kółko myszy", wheelH: "Wybierz klawisz dla kółka podczas gry (Backspace czyści). Działa jak naciśnięcie tego klawisza, więc użyj klawisza ustawionego w grze dla danej akcji. Przypisany kierunek nie przybliża już obrazu.",
       wheelUp: "Kółko w górę", wheelDown: "Kółko w dół", wheelNone: "Nie ustawiono", wheelPress: "Naciśnij klawisz…", wheelClear: "Wyczyść",
@@ -92,7 +92,7 @@
       updRestart: "Update {v} · Restart", updDownload: "Update {v} · Download",
       updRestartT: "A new version is ready. It also installs when you close the app.",
       updDownloadT: "Downloads the new version of the app.", updBusy: "Restarting…",
-      cfgNav: "Settings", cfgSub: "Toolkit options and config file", kosAvg: "avg",
+      cfgNav: "Settings", cfgSub: "Toolkit options and config file", kosAvg: "avg", kosTotal: "total",
       koT: "K.O./s counter", koH: "Shows how fast you defeat Pokémon, under the game's K.O. counter during a run.",
       wheelT: "Mouse wheel", wheelH: "Press a key to bind it to the wheel during a run (Backspace clears). It acts like pressing that key, so use the key you set in the game for the action. A bound direction no longer zooms.",
       wheelUp: "Wheel up", wheelDown: "Wheel down", wheelNone: "Not set", wheelPress: "Press a key…", wheelClear: "Clear",
@@ -119,7 +119,7 @@
       updRestart: "Mise à jour {v} · Redémarrer", updDownload: "Mise à jour {v} · Télécharger",
       updRestartT: "Une nouvelle version est prête. Elle s'installe aussi quand tu fermes l'appli.",
       updDownloadT: "Télécharge la nouvelle version de l'appli.", updBusy: "Redémarrage…",
-      cfgNav: "Réglages", cfgSub: "Options du toolkit et fichier de config", kosAvg: "moy.",
+      cfgNav: "Réglages", cfgSub: "Options du toolkit et fichier de config", kosAvg: "moy.", kosTotal: "total",
       koT: "Compteur K.O./s", koH: "Montre la vitesse à laquelle tu bats les Pokémon, sous le compteur de K.O. du jeu pendant une partie.",
       wheelT: "Molette de la souris", wheelH: "Choisis une touche pour la molette pendant une partie (Retour arrière efface). Elle agit comme si tu appuyais sur cette touche : mets celle que tu as réglée dans le jeu pour l'action. Un sens assigné ne zoome plus.",
       wheelUp: "Molette vers le haut", wheelDown: "Molette vers le bas", wheelNone: "Non défini", wheelPress: "Appuie sur une touche…", wheelClear: "Effacer",
@@ -1254,6 +1254,7 @@
     var r = cur;
     cur = null;
     try { localStorage.removeItem(LIVE_KEY); } catch (e) {}
+    LIVE.profileAt = 0;
     if (r.dur < MIN_RUN) return;
     r.end = reason;
     var last = r.pts[r.pts.length - 1];
@@ -2652,7 +2653,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     kosEl.style.top = Math.round(r.bottom + 6) + "px";
     kosEl.style.right = Math.max(4, Math.round(innerWidth - r.right)) + "px";
     kosV.textContent = oneDecimal(rate);
-    kosA.textContent = S("kosAvg") + " " + oneDecimal(avg);
+    var tot = totalKos();
+    kosA.textContent = S("kosAvg") + " " + oneDecimal(avg) + (tot == null ? "" : " · " + S("kosTotal") + " " + fmtNum(tot));
     kosEl.hidden = false;
   }
 
@@ -2991,6 +2993,13 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function tr(s) { return (LIVE.tr && LIVE.tr[s]) || s; }
 
+  function totalKos() {
+    var p = LIVE.profile;
+    if (!p) return null;
+    var base = p.counters && typeof p.counters.kills === "number" ? p.counters.kills : 0;
+    return base + (cur ? cur.kills : 0);
+  }
+
   function pollGame(h, now) {
     if (!gameToken()) return;
     loadTr();
@@ -2999,7 +3008,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       LIVE.busyB = true;
       gameGet("/leaderboard").then(function (j) { LIVE.board = j; LIVE.boardAt = Date.now(); }).catch(function () { LIVE.boardAt = Date.now() - 20000; }).then(function () { LIVE.busyB = false; });
     }
-    var wantProf = prefs.quests && now - LIVE.profileAt > 90000;
+    var wantProf = (prefs.quests || prefs.ko) && now - LIVE.profileAt > 90000;
     if (wantProf && !LIVE.busyP) {
       LIVE.busyP = true;
       gameGet("/profile").then(function (j) { LIVE.profile = j && j.profile; LIVE.profileAt = Date.now(); }).catch(function () { LIVE.profileAt = Date.now() - 60000; }).then(function () { LIVE.busyP = false; });
