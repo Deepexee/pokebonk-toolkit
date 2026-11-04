@@ -1311,7 +1311,7 @@
         mode: lastResult.mode, modeName: lastResult.modeName,
         sp: lastResult.sp, spName: lastResult.spName, lvl: lastResult.lvl,
         kills: lastResult.kills, killsText: lastResult.killsText, time: lastResult.time,
-        dmgText: lastResult.dmgText, monImg: portraitUrl(lastResult.sp)
+        dmgText: lastResult.dmgText, mapImg: biomeGround(lastResult.biome), monImg: portraitUrl(lastResult.sp)
       };
     } else if (h && cur) {
       s = {

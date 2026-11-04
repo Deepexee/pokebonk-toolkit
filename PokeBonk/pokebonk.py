@@ -525,6 +525,15 @@ def build_activity(st, texts, last, started):
         elif thumb:
             assets["large_image"] = thumb
             assets["large_text"] = ("%s · %s" % (name, where))[:128]
+        elif run.get("mapImg"):
+            assets["large_image"] = run["mapImg"]
+            assets["large_text"] = where[:128] or "PokeBonk"
+            if run.get("monImg"):
+                assets["small_image"] = run["monImg"]
+                assets["small_text"] = name[:128]
+        elif run.get("monImg"):
+            assets["large_image"] = run["monImg"]
+            assets["large_text"] = name[:128]
         elif DISCORD_IMAGE:
             assets["large_image"] = DISCORD_IMAGE
         activity["assets"] = assets
