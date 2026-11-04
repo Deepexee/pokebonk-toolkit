@@ -67,8 +67,8 @@
       updDownloadT: "Pobiera nową wersję aplikacji.", updBusy: "Ponowne uruchamianie…",
       cfgNav: "Ustawienia", cfgSub: "Opcje toolkitu i plik konfiguracji", kosAvg: "śr.", kosTotal: "K.O. łącznie", rkSeason: "Ranking sezonu", rkLead: "Prowadzisz! +{n}", rkGap: "{n} K.O. do #{r}",
       koT: "Licznik K.O./s", koH: "Pokazuje, jak szybko pokonujesz Pokémony, pod licznikiem K.O. w grze podczas gry.",
-      wheelT: "Kółko myszy", wheelH: "Wybierz klawisz dla kółka podczas gry (Backspace czyści). Działa jak naciśnięcie tego klawisza, więc użyj klawisza ustawionego w grze dla danej akcji. Przypisany kierunek nie przybliża już obrazu.",
-      wheelUp: "Kółko w górę", wheelDown: "Kółko w dół", wheelNone: "Nie ustawiono", wheelPress: "Naciśnij klawisz…", wheelClear: "Wyczyść",
+      wheelT: "Kółko myszy", wheelH: "Wybierz akcję gry dla każdego kierunku kółka podczas rozgrywki. Toolkit naciska klawisz ustawiony w grze dla tej akcji. Własny klawisz działa tylko wtedy, gdy ma funkcję w grze. Przypisany kierunek nie przybliża już obrazu.",
+      wheelUp: "Kółko w górę", wheelDown: "Kółko w dół", wheelNone: "Nie ustawiono", wheelCustom: "Własny klawisz", wheelPress: "Naciśnij klawisz…", wheelClear: "Wyczyść",
       uiT: "Interfejs", uiH: "Ukryj lub zmień rozmiar dowolnej części ekranu gry, w menu lub podczas gry. Naciśnij Edytuj, potem kliknij część do zmiany. Aby edytować ekran gry, najpierw wstrzymaj grę.",
       uiEdit: "Edytuj interfejs", uiReset: "Resetuj", uiCount: "Zapisane zmiany: {n}",
       edHint: "Kliknij część ekranu i przeciągnij, aby ją przesunąć · Esc kończy", edDone: "Gotowe", edHide: "Ukryj", edShow: "Pokaż", edReset: "Resetuj",
@@ -94,8 +94,8 @@
       updDownloadT: "Downloads the new version of the app.", updBusy: "Restarting…",
       cfgNav: "Settings", cfgSub: "Toolkit options and config file", kosAvg: "avg", kosTotal: "Total K.O.", rkSeason: "Season ranking", rkLead: "Leading! +{n}", rkGap: "{n} K.O. to #{r}",
       koT: "K.O./s counter", koH: "Shows how fast you defeat Pokémon, under the game's K.O. counter during a run.",
-      wheelT: "Mouse wheel", wheelH: "Press a key to bind it to the wheel during a run (Backspace clears). It acts like pressing that key, so use the key you set in the game for the action. A bound direction no longer zooms.",
-      wheelUp: "Wheel up", wheelDown: "Wheel down", wheelNone: "Not set", wheelPress: "Press a key…", wheelClear: "Clear",
+      wheelT: "Mouse wheel", wheelH: "Pick a game action for each wheel direction during a run. The toolkit presses the key you set for that action in the game. Use Custom key to bind any other key (it only works if that key does something in the game). A bound direction no longer zooms.",
+      wheelUp: "Wheel up", wheelDown: "Wheel down", wheelNone: "Not set", wheelCustom: "Custom key", wheelPress: "Press a key…", wheelClear: "Clear",
       uiT: "Interface", uiH: "Hide, move or resize any part of the game's screen, in the menus or during a run. Press Edit, then click the part to change. To edit the in-run screen, pause the game first.",
       uiEdit: "Edit the interface", uiReset: "Reset", uiCount: "{n} change(s) saved",
       edHint: "Click a part of the screen and drag it to move it · Esc to finish", edDone: "Done", edHide: "Hide", edShow: "Show", edReset: "Reset",
@@ -121,8 +121,8 @@
       updDownloadT: "Télécharge la nouvelle version de l'appli.", updBusy: "Redémarrage…",
       cfgNav: "Réglages", cfgSub: "Options du toolkit et fichier de config", kosAvg: "moy.", kosTotal: "K.O. total", rkSeason: "Classement saison", rkLead: "En tête ! +{n}", rkGap: "{n} K.O. pour #{r}",
       koT: "Compteur K.O./s", koH: "Montre la vitesse à laquelle tu bats les Pokémon, sous le compteur de K.O. du jeu pendant une partie.",
-      wheelT: "Molette de la souris", wheelH: "Choisis une touche pour la molette pendant une partie (Retour arrière efface). Elle agit comme si tu appuyais sur cette touche : mets celle que tu as réglée dans le jeu pour l'action. Un sens assigné ne zoome plus.",
-      wheelUp: "Molette vers le haut", wheelDown: "Molette vers le bas", wheelNone: "Non défini", wheelPress: "Appuie sur une touche…", wheelClear: "Effacer",
+      wheelT: "Molette de la souris", wheelH: "Choisis une action du jeu pour chaque sens de la molette pendant une partie. Le toolkit appuie sur la touche que tu as réglée dans le jeu pour cette action. Touche perso permet d'assigner une autre touche (elle ne marche que si elle fait quelque chose dans le jeu). Un sens assigné ne zoome plus.",
+      wheelUp: "Molette vers le haut", wheelDown: "Molette vers le bas", wheelNone: "Non défini", wheelCustom: "Touche perso", wheelPress: "Appuie sur une touche…", wheelClear: "Effacer",
       uiT: "Interface", uiH: "Cache, déplace ou redimensionne n'importe quelle partie de l'écran du jeu, dans les menus ou en partie. Appuie sur Modifier puis clique sur la partie à changer. Pour modifier l'écran de jeu, mets d'abord la partie en pause.",
       uiEdit: "Modifier l'interface", uiReset: "Réinitialiser", uiCount: "{n} modification(s) enregistrée(s)",
       edHint: "Clique sur une partie de l'écran et glisse-la pour la déplacer · Échap pour finir", edDone: "Terminé", edHide: "Cacher", edShow: "Afficher", edReset: "Réinitialiser",
@@ -1975,6 +1975,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 .kos .kr b{font:900 14px/1 var(--ft);color:#fff;font-variant-numeric:tabular-nums}
 .kos .kr small{font:900 10px/1 var(--ft);color:var(--ink2)}
 .kos .kr i{margin-left:auto;font:800 10px/1 var(--f);font-style:normal;color:var(--ink3)}
+.wtoast{position:absolute;left:50%;bottom:132px;transform:translateX(-50%);padding:8px 18px;border-radius:999px;background:rgba(34,40,58,.94);color:#fff;font:900 14px/1 var(--ft);box-shadow:0 4px 0 rgba(0,0,0,.38),var(--ring);pointer-events:none;white-space:nowrap}
+.wtoast[hidden]{display:none}
+.wtoast.pulse{animation:wtp .35s ease-out}
+@keyframes wtp{0%{transform:translateX(-50%) scale(.85);opacity:.4}60%{transform:translateX(-50%) scale(1.08)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+.wsel{min-width:170px;padding:9px 12px;border-radius:12px;border:0;background:var(--paper3);color:#fff;font:800 13px var(--f);box-shadow:var(--ring)}
+.wsel option{background:#1a1f2e}
 .rkc{position:absolute;display:flex;align-items:center;gap:10px;min-width:178px;padding:7px 14px 7px 8px;border-radius:999px;background:linear-gradient(160deg,rgba(44,52,78,.96),rgba(26,31,46,.96));color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.38),var(--ring);pointer-events:none;white-space:nowrap;--c1:#3a8cff;--c2:#2563d8;--glow:58,140,255}
 .rkc[hidden]{display:none}
 .rkc.t50{--c1:#3a8cff;--c2:#2563d8;--glow:58,140,255}
@@ -2068,6 +2074,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     '<div class="kos" id="kos" hidden><div class="kt" id="kosRow"><small id="kosL"></small><b id="kosT">0</b></div><div class="kr"><b id="kosV">0.0</b><small>K.O./s</small><i id="kosA"></i></div></div>' +
     '<div class="rkc" id="rk" hidden><div class="rkm"><b id="rkV">#1</b></div><div class="rkx"><small id="rkL"></small><span id="rkS"></span><i class="rkbar"><u id="rkB"></u></i></div></div>' +
     '<div class="lvq" id="lvq" hidden></div>' +
+    '<div class="wtoast" id="wtoast" hidden></div>' +
     '<div class="edbar" id="edbar" hidden><span id="edHint"></span><button type="button" class="btn" id="edDone" data-ed="done"></button></div>' +
     '<div class="edbox" id="edbox" hidden></div><div class="edbox sel" id="edsel" hidden></div>' +
     '<div class="edpanel" id="edpanel" hidden><b id="edName"></b><div class="edbtns">' +
@@ -2420,6 +2427,13 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   root.addEventListener("change", function (e) {
     var el = e.target;
+    if (el && el.hasAttribute && el.hasAttribute("data-wsel")) {
+      var wh = el.getAttribute("data-wsel");
+      if (el.value === "custom") { capturing = wh; }
+      else { capturing = ""; prefs[wh] = el.value; savePrefs(); }
+      refreshCfg();
+      return;
+    }
     if (el && el.hasAttribute && el.hasAttribute("data-stx")) {
       stx[el.getAttribute("data-stx")] = el.value;
       renderContent();
@@ -2728,10 +2742,48 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     window.dispatchEvent(new KeyboardEvent("keydown", init));
     setTimeout(function () { window.dispatchEvent(new KeyboardEvent("keyup", init)); }, 60);
   }
+  var WHEEL_ACTIONS = [["jump", "Space"], ["dash", "ShiftLeft"], ["interact", "KeyE"], ["ult", "KeyR"], ["incense", "KeyC"], ["aim", "KeyQ"], ["autorun", "KeyT"], ["map", "KeyM"], ["autoult", "KeyY"], ["cleanfx", "KeyH"], ["pause", "KeyP"], ["reroll", "KeyF"], ["skip", "KeyX"], ["banish", "KeyZ"]];
+  var ACT_NAMES = {
+    en: { jump: "Jump", dash: "Dash / glide", interact: "Interact", ult: "Ultimate", incense: "Incense (open rift)", aim: "Aim mode", autorun: "Auto-run", map: "Big map", autoult: "Auto-ultimate", cleanfx: "Hide effects", pause: "Pause", reroll: "Reroll", skip: "Skip", banish: "Banish" },
+    fr: { jump: "Saut", dash: "Glisse", interact: "Interagir", ult: "Ultimate", incense: "Encens (ouvrir une faille)", aim: "Mode de visée", autorun: "Course auto", map: "Grande carte", autoult: "Ultimate auto", cleanfx: "Cacher les effets", pause: "Pause", reroll: "Relancer", skip: "Passer", banish: "Bannir" },
+    pl: { jump: "Skok", dash: "Ślizg", interact: "Interakcja", ult: "Ultimate", incense: "Kadzidło (otwórz szczelinę)", aim: "Tryb celowania", autorun: "Auto-bieg", map: "Duża mapa", autoult: "Auto-ultimate", cleanfx: "Ukryj efekty", pause: "Pauza", reroll: "Przelosuj", skip: "Pomiń", banish: "Odrzuć" }
+  };
+  function actName(a) { return (ACT_NAMES[lang] || ACT_NAMES.en)[a] || a; }
+  function actDefault(a) {
+    for (var i = 0; i < WHEEL_ACTIONS.length; i++) if (WHEEL_ACTIONS[i][0] === a) return WHEEL_ACTIONS[i][1];
+    return "";
+  }
+  function actCode(a) {
+    var p = LIVE.profile, st = p && p.settings;
+    var custom = (st && st.keys && st.keys[a]) || (st && st.binds && st.binds[a]) || (p && p.keys && p.keys[a]) || (p && p.binds && p.binds[a]);
+    if (typeof custom === "string" && custom && custom.length < 24) return custom;
+    return actDefault(a);
+  }
+  function wheelCode(v) {
+    if (!v) return "";
+    return v.indexOf("act:") === 0 ? actCode(v.slice(4)) : v;
+  }
+  function wheelLabel(v) {
+    if (!v) return "";
+    return v.indexOf("act:") === 0 ? actName(v.slice(4)) : keyCap(v);
+  }
+  var wtEl = root.getElementById("wtoast");
+  var wtTimer = 0;
+  function wheelToast(arrow, label) {
+    if (!wtEl) return;
+    wtEl.textContent = arrow + " " + label;
+    wtEl.hidden = false;
+    wtEl.classList.remove("pulse");
+    void wtEl.offsetWidth;
+    wtEl.classList.add("pulse");
+    clearTimeout(wtTimer);
+    wtTimer = setTimeout(function () { wtEl.hidden = true; }, 900);
+  }
   var lastWheelKey = 0;
   window.addEventListener("wheel", function (e) {
     if (!dockInRun || isOpen || editing) return;
-    var code = e.deltaY < 0 ? prefs.wheelUp : e.deltaY > 0 ? prefs.wheelDown : "";
+    var pref = e.deltaY < 0 ? prefs.wheelUp : e.deltaY > 0 ? prefs.wheelDown : "";
+    var code = wheelCode(pref);
     if (!code) return;
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -2739,6 +2791,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if (now - lastWheelKey < 140) return;
     lastWheelKey = now;
     tapKey(code);
+    wheelToast(e.deltaY < 0 ? "\u25b2" : "\u25bc", wheelLabel(pref));
   }, { capture: true, passive: false });
 
   var capturing = "";
@@ -2965,6 +3018,18 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   function cfgRow(title, hint, ctl) {
     return '<div class="crow"><div class="ctx"><b>' + esc(title) + "</b>" + (hint ? "<span>" + esc(hint) + "</span>" : "") + "</div>" + ctl + "</div>";
   }
+  function wheelCtl(which) {
+    var v = prefs[which] || "";
+    var isAct = v.indexOf("act:") === 0;
+    var isKey = !!v && !isAct;
+    var opts = '<option value=""' + (!v && capturing !== which ? " selected" : "") + ">" + esc(S("wheelNone")) + "</option>";
+    WHEEL_ACTIONS.forEach(function (a) {
+      opts += '<option value="act:' + a[0] + '"' + (v === "act:" + a[0] ? " selected" : "") + ">" + esc(actName(a[0])) + "</option>";
+    });
+    opts += '<option value="custom"' + (isKey || capturing === which ? " selected" : "") + ">" + esc(S("wheelCustom")) + "</option>";
+    return '<span class="kbind"><select class="wsel" data-wsel="' + which + '">' + opts + "</select>" +
+      (isKey || capturing === which ? keyBtn(which) : "") + "</span>";
+  }
   function keyBtn(which) {
     var on = capturing === which;
     return '<span class="kbind"><button type="button" class="btn ghost kb' + (on ? " listen" : "") + '" data-cfg="bind-' + which + '">' +
@@ -2980,7 +3045,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
         cfgRow(S("ultT"), S("ultH"), swHtml(prefs.ult, "ult")) + "</div>" +
       '<div class="panel"><div class="panel-t">' + esc(S("wheelT")) + "</div>" +
         '<p class="hint2">' + esc(S("wheelH")) + "</p>" +
-        cfgRow(S("wheelUp"), "", keyBtn("wheelUp")) + cfgRow(S("wheelDown"), "", keyBtn("wheelDown")) + "</div>" +
+        cfgRow(S("wheelUp"), "", wheelCtl("wheelUp")) + cfgRow(S("wheelDown"), "", wheelCtl("wheelDown")) + "</div>" +
       '<div class="panel"><div class="panel-t">' + esc(S("uiT")) + "</div>" +
         '<p class="hint2">' + esc(S("uiH")) + "</p>" +
         '<div class="crow"><div class="ctx"><span>' + esc(tmpl(S("uiCount"), { n: n })) + "</span></div>" +
