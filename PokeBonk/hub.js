@@ -3303,8 +3303,18 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if (LIVE.items || LIVE.itemsBusy) return;
     LIVE.itemsBusy = true;
     fetch(location.origin + "/data/items.json").then(function (r) { return r.json(); }).then(function (j) {
-      LIVE.items = Object.keys(j).map(function (k) { var d = j[k]; return { key: k, name: d.name, icon: d.icon, desc: d.desc }; });
-      refreshLive();
+      var list = Object.keys(j).map(function (k) { var d = j[k]; return { key: k, name: d.name, icon: d.icon, desc: d.desc }; });
+      var pending = list.length;
+      list.forEach(function (it) {
+        var img = new Image();
+        var done = function (bad) {
+          it.bad = bad;
+          if (--pending === 0) { LIVE.items = list.filter(function (x) { return !x.bad; }); refreshLive(); }
+        };
+        img.onload = function () { done(false); };
+        img.onerror = function () { done(true); };
+        img.src = asset(it.icon);
+      });
     }).catch(function () { LIVE.itemsBusy = false; });
   }
   function itemsView() {
