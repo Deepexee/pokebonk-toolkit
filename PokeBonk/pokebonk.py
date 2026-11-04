@@ -191,7 +191,7 @@ def sha256_file(path):
 VERSION_INFO = read_json(resource_path("version.json"), {})
 APP_VERSION = VERSION_INFO.get("app", "1.0.0")
 TOOLKIT_BUILD = int(VERSION_INFO.get("toolkit", 0))
-SETTINGS = {"gpu_boost": True, "high_performance_gpu": True, "priority_boost": True, "auto_update": True}
+SETTINGS = {"gpu_boost": True, "high_performance_gpu": False, "priority_boost": True, "auto_update": True}
 SETTINGS.update(read_json(SETTINGS_FILE, {}) or {})
 
 TOOLKIT_FILES = (TYPEDEX_FILE, MAPS_FILE, HUB_FILE, "rpc_index.json")
@@ -841,7 +841,7 @@ def set_browser_args():
     args = ["--disable-features=ElasticOverscroll,msSmartScreenProtection"]
     if SETTINGS.get("gpu_boost", True):
         args += ["--ignore-gpu-blocklist", "--enable-gpu-rasterization"]
-    if SETTINGS.get("high_performance_gpu", True):
+    if SETTINGS.get("high_performance_gpu", False):
         args.append("--force_high_performance_gpu")
     if ORIGINAL_BROWSER_ARGS:
         args.append(ORIGINAL_BROWSER_ARGS)

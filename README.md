@@ -81,10 +81,10 @@ Everything is saved in `%LOCALAPPDATA%\PokeBonk\config.yml` (a copy of your tool
 `%LOCALAPPDATA%\PokeBonk\settings.json` can turn features off, for example on a PC with GPU driver problems:
 
 ```json
-{ "gpu_boost": false, "high_performance_gpu": false, "priority_boost": false, "auto_update": false }
+{ "gpu_boost": false, "high_performance_gpu": true, "priority_boost": false, "auto_update": false }
 ```
 
-If OBS shows a black window, use **Window Capture** with the *Windows 10 (1903 and up)* capture method, and set `"high_performance_gpu": false` on laptops with two graphics cards.
+If OBS shows a black window, use **Window Capture** with the *Windows 10 (1903 and up)* capture method, The app no longer forces the faster graphics card by default (it made OBS capture black on laptops with two graphics cards); set `"high_performance_gpu": true` to force it.
 
 ## Credits
 
