@@ -65,7 +65,7 @@
       updRestart: "Aktualizacja {v} · Uruchom ponownie", updDownload: "Aktualizacja {v} · Pobierz",
       updRestartT: "Nowa wersja jest gotowa. Zainstaluje się też po zamknięciu aplikacji.",
       updDownloadT: "Pobiera nową wersję aplikacji.", updBusy: "Ponowne uruchamianie…",
-      cfgNav: "Ustawienia", cfgSub: "Opcje toolkitu i plik konfiguracji", kosAvg: "śr.", kosTotal: "łącznie",
+      cfgNav: "Ustawienia", cfgSub: "Opcje toolkitu i plik konfiguracji", kosAvg: "śr.", kosTotal: "K.O. łącznie", rkSeason: "Ranking sezonu", rkLead: "Prowadzisz! +{n}", rkGap: "{n} K.O. do #{r}",
       koT: "Licznik K.O./s", koH: "Pokazuje, jak szybko pokonujesz Pokémony, pod licznikiem K.O. w grze podczas gry.",
       wheelT: "Kółko myszy", wheelH: "Wybierz klawisz dla kółka podczas gry (Backspace czyści). Działa jak naciśnięcie tego klawisza, więc użyj klawisza ustawionego w grze dla danej akcji. Przypisany kierunek nie przybliża już obrazu.",
       wheelUp: "Kółko w górę", wheelDown: "Kółko w dół", wheelNone: "Nie ustawiono", wheelPress: "Naciśnij klawisz…", wheelClear: "Wyczyść",
@@ -92,7 +92,7 @@
       updRestart: "Update {v} · Restart", updDownload: "Update {v} · Download",
       updRestartT: "A new version is ready. It also installs when you close the app.",
       updDownloadT: "Downloads the new version of the app.", updBusy: "Restarting…",
-      cfgNav: "Settings", cfgSub: "Toolkit options and config file", kosAvg: "avg", kosTotal: "total",
+      cfgNav: "Settings", cfgSub: "Toolkit options and config file", kosAvg: "avg", kosTotal: "Total K.O.", rkSeason: "Season ranking", rkLead: "Leading! +{n}", rkGap: "{n} K.O. to #{r}",
       koT: "K.O./s counter", koH: "Shows how fast you defeat Pokémon, under the game's K.O. counter during a run.",
       wheelT: "Mouse wheel", wheelH: "Press a key to bind it to the wheel during a run (Backspace clears). It acts like pressing that key, so use the key you set in the game for the action. A bound direction no longer zooms.",
       wheelUp: "Wheel up", wheelDown: "Wheel down", wheelNone: "Not set", wheelPress: "Press a key…", wheelClear: "Clear",
@@ -119,7 +119,7 @@
       updRestart: "Mise à jour {v} · Redémarrer", updDownload: "Mise à jour {v} · Télécharger",
       updRestartT: "Une nouvelle version est prête. Elle s'installe aussi quand tu fermes l'appli.",
       updDownloadT: "Télécharge la nouvelle version de l'appli.", updBusy: "Redémarrage…",
-      cfgNav: "Réglages", cfgSub: "Options du toolkit et fichier de config", kosAvg: "moy.", kosTotal: "total",
+      cfgNav: "Réglages", cfgSub: "Options du toolkit et fichier de config", kosAvg: "moy.", kosTotal: "K.O. total", rkSeason: "Classement saison", rkLead: "En tête ! +{n}", rkGap: "{n} K.O. pour #{r}",
       koT: "Compteur K.O./s", koH: "Montre la vitesse à laquelle tu bats les Pokémon, sous le compteur de K.O. du jeu pendant une partie.",
       wheelT: "Molette de la souris", wheelH: "Choisis une touche pour la molette pendant une partie (Retour arrière efface). Elle agit comme si tu appuyais sur cette touche : mets celle que tu as réglée dans le jeu pour l'action. Un sens assigné ne zoome plus.",
       wheelUp: "Molette vers le haut", wheelDown: "Molette vers le bas", wheelNone: "Non défini", wheelPress: "Appuie sur une touche…", wheelClear: "Effacer",
@@ -1960,11 +1960,37 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 .kb{min-width:96px;justify-content:center}
 .kb.listen{background:var(--yellow);color:#3a2a00;box-shadow:0 3px 0 #b8860b}
 .kx{border:0;background:var(--pill);color:#fff;width:26px;height:26px;border-radius:50%;font:900 15px/1 var(--ft);cursor:pointer;padding:0}
-.kos{position:absolute;display:flex;align-items:baseline;gap:5px;padding:6px 13px 6px 11px;border-radius:999px;background:rgba(34,40,58,.93);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.35),var(--ring);pointer-events:none;white-space:nowrap}
+.kos{position:absolute;display:flex;flex-direction:column;gap:4px;min-width:178px;padding:8px 14px 8px 12px;border-radius:18px;background:linear-gradient(160deg,rgba(44,52,78,.96),rgba(26,31,46,.96));color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.38),var(--ring),0 0 18px rgba(255,204,51,.16);pointer-events:none;white-space:nowrap}
 .kos[hidden]{display:none}
-.kos b{min-width:2ch;text-align:right;font:900 18px/1 var(--ft);color:var(--yellow)}
-.kos small{font:900 11px/1 var(--ft);color:#fff}
-.kos i{margin-left:4px;font:800 10px/1 var(--f);font-style:normal;color:var(--ink3)}
+.kos .kt{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.kos .kt[hidden]{display:none}
+.kos .kt small{font:900 10px/1 var(--ft);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.kos .kt b{font:900 27px/1 var(--ft);color:var(--yellow);text-shadow:0 2px 0 rgba(0,0,0,.4),0 0 14px rgba(255,204,51,.35);font-variant-numeric:tabular-nums;display:inline-block}
+.kos .kt b.pop{animation:kpop .45s ease-out}
+@keyframes kpop{0%{transform:scale(1)}35%{transform:scale(1.14);filter:brightness(1.35)}100%{transform:scale(1)}}
+.kos .kr{display:flex;align-items:baseline;gap:5px}
+.kos .kr b{font:900 14px/1 var(--ft);color:#fff;font-variant-numeric:tabular-nums}
+.kos .kr small{font:900 10px/1 var(--ft);color:var(--ink2)}
+.kos .kr i{margin-left:auto;font:800 10px/1 var(--f);font-style:normal;color:var(--ink3)}
+.rkc{position:absolute;display:flex;align-items:center;gap:10px;min-width:178px;padding:7px 14px 7px 8px;border-radius:999px;background:linear-gradient(160deg,rgba(44,52,78,.96),rgba(26,31,46,.96));color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.38),var(--ring);pointer-events:none;white-space:nowrap;--c1:#3a8cff;--c2:#2563d8;--glow:58,140,255}
+.rkc[hidden]{display:none}
+.rkc.t50{--c1:#3a8cff;--c2:#2563d8;--glow:58,140,255}
+.rkc.t10{--c1:#a47cff;--c2:#6a3fe0;--glow:138,92,255}
+.rkc.t3{--c1:#ffb066;--c2:#d9691f;--glow:255,154,58}
+.rkc.t2{--c1:#eef2ff;--c2:#9aa6c4;--glow:200,210,240}
+.rkc.t1{--c1:#ffe27a;--c2:#f2a900;--glow:255,204,51}
+.rkc.out{--c1:#6b7594;--c2:#434b66;--glow:120,130,160}
+.rkc{box-shadow:0 4px 0 rgba(0,0,0,.38),var(--ring),0 0 16px rgba(var(--glow),.28)}
+.rkm{flex:0 0 auto;display:grid;place-items:center;min-width:46px;height:46px;padding:0 8px;border-radius:999px;background:radial-gradient(circle at 30% 25%,var(--c1),var(--c2));box-shadow:inset 0 -3px 0 rgba(0,0,0,.25),0 2px 0 rgba(0,0,0,.35)}
+.rkm b{font:900 19px/1 var(--ft);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.4)}
+.rkc.t2 .rkm b,.rkc.t1 .rkm b{color:#2a2208}
+.rkx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.rkx small{font:900 10px/1 var(--ft);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.rkx span{font:900 12px/1.1 var(--ft);color:#fff}
+.rkbar{display:block;height:5px;width:100%;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+.rkbar u{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--c2),var(--c1));text-decoration:none;transition:width .6s ease}
+.rkc.up{animation:rup 1.4s ease-out}
+@keyframes rup{0%{transform:scale(1)}20%{transform:scale(1.1);box-shadow:0 4px 0 rgba(0,0,0,.38),0 0 26px rgba(var(--glow),.9)}100%{transform:scale(1)}}
 .edbar{position:absolute;left:50%;top:12px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(34,40,58,.97);color:#fff;font:900 13px/1 var(--ft);box-shadow:0 4px 0 rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.5),var(--ring);pointer-events:auto}
 .edbar[hidden],.edbox[hidden],.edpanel[hidden]{display:none}
 .edbox{position:absolute;z-index:1;pointer-events:none;border:2px dashed var(--yellow);border-radius:8px;background:rgba(255,204,51,.1)}
@@ -1975,7 +2001,6 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 .edbtns button{height:34px;min-width:34px;padding:0 12px;border:0;border-radius:999px;background:var(--pill);color:#fff;font:900 14px/1 var(--ft);cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.4)}
 .edbtns button:hover{filter:brightness(1.12)}
 .edbtns span{min-width:46px;text-align:center;font:900 13px var(--ft)}
-.rk b{color:#7fe3a0}
 .lvq{position:absolute;width:236px;padding:8px 10px 9px;border-radius:14px;background:rgba(34,40,58,.9);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.35),var(--ring);pointer-events:none;display:flex;flex-direction:column;gap:6px}
 .lvq[hidden]{display:none}
 .qtitle{font:900 11px/1 var(--ft);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
@@ -2037,8 +2062,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       '<button type="button" class="dk" id="launcher" data-open>' + uiIcon("ui/icons/research.png", 24) +
         '<span class="ltext">Menu</span><kbd>F2</kbd></button>' +
     "</div>" +
-    '<div class="kos" id="kos" hidden><b id="kosV">0.0</b><small>K.O./s</small><i id="kosA"></i></div>' +
-    '<div class="kos rk" id="rk" hidden><b id="rkV">#1</b><small id="rkS"></small></div>' +
+    '<div class="kos" id="kos" hidden><div class="kt" id="kosRow"><small id="kosL"></small><b id="kosT">0</b></div><div class="kr"><b id="kosV">0.0</b><small>K.O./s</small><i id="kosA"></i></div></div>' +
+    '<div class="rkc" id="rk" hidden><div class="rkm"><b id="rkV">#1</b></div><div class="rkx"><small id="rkL"></small><span id="rkS"></span><i class="rkbar"><u id="rkB"></u></i></div></div>' +
     '<div class="lvq" id="lvq" hidden></div>' +
     '<div class="edbar" id="edbar" hidden><span id="edHint"></span><button type="button" class="btn" id="edDone" data-ed="done"></button></div>' +
     '<div class="edbox" id="edbox" hidden></div><div class="edbox sel" id="edsel" hidden></div>' +
@@ -2627,6 +2652,29 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   var kosEl = root.getElementById("kos");
   var kosV = root.getElementById("kosV");
   var kosA = root.getElementById("kosA");
+  var kosT = root.getElementById("kosT");
+  var kosL = root.getElementById("kosL");
+  var kosRow = root.getElementById("kosRow");
+  var kosShown = null;
+  var kosTween = 0;
+  function setTotal(t) {
+    if (t === kosShown) return;
+    var from = kosShown == null ? t : kosShown;
+    cancelAnimationFrame(kosTween);
+    var start = performance.now();
+    var grew = from !== t;
+    kosShown = t;
+    (function step(now) {
+      var k = Math.min(1, (now - start) / 600);
+      kosT.textContent = fmtNum(Math.round(from + (t - from) * k));
+      if (k < 1) kosTween = requestAnimationFrame(step);
+    })(start);
+    if (grew && from !== t && kosT.textContent) {
+      kosT.classList.remove("pop");
+      void kosT.offsetWidth;
+      kosT.classList.add("pop");
+    }
+  }
   var koHist = [];
   function oneDecimal(n) {
     return n.toLocaleString(locale(), { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -2654,7 +2702,9 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     kosEl.style.right = Math.max(4, Math.round(innerWidth - r.right)) + "px";
     kosV.textContent = oneDecimal(rate);
     var tot = totalKos();
-    kosA.textContent = S("kosAvg") + " " + oneDecimal(avg) + (tot == null ? "" : " · " + S("kosTotal") + " " + fmtNum(tot));
+    kosRow.hidden = tot == null;
+    if (tot != null) { kosL.textContent = S("kosTotal"); setTotal(tot); }
+    kosA.textContent = S("kosAvg") + " " + oneDecimal(avg);
     kosEl.hidden = false;
   }
 
@@ -2954,7 +3004,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   var QUEST_DEFS = {"d-kills":["Limpieza del bosque","Derrota a 500 Pokémon salvajes.","kills",500],"d-runs":["Doble turno","Juega 2 partidas.","runs",2],"d-chests":["Buscador de tesoros","Abre 6 Poké Balls de objetos.","chests",6],"d-rocks":["Golpe Roca","Rompe 8 rocas de oro.","rocks",8],"d-time":["Resistencia","Sobrevive 8 minutos en una partida.","time",480],"d-gold":["Bolsillos llenos","Consigue 1.200 ₽ en partidas.","gold",1200],"d-mutation":["Mutante del día","Juega la Mutación del día.","mutation",1],"d-dojo":["Primer cinturón","Supera un reto del Dojo Karate.","dojo",1],"d-ults":["Poder desatado","Lanza 10 Ultimates.","ultimates",10],"d-incense":["Aroma misterioso","Abre 3 Grietas con el Incienso.","riftsOpened",3],"d-johto":["Aires de Johto","Juega una partida con un Pokémon de Johto.","johtoRuns",1],"d-alphas":["Caza mayor","Derrota o captura 2 Pokémon Alfa.","alphas",2],"d-react":["Química elemental","Provoca 60 reacciones elementales.","reactions",60],"d-burn":["Fuego cruzado","Quema a 150 Pokémon.","burned",150],"d-para":["Alta tensión","Paraliza a 120 Pokémon.","paralyzed",120],"d-soak":["Chaparrón","Moja a 200 Pokémon.","soaked",200],"d-freeze":["Ola de frío","Congela a 100 Pokémon.","frozen",100],"d-poison":["Picadura tóxica","Envenena a 150 Pokémon.","poisoned",150],"d-crits":["Puntería","Asesta 400 golpes críticos.","crits",400],"d-boss":["Guardián caído","Derrota a un guardián.","bosses",1],"d-zone2":["Más adentro","Llega a la zona 2.","stage",2],"d-challenge":["Desafío aceptado","Supera 2 altares de desafío.","challenges",2],"d-rift":["Al otro lado","Vence a 2 Alfas de grieta.","rifts",2],"d-johto2":["Paso firme","Llega a la zona 2 con un Pokémon de Johto.","johtoStage",2],"d-runkills":["Imparable","Consigue 1.500 bajas en una sola partida.","runKills",1500],"d-ally":["Nuevo aliado","Captura un Alfa de apoyo.","alphaCaught",1],"d-zone3":["Tierra adentro","Llega a la zona 3.","stage",3],"d-bosses":["Doble guardia","Derrota a 2 guardianes.","bosses",2],"d-level":["Entrenamiento duro","Alcanza el nivel 22 en una partida.","level",22],"d-evo":["¡Qué está pasando!","Evoluciona 2 veces.","evolutions",2],"d-dojo3":["Maestro del tatami","Supera 3 retos del Dojo Karate.","dojo",3],"d-rifts":["Explorador de grietas","Vence a 4 Alfas de grieta.","rifts",4],"d-johto3":["Corazón de Johto","Llega a la zona 3 con un Pokémon de Johto.","johtoStage",3],"w-kills":["Temporada de caza","Derrota a 8.000 Pokémon salvajes.","kills",8],"w-runs":["Constancia","Juega 12 partidas.","runs",12],"w-play":["Vida de entrenador","Juega 90 minutos.","playtime",5400],"w-chests":["Coleccionista de Poké Balls","Abre 50 Poké Balls de objetos.","chests",50],"w-ults":["Maestro de la Ultimate","Lanza 100 Ultimates.","ultimates",100],"w-dojo":["Alumno del dojo","Supera 8 retos del Dojo Karate.","dojo",8],"w-mutation":["Mutación constante","Juega 4 partidas de la Mutación del día.","mutation",4],"w-johto":["Ruta de Johto","Juega 6 partidas con Pokémon de Johto.","johtoRuns",6],"w-alphas":["Rey de los Alfas","Derrota o captura 12 Pokémon Alfa.","alphas",12],"w-allies":["Equipo de ensueño","Captura 5 Alfas de apoyo.","alphaCaught",5],"w-react":["Alquimia salvaje","Provoca 600 reacciones elementales.","reactions",600],"w-bosses":["Sin guardia","Derrota a 8 guardianes.","bosses",8],"w-challenges":["Sin miedo al desafío","Supera 12 altares de desafío.","challenges",12],"w-blackbelt":["Cinturón negro","Supera 2 retos de cinturón negro del Dojo Karate.","dojoBlack",2],"w-rifts":["Cazagrietas","Vence a 12 Alfas de grieta.","rifts",12],"w-relics":["Coleccionista de Reliquias","Consigue 15 Reliquias.","relics",15],"w-win":["Campeón regional","Completa un mapa.","wins",1],"w-legend":["Leyenda viva","Derrota al legendario del santuario.","legendaries",1],"w-shiny":["Brillo raro","Captura un Pokémon variocolor.","shinies",1],"w-level":["Maestría","Alcanza el nivel 30 en una partida.","level",30],"w-runkills":["Marea salvaje","Consigue 3.000 bajas en una sola partida.","runKills",3],"w-mutwin":["Mutación dominada","Completa la Mutación del día.","mutationWins",1],"w-riftrun":["Noche de grietas","Vence a 6 Alfas de grieta en una sola partida.","riftsRun",6],"w-johtowin":["Campeón de Johto","Completa un mapa con un Pokémon de Johto.","johtoWins",1]};
   var GAME_API = "https://api.pokebonk.com";
-  var LIVE = { board: null, boardAt: 0, profile: null, profileAt: 0, busyB: false, busyP: false, tr: null, trKey: "", items: null, itemsBusy: false, owned: {}, ownedRun: "", sig: {}, sigRun: "", boss: 0, bossName: "", lastLvl: 0, lastPhase: "" };
+  var LIVE = { board: null, boardAt: 0, profile: null, profileAt: 0, busyB: false, busyP: false, tr: null, trKey: "", items: null, itemsBusy: false, owned: {}, ownedRun: "", sig: {}, sigRun: "", boss: 0, bossName: "", lastLvl: 0, lastPhase: "", lastRank: null };
 
   function gameToken() {
     try {
@@ -3021,12 +3071,16 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     var out = {};
     if (h && cur) {
       var kills = cur.kills;
+      var others = b.entries.filter(function (e) { return !e.me; });
       var above = 0;
-      var worst = b.entries.length ? b.entries[b.entries.length - 1].kills : 0;
-      b.entries.forEach(function (e) { if (!e.me && e.kills > kills) above++; });
+      others.forEach(function (e) { if (e.kills > kills) above++; });
+      var worst = others.length ? others[others.length - 1].kills : 0;
       out.rank = above + 1;
-      out.out = b.entries.length >= 50 && kills < worst;
+      out.out = others.length >= 49 && kills < worst;
       out.worst = worst;
+      out.next = above > 0 ? others[above - 1].kills : 0;
+      out.lead = above === 0 && others.length ? kills - others[0].kills : 0;
+      out.kills = kills;
     } else if (b.me && b.me.rank) {
       out.rank = b.me.rank;
     } else return null;
@@ -3036,6 +3090,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   var rkEl = root.getElementById("rk");
   var rkV = root.getElementById("rkV");
   var rkS = root.getElementById("rkS");
+  var rkL = root.getElementById("rkL");
+  var rkB = root.getElementById("rkB");
   var lvq = root.getElementById("lvq");
   function paintRank(h) {
     var counter = h && prefs.rank && !isOpen && !editing && !gameModal() ? document.querySelector(".hud-tr .counter") : null;
@@ -3044,15 +3100,31 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if (!info || !c || !c.width) { if (!rkEl.hidden) rkEl.hidden = true; return; }
     var below = c.bottom;
     if (!kosEl.hidden) below = kosEl.getBoundingClientRect().bottom;
-    rkEl.style.top = Math.round(below + 6) + "px";
+    rkEl.style.top = Math.round(below + 8) + "px";
     rkEl.style.right = Math.max(4, Math.round(innerWidth - c.right)) + "px";
+    var tier = info.out ? "out" : info.rank === 1 ? "t1" : info.rank === 2 ? "t2" : info.rank === 3 ? "t3" : info.rank <= 10 ? "t10" : "t50";
+    var keep = rkEl.classList.contains("up") ? " up" : "";
+    rkEl.className = "rkc " + tier + keep;
+    rkL.textContent = S("rkSeason");
+    var frac = 1;
     if (info.out) {
       rkV.textContent = "> 50";
-      rkS.textContent = tmpl(S("rkNeed"), { n: fmtNum(info.worst) });
+      rkS.textContent = tmpl(S("rkNeed"), { n: fmtNum(Math.max(1, info.worst - info.kills + 1)) });
+      frac = info.worst ? info.kills / info.worst : 0;
     } else {
       rkV.textContent = "#" + info.rank;
-      rkS.textContent = S("rkLabel");
+      if (info.rank === 1) rkS.textContent = tmpl(S("rkLead"), { n: fmtNum(info.lead) });
+      else rkS.textContent = tmpl(S("rkGap"), { n: fmtNum(Math.max(1, info.next - info.kills + 1)), r: info.rank - 1 });
+      frac = info.rank === 1 ? 1 : info.next ? info.kills / info.next : 0;
     }
+    rkB.style.width = Math.max(4, Math.min(100, Math.round(frac * 100))) + "%";
+    if (LIVE.lastRank != null && !info.out && info.rank < LIVE.lastRank) {
+      rkEl.classList.remove("up");
+      void rkEl.offsetWidth;
+      rkEl.classList.add("up");
+      setTimeout(function () { rkEl.classList.remove("up"); }, 1500);
+    }
+    LIVE.lastRank = info.out ? null : info.rank;
     rkEl.hidden = false;
   }
 
