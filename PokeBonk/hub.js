@@ -2257,7 +2257,25 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     isOpen = true;
     screen.hidden = false;
     launcher.classList.add("on");
+    try {
+      if (document.pointerLockElement) { lostLock = true; document.exitPointerLock(); }
+    } catch (e) {}
     focusMain();
+  }
+
+  var lostLock = false;
+  var swallowEscUp = false;
+  document.addEventListener("pointerlockchange", function () {
+    if (isOpen && !document.pointerLockElement) lostLock = true;
+  });
+
+  function resumeGame() {
+    if (!lostLock) return;
+    lostLock = false;
+    setTimeout(function () {
+      var b = document.querySelector(".sm-modal .actions .btn.green.big");
+      if (b && b.offsetParent) b.click();
+    }, 150);
   }
 
   function closeHub() {
@@ -2268,6 +2286,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     q.blur();
     hub.blur();
     launcher.blur();
+    resumeGame();
   }
 
   function toggleHub() {
@@ -2318,6 +2337,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if (e.key === "Escape") {
       e.preventDefault();
       e.stopPropagation();
+      swallowEscUp = true;
       if (q.value) resetSearch();
       else closeHub();
     }
@@ -2368,6 +2388,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       if (path.indexOf(q) >= 0) return;
       e.preventDefault();
       e.stopPropagation();
+      swallowEscUp = true;
       if (isDetail()) goBack();
       else closeHub();
       return;
@@ -2380,6 +2401,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   ["keyup", "keypress"].forEach(function (ev) {
     window.addEventListener(ev, function (e) {
+      if (swallowEscUp && e.key === "Escape") {
+        if (ev === "keyup") swallowEscUp = false;
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       if (!isOpen) return;
       var path = e.composedPath ? e.composedPath() : [];
       if (path.indexOf(host) >= 0) return;
