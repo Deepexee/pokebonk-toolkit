@@ -72,7 +72,7 @@ The **Settings** tab of the toolkit (F2) has:
 
 - a **K.O./s counter** shown under the game's K.O. counter during a run;
 - **mouse wheel binds**: bind the wheel up/down to a key during a run (it acts like pressing that key, so use the key you set in the game for the action);
-- an **interface editor**: hide or resize any part of the game's screen, in the menus or in a run (pause the game first for the in-run screen).
+- an **interface editor**: hide, move (drag it) or resize any part of the game's screen, in the menus or in a run (pause the game first for the in-run screen).
 
 Everything is saved in `%LOCALAPPDATA%\PokeBonk\config.yml` (a copy of your toolkit options plus some game options such as the controller calibration). Edit it with any text editor and restart the app.
 

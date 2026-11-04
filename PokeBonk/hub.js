@@ -71,10 +71,10 @@
       wheelUp: "Kółko w górę", wheelDown: "Kółko w dół", wheelNone: "Nie ustawiono", wheelPress: "Naciśnij klawisz…", wheelClear: "Wyczyść",
       uiT: "Interfejs", uiH: "Ukryj lub zmień rozmiar dowolnej części ekranu gry, w menu lub podczas gry. Naciśnij Edytuj, potem kliknij część do zmiany. Aby edytować ekran gry, najpierw wstrzymaj grę.",
       uiEdit: "Edytuj interfejs", uiReset: "Resetuj", uiCount: "Zapisane zmiany: {n}",
-      edHint: "Kliknij część ekranu · Esc kończy", edDone: "Gotowe", edHide: "Ukryj", edShow: "Pokaż", edReset: "Resetuj",
+      edHint: "Kliknij część ekranu i przeciągnij, aby ją przesunąć · Esc kończy", edDone: "Gotowe", edHide: "Ukryj", edShow: "Pokaż", edReset: "Resetuj",
       cfgT: "Plik konfiguracji", cfgH: "Opcje toolkitu i część opcji gry (kalibracja pada, grafika…) są zapisane w tym pliku. Edytuj go dowolnym edytorem tekstu i uruchom ponownie aplikację.",
       cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Otwórz plik konfiguracji",
-      rkLabel: "Ranking", rkNeed: "{n} K.O. aby wejść", qT: "Zadania", qDaily: "Dzienne", qWeekly: "Tygodniowe", journal: "Dziennik gry", jt_lvl: "Poziom", jt_zone: "Strefa", jt_atk: "Atak", jt_atkUp: "Ulepszenie", jt_relic: "Relikwia", jt_vit: "Witamina", jt_item: "Przedmiot", jt_boss: "Boss", jt_bossEnd: "Boss pokonany", jt_toast: "Info", itemsNav: "Przedmioty", itemsSub: "Wszystkie przedmioty i ile jeszcze zostało", itemsSearch: "Szukaj przedmiotu…", itemsLoad: "Wczytywanie przedmiotów…", itemsHave: "W tej grze", itemsLeft: "Do zdobycia", itemsTotal: "Wszystkie", itemsHint: "Lista odświeża się, gdy otworzysz pauzę w grze (tam widać Twoje przedmioty).", itemsIdle: "Zacznij grę i otwórz pauzę, aby zobaczyć, które przedmioty już masz.", rankT: "Pozycja w rankingu", rankH: "Pokazuje na żywo Twoje miejsce w rankingu K.O. sezonu pod licznikiem K.O.", questT: "Śledzenie zadań", questH: "Pokazuje postęp dziennych i tygodniowych zadań w trakcie gry.", logT: "Dziennik gry", logH: "Zapisuje z czasem ataki, przedmioty, relikwie, bossów i poziomy. Widać go w szczegółach gry.", ultT: "Powiadomienie o ultimate", ultH: "Wyświetla komunikat, gdy ultimate jest gotowe."
+      rkLabel: "Ranking", rkNeed: "{n} K.O. aby wejść", qT: "Zadania", qDaily: "Dzienne", qWeekly: "Tygodniowe", journal: "Dziennik gry", jt_lvl: "Poziom", jt_zone: "Strefa", jt_atk: "Atak", jt_atkUp: "Ulepszenie", jt_relic: "Relikwia", jt_vit: "Witamina", jt_item: "Przedmiot", jt_boss: "Boss", jt_bossEnd: "Boss pokonany", jt_toast: "Info", itemsNav: "Przedmioty", vitT: "Witaminy i wzmocnienia", vitH: "To nie są przedmioty: zajmują miejsca na witaminy i działają jak ulepszenia statystyk.", itemsSub: "Wszystkie przedmioty i ile jeszcze zostało", itemsSearch: "Szukaj przedmiotu…", itemsLoad: "Wczytywanie przedmiotów…", itemsHave: "W tej grze", itemsLeft: "Do zdobycia", itemsTotal: "Wszystkie", itemsHint: "Lista odświeża się, gdy otworzysz pauzę w grze (tam widać Twoje przedmioty).", itemsIdle: "Zacznij grę i otwórz pauzę, aby zobaczyć, które przedmioty już masz.", rankT: "Pozycja w rankingu", rankH: "Pokazuje na żywo Twoje miejsce w rankingu K.O. sezonu pod licznikiem K.O.", questT: "Śledzenie zadań", questH: "Pokazuje postęp dziennych i tygodniowych zadań w trakcie gry.", logT: "Dziennik gry", logH: "Zapisuje z czasem ataki, przedmioty, relikwie, bossów i poziomy. Widać go w szczegółach gry.", ultT: "Powiadomienie o ultimate", ultH: "Wyświetla komunikat, gdy ultimate jest gotowe."
     },
     en: {
       nav: "Progress", sub: "{n} runs saved", subNone: "No runs saved yet",
@@ -96,12 +96,12 @@
       koT: "K.O./s counter", koH: "Shows how fast you defeat Pokémon, under the game's K.O. counter during a run.",
       wheelT: "Mouse wheel", wheelH: "Press a key to bind it to the wheel during a run (Backspace clears). It acts like pressing that key, so use the key you set in the game for the action. A bound direction no longer zooms.",
       wheelUp: "Wheel up", wheelDown: "Wheel down", wheelNone: "Not set", wheelPress: "Press a key…", wheelClear: "Clear",
-      uiT: "Interface", uiH: "Hide or resize any part of the game's screen, in the menus or during a run. Press Edit, then click the part to change. To edit the in-run screen, pause the game first.",
+      uiT: "Interface", uiH: "Hide, move or resize any part of the game's screen, in the menus or during a run. Press Edit, then click the part to change. To edit the in-run screen, pause the game first.",
       uiEdit: "Edit the interface", uiReset: "Reset", uiCount: "{n} change(s) saved",
-      edHint: "Click a part of the screen · Esc to finish", edDone: "Done", edHide: "Hide", edShow: "Show", edReset: "Reset",
+      edHint: "Click a part of the screen and drag it to move it · Esc to finish", edDone: "Done", edHide: "Hide", edShow: "Show", edReset: "Reset",
       cfgT: "Config file", cfgH: "Your toolkit options and some game options (controller calibration, graphics…) are saved in this file. Edit it with any text editor, then restart the app.",
       cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Open the config file",
-      rkLabel: "Rank", rkNeed: "{n} K.O. to enter", qT: "Quests", qDaily: "Daily", qWeekly: "Weekly", journal: "Run log", jt_lvl: "Level", jt_zone: "Zone", jt_atk: "Attack", jt_atkUp: "Upgrade", jt_relic: "Relic", jt_vit: "Vitamin", jt_item: "Item", jt_boss: "Boss", jt_bossEnd: "Boss down", jt_toast: "Info", itemsNav: "Items", itemsSub: "Every item and how many are left to find", itemsSearch: "Search items…", itemsLoad: "Loading items…", itemsHave: "This run", itemsLeft: "Left to find", itemsTotal: "Total", itemsHint: "The list updates whenever you open the game's pause screen (it shows your items).", itemsIdle: "Start a run and open the pause screen to see which items you already have.", rankT: "Live ranking", rankH: "Shows your live position in the season's K.O. ranking under the K.O. counter.", questT: "Quest tracker", questH: "Shows the progress of your daily and weekly quests during a run.", logT: "Run log", logH: "Records attacks, items, relics, bosses and levels with timestamps. See it in a run's details.", ultT: "Ultimate notification", ultH: "Shows the message when your ultimate is ready."
+      rkLabel: "Rank", rkNeed: "{n} K.O. to enter", qT: "Quests", qDaily: "Daily", qWeekly: "Weekly", journal: "Run log", jt_lvl: "Level", jt_zone: "Zone", jt_atk: "Attack", jt_atkUp: "Upgrade", jt_relic: "Relic", jt_vit: "Vitamin", jt_item: "Item", jt_boss: "Boss", jt_bossEnd: "Boss down", jt_toast: "Info", itemsNav: "Items", vitT: "Vitamins and boosts", vitH: "These are not items: they use the vitamin slots and work as stat upgrades.", itemsSub: "Every item and how many are left to find", itemsSearch: "Search items…", itemsLoad: "Loading items…", itemsHave: "This run", itemsLeft: "Left to find", itemsTotal: "Total", itemsHint: "The list updates whenever you open the game's pause screen (it shows your items).", itemsIdle: "Start a run and open the pause screen to see which items you already have.", rankT: "Live ranking", rankH: "Shows your live position in the season's K.O. ranking under the K.O. counter.", questT: "Quest tracker", questH: "Shows the progress of your daily and weekly quests during a run.", logT: "Run log", logH: "Records attacks, items, relics, bosses and levels with timestamps. See it in a run's details.", ultT: "Ultimate notification", ultH: "Shows the message when your ultimate is ready."
     },
     fr: {
       nav: "Progression", sub: "{n} parties enregistrées", subNone: "Aucune partie enregistrée",
@@ -123,12 +123,12 @@
       koT: "Compteur K.O./s", koH: "Montre la vitesse à laquelle tu bats les Pokémon, sous le compteur de K.O. du jeu pendant une partie.",
       wheelT: "Molette de la souris", wheelH: "Choisis une touche pour la molette pendant une partie (Retour arrière efface). Elle agit comme si tu appuyais sur cette touche : mets celle que tu as réglée dans le jeu pour l'action. Un sens assigné ne zoome plus.",
       wheelUp: "Molette vers le haut", wheelDown: "Molette vers le bas", wheelNone: "Non défini", wheelPress: "Appuie sur une touche…", wheelClear: "Effacer",
-      uiT: "Interface", uiH: "Cache ou redimensionne n'importe quelle partie de l'écran du jeu, dans les menus ou en partie. Appuie sur Modifier puis clique sur la partie à changer. Pour modifier l'écran de jeu, mets d'abord la partie en pause.",
+      uiT: "Interface", uiH: "Cache, déplace ou redimensionne n'importe quelle partie de l'écran du jeu, dans les menus ou en partie. Appuie sur Modifier puis clique sur la partie à changer. Pour modifier l'écran de jeu, mets d'abord la partie en pause.",
       uiEdit: "Modifier l'interface", uiReset: "Réinitialiser", uiCount: "{n} modification(s) enregistrée(s)",
-      edHint: "Clique sur une partie de l'écran · Échap pour finir", edDone: "Terminé", edHide: "Cacher", edShow: "Afficher", edReset: "Réinitialiser",
+      edHint: "Clique sur une partie de l'écran et glisse-la pour la déplacer · Échap pour finir", edDone: "Terminé", edHide: "Cacher", edShow: "Afficher", edReset: "Réinitialiser",
       cfgT: "Fichier de config", cfgH: "Tes options du toolkit et certaines options du jeu (calibration manette, graphismes…) sont enregistrées dans ce fichier. Modifie-le avec n'importe quel éditeur de texte puis redémarre l'appli.",
       cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Ouvrir le fichier de config",
-      rkLabel: "Rang", rkNeed: "{n} K.O. pour entrer", qT: "Missions", qDaily: "Du jour", qWeekly: "De la semaine", journal: "Journal de partie", jt_lvl: "Niveau", jt_zone: "Zone", jt_atk: "Attaque", jt_atkUp: "Amélioration", jt_relic: "Relique", jt_vit: "Vitamine", jt_item: "Objet", jt_boss: "Boss", jt_bossEnd: "Boss vaincu", jt_toast: "Info", itemsNav: "Objets", itemsSub: "Tous les objets et combien il en reste à trouver", itemsSearch: "Chercher un objet…", itemsLoad: "Chargement des objets…", itemsHave: "Cette partie", itemsLeft: "Restants", itemsTotal: "Total", itemsHint: "La liste se met à jour quand tu ouvres l'écran de pause du jeu (il montre tes objets).", itemsIdle: "Lance une partie et ouvre la pause pour voir quels objets tu as déjà.", rankT: "Classement en direct", rankH: "Montre ta position en direct dans le classement K.O. de la saison, sous le compteur de K.O.", questT: "Suivi des missions", questH: "Montre la progression de tes missions du jour et de la semaine pendant une partie.", logT: "Journal de partie", logH: "Enregistre attaques, objets, reliques, boss et niveaux avec l'heure. Visible dans le détail d'une partie.", ultT: "Notification d'ultimate", ultH: "Affiche le message quand ton ultimate est prête."
+      rkLabel: "Rang", rkNeed: "{n} K.O. pour entrer", qT: "Missions", qDaily: "Du jour", qWeekly: "De la semaine", journal: "Journal de partie", jt_lvl: "Niveau", jt_zone: "Zone", jt_atk: "Attaque", jt_atkUp: "Amélioration", jt_relic: "Relique", jt_vit: "Vitamine", jt_item: "Objet", jt_boss: "Boss", jt_bossEnd: "Boss vaincu", jt_toast: "Info", itemsNav: "Objets", vitT: "Vitamines et boosts", vitH: "Ce ne sont pas des objets : ils occupent les emplacements de vitamines et améliorent tes statistiques.", itemsSub: "Tous les objets et combien il en reste à trouver", itemsSearch: "Chercher un objet…", itemsLoad: "Chargement des objets…", itemsHave: "Cette partie", itemsLeft: "Restants", itemsTotal: "Total", itemsHint: "La liste se met à jour quand tu ouvres l'écran de pause du jeu (il montre tes objets).", itemsIdle: "Lance une partie et ouvre la pause pour voir quels objets tu as déjà.", rankT: "Classement en direct", rankH: "Montre ta position en direct dans le classement K.O. de la saison, sous le compteur de K.O.", questT: "Suivi des missions", questH: "Montre la progression de tes missions du jour et de la semaine pendant une partie.", logT: "Journal de partie", logH: "Enregistre attaques, objets, reliques, boss et niveaux avec l'heure. Visible dans le détail d'une partie.", ultT: "Notification d'ultimate", ultH: "Affiche le message quand ton ultimate est prête."
     }
   };
 
@@ -1255,6 +1255,7 @@
     cur = null;
     try { localStorage.removeItem(LIVE_KEY); } catch (e) {}
     LIVE.profileAt = 0;
+    if (r.dur >= 60 && LIVE.baseKills != null) LIVE.baseKills += r.kills;
     if (r.dur < MIN_RUN) return;
     r.end = reason;
     var last = r.pts[r.pts.length - 1];
@@ -1345,8 +1346,10 @@
     if (h) {
       lastSeen = now;
       if (cur && (h.biome !== cur.biome || h.t < cur.dur - 3)) finishRun("restart");
-      if (!cur) cur = resumeRun(h) || newRun(h);
-      else updateRun(h);
+      if (!cur) {
+        cur = resumeRun(h);
+        if (!cur) { cur = newRun(h); LIVE.baseKills = null; LIVE.profileAt = 0; }
+      } else updateRun(h);
       if (now - lastLiveSave > 15000) {
         lastLiveSave = now;
         try { localStorage.setItem(LIVE_KEY, JSON.stringify(cur)); } catch (e) {}
@@ -2578,7 +2581,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     };
     Object.keys(prefs.ui).forEach(function (sel) {
       var e = prefs.ui[sel];
-      o["interface"][sel] = { hidden: !!e.hide, scale: e.scale || 1, origin: e.origin || "center center" };
+      o["interface"][sel] = { hidden: !!e.hide, scale: e.scale || 1, origin: e.origin || "center center", x: Math.round(e.x || 0), y: Math.round(e.y || 0) };
     });
     return o;
   }
@@ -2613,7 +2616,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     Object.keys(iface).forEach(function (sel) {
       var e = iface[sel];
       if (!e || typeof e !== "object" || /[{};<]/.test(sel)) return;
-      ui[sel] = { hide: !!e.hidden, scale: typeof e.scale === "number" ? e.scale : 1, origin: typeof e.origin === "string" ? e.origin : "center center" };
+      ui[sel] = { hide: !!e.hidden, scale: typeof e.scale === "number" ? e.scale : 1, origin: typeof e.origin === "string" ? e.origin : "center center", x: typeof e.x === "number" ? e.x : 0, y: typeof e.y === "number" ? e.y : 0 };
     });
     prefs.ui = ui;
     var g = o.game || {};
@@ -2776,7 +2779,9 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       var e = prefs.ui[sel], rule = "";
       if (/[{};<]/.test(sel)) return;
       if (e.hide) rule += editing ? "opacity:.3!important;outline:2px dashed #fc3!important;" : "display:none!important;";
+      if (e.x || e.y) rule += "translate:" + Math.round(e.x || 0) + "px " + Math.round(e.y || 0) + "px;";
       if (e.scale && e.scale !== 1) rule += "scale:" + e.scale + ";transform-origin:" + (e.origin || "center center") + ";";
+      else if (e.x || e.y) rule += "transform-origin:" + (e.origin || "center center") + ";";
       if (rule) css += sel + "{" + rule + "}\n";
     });
     styleEl.textContent = css;
@@ -2829,7 +2834,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     box.hidden = false;
   }
   function inHost(e) { return (e.composedPath ? e.composedPath() : []).indexOf(host) >= 0; }
-  function edEntry() { return prefs.ui[edSel] || { hide: false, scale: 1, origin: "center center" }; }
+  function edEntry() { return prefs.ui[edSel] || { hide: false, scale: 1, origin: "center center", x: 0, y: 0 }; }
   function paintEdPanel() {
     edpanel.hidden = !edSel;
     if (!edSel) return;
@@ -2849,8 +2854,9 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     else if (what === "plus") e.scale = Math.min(2, Math.round((e.scale + 0.1) * 100) / 100);
     else if (what === "hide") e.hide = !e.hide;
     else if (what === "reset") { delete prefs.ui[edSel]; e = null; }
+    else if (what === "center") { e.x = 0; e.y = 0; }
     if (e) {
-      if (!e.hide && e.scale === 1) delete prefs.ui[edSel];
+      if (!e.hide && e.scale === 1 && !e.x && !e.y) delete prefs.ui[edSel];
       else prefs.ui[edSel] = e;
     }
     savePrefs();
@@ -2858,25 +2864,56 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     paintEdPanel();
     requestAnimationFrame(function () { placeBox(edsel, edEl); });
   }
-  function onEdBlock(e) {
-    if (inHost(e)) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-  }
-  function onEdClick(e) {
-    if (inHost(e)) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    var el = pickBlock(e.clientX, e.clientY);
-    if (!el) return;
+  var edDrag = null;
+  var edDragged = false;
+  function selectEl(el) {
     edEl = el;
     edSel = selectorFor(el);
     placeBox(edsel, el);
     paintEdPanel();
   }
+  function onEdBlock(e) {
+    if (inHost(e)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if (e.type === "pointerdown" && e.button === 0) {
+      var el = pickBlock(e.clientX, e.clientY);
+      if (!el) return;
+      if (el !== edEl) selectEl(el);
+      var cur0 = Object.assign({ hide: false, scale: 1, origin: originFor(edEl) }, prefs.ui[edSel] || {});
+      edDrag = { sx: e.clientX, sy: e.clientY, x: cur0.x || 0, y: cur0.y || 0, entry: cur0 };
+      edDragged = false;
+    } else if (e.type === "pointerup" && edDrag) {
+      var moved = edDragged;
+      edDrag = null;
+      if (moved) { savePrefs(); paintEdPanel(); }
+    }
+  }
+  function onEdClick(e) {
+    if (inHost(e)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if (edDragged) { edDragged = false; return; }
+    var el = pickBlock(e.clientX, e.clientY);
+    if (!el) return;
+    selectEl(el);
+  }
   var edRaf = 0, edMoveEv = null;
   function onEdMove(e) {
     if (inHost(e)) { edbox.hidden = true; return; }
+    if (edDrag) {
+      var dx = e.clientX - edDrag.sx, dy = e.clientY - edDrag.sy;
+      if (!edDragged && Math.abs(dx) + Math.abs(dy) < 4) return;
+      edDragged = true;
+      var en = edDrag.entry;
+      en.x = Math.round(edDrag.x + dx);
+      en.y = Math.round(edDrag.y + dy);
+      prefs.ui[edSel] = en;
+      applyUiEdits();
+      placeBox(edsel, edEl);
+      edbox.hidden = true;
+      return;
+    }
     edMoveEv = e;
     if (!edRaf) edRaf = requestAnimationFrame(function () {
       edRaf = 0;
@@ -3004,7 +3041,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   var QUEST_DEFS = {"d-kills":["Limpieza del bosque","Derrota a 500 Pokémon salvajes.","kills",500],"d-runs":["Doble turno","Juega 2 partidas.","runs",2],"d-chests":["Buscador de tesoros","Abre 6 Poké Balls de objetos.","chests",6],"d-rocks":["Golpe Roca","Rompe 8 rocas de oro.","rocks",8],"d-time":["Resistencia","Sobrevive 8 minutos en una partida.","time",480],"d-gold":["Bolsillos llenos","Consigue 1.200 ₽ en partidas.","gold",1200],"d-mutation":["Mutante del día","Juega la Mutación del día.","mutation",1],"d-dojo":["Primer cinturón","Supera un reto del Dojo Karate.","dojo",1],"d-ults":["Poder desatado","Lanza 10 Ultimates.","ultimates",10],"d-incense":["Aroma misterioso","Abre 3 Grietas con el Incienso.","riftsOpened",3],"d-johto":["Aires de Johto","Juega una partida con un Pokémon de Johto.","johtoRuns",1],"d-alphas":["Caza mayor","Derrota o captura 2 Pokémon Alfa.","alphas",2],"d-react":["Química elemental","Provoca 60 reacciones elementales.","reactions",60],"d-burn":["Fuego cruzado","Quema a 150 Pokémon.","burned",150],"d-para":["Alta tensión","Paraliza a 120 Pokémon.","paralyzed",120],"d-soak":["Chaparrón","Moja a 200 Pokémon.","soaked",200],"d-freeze":["Ola de frío","Congela a 100 Pokémon.","frozen",100],"d-poison":["Picadura tóxica","Envenena a 150 Pokémon.","poisoned",150],"d-crits":["Puntería","Asesta 400 golpes críticos.","crits",400],"d-boss":["Guardián caído","Derrota a un guardián.","bosses",1],"d-zone2":["Más adentro","Llega a la zona 2.","stage",2],"d-challenge":["Desafío aceptado","Supera 2 altares de desafío.","challenges",2],"d-rift":["Al otro lado","Vence a 2 Alfas de grieta.","rifts",2],"d-johto2":["Paso firme","Llega a la zona 2 con un Pokémon de Johto.","johtoStage",2],"d-runkills":["Imparable","Consigue 1.500 bajas en una sola partida.","runKills",1500],"d-ally":["Nuevo aliado","Captura un Alfa de apoyo.","alphaCaught",1],"d-zone3":["Tierra adentro","Llega a la zona 3.","stage",3],"d-bosses":["Doble guardia","Derrota a 2 guardianes.","bosses",2],"d-level":["Entrenamiento duro","Alcanza el nivel 22 en una partida.","level",22],"d-evo":["¡Qué está pasando!","Evoluciona 2 veces.","evolutions",2],"d-dojo3":["Maestro del tatami","Supera 3 retos del Dojo Karate.","dojo",3],"d-rifts":["Explorador de grietas","Vence a 4 Alfas de grieta.","rifts",4],"d-johto3":["Corazón de Johto","Llega a la zona 3 con un Pokémon de Johto.","johtoStage",3],"w-kills":["Temporada de caza","Derrota a 8.000 Pokémon salvajes.","kills",8],"w-runs":["Constancia","Juega 12 partidas.","runs",12],"w-play":["Vida de entrenador","Juega 90 minutos.","playtime",5400],"w-chests":["Coleccionista de Poké Balls","Abre 50 Poké Balls de objetos.","chests",50],"w-ults":["Maestro de la Ultimate","Lanza 100 Ultimates.","ultimates",100],"w-dojo":["Alumno del dojo","Supera 8 retos del Dojo Karate.","dojo",8],"w-mutation":["Mutación constante","Juega 4 partidas de la Mutación del día.","mutation",4],"w-johto":["Ruta de Johto","Juega 6 partidas con Pokémon de Johto.","johtoRuns",6],"w-alphas":["Rey de los Alfas","Derrota o captura 12 Pokémon Alfa.","alphas",12],"w-allies":["Equipo de ensueño","Captura 5 Alfas de apoyo.","alphaCaught",5],"w-react":["Alquimia salvaje","Provoca 600 reacciones elementales.","reactions",600],"w-bosses":["Sin guardia","Derrota a 8 guardianes.","bosses",8],"w-challenges":["Sin miedo al desafío","Supera 12 altares de desafío.","challenges",12],"w-blackbelt":["Cinturón negro","Supera 2 retos de cinturón negro del Dojo Karate.","dojoBlack",2],"w-rifts":["Cazagrietas","Vence a 12 Alfas de grieta.","rifts",12],"w-relics":["Coleccionista de Reliquias","Consigue 15 Reliquias.","relics",15],"w-win":["Campeón regional","Completa un mapa.","wins",1],"w-legend":["Leyenda viva","Derrota al legendario del santuario.","legendaries",1],"w-shiny":["Brillo raro","Captura un Pokémon variocolor.","shinies",1],"w-level":["Maestría","Alcanza el nivel 30 en una partida.","level",30],"w-runkills":["Marea salvaje","Consigue 3.000 bajas en una sola partida.","runKills",3],"w-mutwin":["Mutación dominada","Completa la Mutación del día.","mutationWins",1],"w-riftrun":["Noche de grietas","Vence a 6 Alfas de grieta en una sola partida.","riftsRun",6],"w-johtowin":["Campeón de Johto","Completa un mapa con un Pokémon de Johto.","johtoWins",1]};
   var GAME_API = "https://api.pokebonk.com";
-  var LIVE = { board: null, boardAt: 0, profile: null, profileAt: 0, busyB: false, busyP: false, tr: null, trKey: "", items: null, itemsBusy: false, owned: {}, ownedRun: "", sig: {}, sigRun: "", boss: 0, bossName: "", lastLvl: 0, lastPhase: "", lastRank: null };
+  var LIVE = { board: null, boardAt: 0, profile: null, profileAt: 0, busyB: false, busyP: false, tr: null, trKey: "", items: null, itemsBusy: false, owned: {}, ownedRun: "", sig: {}, sigRun: "", boss: 0, bossName: "", lastLvl: 0, lastPhase: "", lastRank: null, baseKills: null };
 
   function gameToken() {
     try {
@@ -3044,10 +3081,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   function tr(s) { return (LIVE.tr && LIVE.tr[s]) || s; }
 
   function totalKos() {
-    var p = LIVE.profile;
-    if (!p) return null;
-    var base = p.counters && typeof p.counters.kills === "number" ? p.counters.kills : 0;
-    return base + (cur ? cur.kills : 0);
+    if (LIVE.baseKills == null) return null;
+    return LIVE.baseKills + (cur ? cur.kills : 0);
   }
 
   function pollGame(h, now) {
@@ -3061,7 +3096,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     var wantProf = (prefs.quests || prefs.ko) && now - LIVE.profileAt > 90000;
     if (wantProf && !LIVE.busyP) {
       LIVE.busyP = true;
-      gameGet("/profile").then(function (j) { LIVE.profile = j && j.profile; LIVE.profileAt = Date.now(); }).catch(function () { LIVE.profileAt = Date.now() - 60000; }).then(function () { LIVE.busyP = false; });
+      gameGet("/profile").then(function (j) {
+        LIVE.profile = j && j.profile;
+        LIVE.profileAt = Date.now();
+        var c = LIVE.profile && LIVE.profile.counters;
+        if (LIVE.profile && (!cur || LIVE.baseKills == null)) LIVE.baseKills = c && typeof c.kills === "number" ? c.kills : 0;
+      }).catch(function () { LIVE.profileAt = Date.now() - 60000; }).then(function () { LIVE.busyP = false; });
     }
   }
 
@@ -3225,7 +3265,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     return out;
   }
   function logTick(h) {
-    if (LIVE.sigRun !== cur.id) { LIVE.sig = {}; LIVE.sigRun = cur.id; LIVE.lastLvl = h.lvl; LIVE.lastPhase = h.phase; LIVE.boss = 0; LIVE.owned = {}; }
+    if (LIVE.sigRun !== cur.id) { LIVE.sig = {}; LIVE.sigRun = cur.id; LIVE.lastLvl = h.lvl; LIVE.lastPhase = h.phase; LIVE.boss = 0; LIVE.owned = {}; LIVE.vits = {}; }
     if (h.lvl > LIVE.lastLvl) addLog("lvl", h.lvl, h.t);
     LIVE.lastLvl = h.lvl;
     if (h.phase && h.phase !== LIVE.lastPhase) addLog("zone", h.phase, h.t);
@@ -3259,6 +3299,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       LIVE.boss = 0;
     }
 
+    var vv = readVitamins();
+    if (Object.keys(vv).length) LIVE.vits = vv;
     var owned = readOwned();
     if (owned) {
       Object.keys(owned).forEach(function (k) {
@@ -3299,6 +3341,9 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     } catch (e) {}
   }
 
+  var VITAMIN_KEYS = {};
+  ["protein", "calcium", "iron", "zinc", "carbos", "hp-up", "pp-up", "ether", "dire-hit", "x-speed", "x-defense", "x-attack", "stardust", "elixir", "super-potion", "nugget", "exp-candy", "star-piece-v", "max-potion", "escape-rope"].forEach(function (k) { VITAMIN_KEYS[k] = 1; });
+
   function loadItems() {
     if (LIVE.items || LIVE.itemsBusy) return;
     LIVE.itemsBusy = true;
@@ -3317,27 +3362,47 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       });
     }).catch(function () { LIVE.itemsBusy = false; });
   }
+  function itemCard(c) {
+    return '<div class="itm' + (c.n ? " have" : "") + '" title="' + esc(c.nm + " \u2014 " + tr(c.it.desc || "")) + '"><img class="pix" src="' + asset(c.it.icon) + '" alt="" draggable="false" loading="lazy">' +
+      "<span>" + esc(c.nm) + "</span>" + (c.n ? "<b>\u00d7" + c.n + "</b>" : "") + "</div>";
+  }
+  function readVitamins() {
+    var out = {};
+    Array.prototype.forEach.call(document.querySelectorAll(".pk-vits > *"), function (el) {
+      var name = (el.getAttribute("title") || el.getAttribute("aria-label") || "").trim();
+      if (name) out[name] = (out[name] || 0) + 1;
+    });
+    return out;
+  }
   function itemsView() {
     loadItems();
     loadTr();
     if (!LIVE.items) return '<div class="panel"><p class="hint2">' + esc(S("itemsLoad")) + "</p></div>";
     var owned = cur ? LIVE.owned || {} : {};
+    var vits = cur ? LIVE.vits || {} : {};
     var term = norm(state.query);
     var have = 0;
-    var cards = LIVE.items.map(function (it) {
+    var items = [], vitamins = [];
+    LIVE.items.forEach(function (it) {
       var nm = tr(it.name);
+      if (term && norm(nm).indexOf(term) < 0) {
+        if (!VITAMIN_KEYS[it.key] && owned[nm]) have++;
+        return;
+      }
+      if (VITAMIN_KEYS[it.key]) { vitamins.push({ it: it, nm: nm, n: vits[nm] || 0 }); return; }
       var n = owned[nm] || 0;
       if (n) have++;
-      return { it: it, nm: nm, n: n };
+      items.push({ it: it, nm: nm, n: n });
     });
-    var shown = cards.filter(function (c) { return !term || norm(c.nm).indexOf(term) >= 0; });
+    var totalItems = LIVE.items.filter(function (it) { return !VITAMIN_KEYS[it.key]; }).length;
     var html = '<div class="panel"><div class="stiles">' +
-      statTile(S("itemsHave"), String(have)) + statTile(S("itemsLeft"), String(cards.length - have)) + statTile(S("itemsTotal"), String(cards.length)) +
+      statTile(S("itemsHave"), String(have)) + statTile(S("itemsLeft"), String(totalItems - have)) + statTile(S("itemsTotal"), String(totalItems)) +
       '</div><p class="hint2">' + esc(S(cur ? "itemsHint" : "itemsIdle")) + "</p></div>";
-    html += '<div class="igrid">' + shown.map(function (c) {
-      return '<div class="itm' + (c.n ? " have" : "") + '" title="' + esc(c.nm + " — " + tr(c.it.desc || "")) + '"><img class="pix" src="' + asset(c.it.icon) + '" alt="" draggable="false" loading="lazy">' +
-        "<span>" + esc(c.nm) + "</span>" + (c.n ? "<b>×" + c.n + "</b>" : "") + "</div>";
-    }).join("") + "</div>";
+    html += '<div class="igrid">' + items.map(itemCard).join("") + "</div>";
+    if (vitamins.length) {
+      html += '<div class="panel"><div class="panel-t">' + esc(S("vitT")) + '</div><p class="hint2">' + esc(S("vitH")) + "</p></div>";
+      html += '<div class="igrid">' + vitamins.map(itemCard).join("") + "</div>";
+    }
     return html;
   }
 
