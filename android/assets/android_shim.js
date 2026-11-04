@@ -35,6 +35,9 @@
           return Promise.resolve();
         },
         set_fullscreen: function () { return Promise.resolve(true); },
+        load_config: function () { return Promise.resolve(A.loadConfig()); },
+        save_config: function (t) { return Promise.resolve(A.saveConfig(t)); },
+        open_config: function () { A.shareConfig(); return Promise.resolve(true); },
         update_info: function () {
           var info = null;
           try { info = JSON.parse(A.updateInfo()); } catch (e) {}

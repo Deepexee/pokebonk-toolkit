@@ -64,7 +64,16 @@
       saved: "Zapis: %LOCALAPPDATA%\\PokeBonk\\runs.json",
       updRestart: "Aktualizacja {v} · Uruchom ponownie", updDownload: "Aktualizacja {v} · Pobierz",
       updRestartT: "Nowa wersja jest gotowa. Zainstaluje się też po zamknięciu aplikacji.",
-      updDownloadT: "Pobiera nową wersję aplikacji.", updBusy: "Ponowne uruchamianie…"
+      updDownloadT: "Pobiera nową wersję aplikacji.", updBusy: "Ponowne uruchamianie…",
+      cfgNav: "Ustawienia", cfgSub: "Opcje toolkitu i plik konfiguracji", kosAvg: "śr.",
+      koT: "Licznik K.O./s", koH: "Pokazuje, jak szybko pokonujesz Pokémony, pod licznikiem K.O. w grze podczas gry.",
+      wheelT: "Kółko myszy", wheelH: "Wybierz klawisz dla kółka podczas gry (Backspace czyści). Działa jak naciśnięcie tego klawisza, więc użyj klawisza ustawionego w grze dla danej akcji. Przypisany kierunek nie przybliża już obrazu.",
+      wheelUp: "Kółko w górę", wheelDown: "Kółko w dół", wheelNone: "Nie ustawiono", wheelPress: "Naciśnij klawisz…", wheelClear: "Wyczyść",
+      uiT: "Interfejs", uiH: "Ukryj lub zmień rozmiar dowolnej części ekranu gry, w menu lub podczas gry. Naciśnij Edytuj, potem kliknij część do zmiany. Aby edytować ekran gry, najpierw wstrzymaj grę.",
+      uiEdit: "Edytuj interfejs", uiReset: "Resetuj", uiCount: "Zapisane zmiany: {n}",
+      edHint: "Kliknij część ekranu · Esc kończy", edDone: "Gotowe", edHide: "Ukryj", edShow: "Pokaż", edReset: "Resetuj",
+      cfgT: "Plik konfiguracji", cfgH: "Opcje toolkitu i część opcji gry (kalibracja pada, grafika…) są zapisane w tym pliku. Edytuj go dowolnym edytorem tekstu i uruchom ponownie aplikację.",
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Otwórz plik konfiguracji"
     },
     en: {
       nav: "Progress", sub: "{n} runs saved", subNone: "No runs saved yet",
@@ -81,7 +90,16 @@
       saved: "Saved in %LOCALAPPDATA%\\PokeBonk\\runs.json",
       updRestart: "Update {v} · Restart", updDownload: "Update {v} · Download",
       updRestartT: "A new version is ready. It also installs when you close the app.",
-      updDownloadT: "Downloads the new version of the app.", updBusy: "Restarting…"
+      updDownloadT: "Downloads the new version of the app.", updBusy: "Restarting…",
+      cfgNav: "Settings", cfgSub: "Toolkit options and config file", kosAvg: "avg",
+      koT: "K.O./s counter", koH: "Shows how fast you defeat Pokémon, under the game's K.O. counter during a run.",
+      wheelT: "Mouse wheel", wheelH: "Press a key to bind it to the wheel during a run (Backspace clears). It acts like pressing that key, so use the key you set in the game for the action. A bound direction no longer zooms.",
+      wheelUp: "Wheel up", wheelDown: "Wheel down", wheelNone: "Not set", wheelPress: "Press a key…", wheelClear: "Clear",
+      uiT: "Interface", uiH: "Hide or resize any part of the game's screen, in the menus or during a run. Press Edit, then click the part to change. To edit the in-run screen, pause the game first.",
+      uiEdit: "Edit the interface", uiReset: "Reset", uiCount: "{n} change(s) saved",
+      edHint: "Click a part of the screen · Esc to finish", edDone: "Done", edHide: "Hide", edShow: "Show", edReset: "Reset",
+      cfgT: "Config file", cfgH: "Your toolkit options and some game options (controller calibration, graphics…) are saved in this file. Edit it with any text editor, then restart the app.",
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Open the config file"
     },
     fr: {
       nav: "Progression", sub: "{n} parties enregistrées", subNone: "Aucune partie enregistrée",
@@ -98,7 +116,16 @@
       saved: "Enregistré dans %LOCALAPPDATA%\\PokeBonk\\runs.json",
       updRestart: "Mise à jour {v} · Redémarrer", updDownload: "Mise à jour {v} · Télécharger",
       updRestartT: "Une nouvelle version est prête. Elle s'installe aussi quand tu fermes l'appli.",
-      updDownloadT: "Télécharge la nouvelle version de l'appli.", updBusy: "Redémarrage…"
+      updDownloadT: "Télécharge la nouvelle version de l'appli.", updBusy: "Redémarrage…",
+      cfgNav: "Réglages", cfgSub: "Options du toolkit et fichier de config", kosAvg: "moy.",
+      koT: "Compteur K.O./s", koH: "Montre la vitesse à laquelle tu bats les Pokémon, sous le compteur de K.O. du jeu pendant une partie.",
+      wheelT: "Molette de la souris", wheelH: "Choisis une touche pour la molette pendant une partie (Retour arrière efface). Elle agit comme si tu appuyais sur cette touche : mets celle que tu as réglée dans le jeu pour l'action. Un sens assigné ne zoome plus.",
+      wheelUp: "Molette vers le haut", wheelDown: "Molette vers le bas", wheelNone: "Non défini", wheelPress: "Appuie sur une touche…", wheelClear: "Effacer",
+      uiT: "Interface", uiH: "Cache ou redimensionne n'importe quelle partie de l'écran du jeu, dans les menus ou en partie. Appuie sur Modifier puis clique sur la partie à changer. Pour modifier l'écran de jeu, mets d'abord la partie en pause.",
+      uiEdit: "Modifier l'interface", uiReset: "Réinitialiser", uiCount: "{n} modification(s) enregistrée(s)",
+      edHint: "Clique sur une partie de l'écran · Échap pour finir", edDone: "Terminé", edHide: "Cacher", edShow: "Afficher", edReset: "Réinitialiser",
+      cfgT: "Fichier de config", cfgH: "Tes options du toolkit et certaines options du jeu (calibration manette, graphismes…) sont enregistrées dans ce fichier. Modifie-le avec n'importe quel éditeur de texte puis redémarre l'appli.",
+      cfgPath: "%LOCALAPPDATA%\\PokeBonk\\config.yml", cfgOpen: "Ouvrir le fichier de config"
     }
   };
 
@@ -1323,6 +1350,8 @@
     if (res) noteResult(res);
     publish(h);
     setDockMode(!!h);
+    koSample(h, now);
+    paintKos(h);
     refreshLiveCard();
   }
 
@@ -1338,6 +1367,10 @@
     s = Math.max(0, Math.round(s || 0));
     var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60;
     return h ? h + "h" + String(m).padStart(2, "0") : m + ":" + String(x).padStart(2, "0");
+  }
+  function fmtAxis(s, maxS) {
+    if (maxS >= 3600) return (Math.round(s / 360) / 10).toLocaleString(locale()) + " h";
+    return Math.round(s / 60) + " min";
   }
   function kpmOf(r) { return r.dur > 0 ? r.kills / (r.dur / 60) : 0; }
   function spOf(r) { return r.sp0 || r.sp || 0; }
@@ -1399,7 +1432,7 @@
     for (var k = 0; k <= 4; k++) {
       var gv = max * k / 4, gy = y(gv);
       g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + gy + '" y2="' + gy + '" class="gl"/>' +
-        '<text x="' + (L - 8) + '" y="' + (gy + 4) + '" class="ax" text-anchor="end">' + esc(fmtMetric(gv, m)) + "</text>";
+        '<text x="' + (L - 8) + '" y="' + (gy + 4) + '" class="ax" text-anchor="end">' + esc(m === "dur" ? fmtAxis(gv, max) : fmtMetric(gv, m)) + "</text>";
     }
     var avg = [];
     for (var i = 0; i < n; i++) {
@@ -1435,7 +1468,7 @@
     }
     for (var q = 1; q <= 4; q++) {
       var tx = x(tMax * q / 4);
-      g += '<text x="' + tx + '" y="' + (H - 6) + '" class="ax" text-anchor="middle">' + fmtDur(tMax * q / 4) + "</text>";
+      g += '<text x="' + tx + '" y="' + (H - 6) + '" class="ax" text-anchor="middle">' + (tMax >= 3600 ? fmtAxis(tMax * q / 4, tMax) : fmtDur(tMax * q / 4)) + "</text>";
     }
     var kp = pts.map(function (p) { return x(p[0]).toFixed(1) + "," + yk(p[2]).toFixed(1); });
     var area = x(pts[0][0]).toFixed(1) + "," + yk(0) + " " + kp.join(" ") + " " + x(pts[pts.length - 1][0]).toFixed(1) + "," + yk(0);
@@ -1899,13 +1932,50 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 @media (prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
 }
+.ribbon.rb-cfg{background:var(--stripes),linear-gradient(100deg,#3a4a78,#5f78b8)}
+.pill svg{flex:0 0 auto}
+.crow{display:flex;align-items:center;gap:12px;padding:7px 2px}
+.crow+.crow{border-top:1px solid rgba(150,165,215,.1)}
+.ctx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ctx b{font:900 13.5px/1.2 var(--ft);color:#fff}
+.ctx span{font:700 12px/1.45 var(--f);color:var(--ink2)}
+.hint2{margin:-4px 0 6px;font:700 12px/1.5 var(--f);color:var(--ink2)}
+.sw{position:relative;flex:0 0 auto;width:48px;height:27px;border:0;border-radius:999px;background:var(--pill);cursor:pointer;box-shadow:inset 0 2px 3px rgba(0,0,0,.35)}
+.sw i{position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.3);transition:transform .14s}
+.sw.on{background:linear-gradient(100deg,var(--green-d),var(--green))}
+.sw.on i{transform:translateX(21px)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.kbind{display:inline-flex;align-items:center;gap:6px}
+.kb{min-width:96px;justify-content:center}
+.kb.listen{background:var(--yellow);color:#3a2a00;box-shadow:0 3px 0 #b8860b}
+.kx{border:0;background:var(--pill);color:#fff;width:26px;height:26px;border-radius:50%;font:900 15px/1 var(--ft);cursor:pointer;padding:0}
+.kos{position:absolute;display:flex;align-items:baseline;gap:5px;padding:6px 13px 6px 11px;border-radius:999px;background:rgba(34,40,58,.93);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.35),var(--ring);pointer-events:none;white-space:nowrap}
+.kos[hidden]{display:none}
+.kos b{min-width:2ch;text-align:right;font:900 18px/1 var(--ft);color:var(--yellow)}
+.kos small{font:900 11px/1 var(--ft);color:#fff}
+.kos i{margin-left:4px;font:800 10px/1 var(--f);font-style:normal;color:var(--ink3)}
+.edbar{position:absolute;left:50%;top:12px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(34,40,58,.97);color:#fff;font:900 13px/1 var(--ft);box-shadow:0 4px 0 rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.5),var(--ring);pointer-events:auto}
+.edbar[hidden],.edbox[hidden],.edpanel[hidden]{display:none}
+.edbox{position:absolute;z-index:1;pointer-events:none;border:2px dashed var(--yellow);border-radius:8px;background:rgba(255,204,51,.1)}
+.edbox.sel{z-index:2;border-style:solid;background:rgba(255,204,51,.18)}
+.edpanel{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 14px;max-width:92vw;border-radius:18px;background:rgba(34,40,58,.97);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.5),var(--ring);pointer-events:auto}
+.edpanel b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:800 11px/1.2 var(--f);color:var(--ink2)}
+.edbtns{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px}
+.edbtns button{height:34px;min-width:34px;padding:0 12px;border:0;border-radius:999px;background:var(--pill);color:#fff;font:900 14px/1 var(--ft);cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.4)}
+.edbtns button:hover{filter:brightness(1.12)}
+.edbtns span{min-width:46px;text-align:center;font:900 13px var(--ft)}
 `;
 
+  var GEAR = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6a.5.5 0 0 0 .1-.6l-2-3.4a.5.5 0 0 0-.6-.2l-2.3 1a7 7 0 0 0-1.7-1l-.4-2.5a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1a.5.5 0 0 0-.6.2l-2 3.4a.5.5 0 0 0 .1.6l2 1.6a7.5 7.5 0 0 0 0 2l-2 1.6a.5.5 0 0 0-.1.6l2 3.4c.1.2.4.3.6.2l2.3-1a7 7 0 0 0 1.7 1l.4 2.5c0 .2.3.4.5.4h4c.3 0 .5-.2.5-.4l.4-2.5a7 7 0 0 0 1.7-1l2.3 1c.2.1.5 0 .6-.2l2-3.4a.5.5 0 0 0-.1-.6zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg>';
+  function navIcon(n, size) {
+    return n.svg ? '<span class="ui" style="display:inline-grid;width:' + size + "px;height:" + size + 'px">' + n.svg + "</span>" : uiIcon(n.icon, size);
+  }
   var NAV = [
     { v: "dex", icon: "items/poke-ball.png", label: function () { return T("navDex"); }, rb: "rb-dex" },
     { v: "types", icon: "ui/types/fire.png", label: function () { return T("navTypes"); }, rb: "rb-types" },
     { v: "maps", icon: "ui/icons/map-portal.png", label: function () { return T("navMaps"); }, rb: "rb-maps" },
-    { v: "stats", icon: "ui/icons/record.png", label: function () { return S("nav"); }, rb: "rb-stats" }
+    { v: "stats", icon: "ui/icons/record.png", label: function () { return S("nav"); }, rb: "rb-stats" },
+    { v: "cfg", svg: GEAR, label: function () { return S("cfgNav"); }, rb: "rb-cfg" }
   ];
 
   var SPEAKER = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4 9.5h3.6L12.5 5v14l-4.9-4.5H4z"/>' +
@@ -1925,6 +1995,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       '<button type="button" class="dk" id="launcher" data-open>' + uiIcon("ui/icons/research.png", 24) +
         '<span class="ltext">Menu</span><kbd>F2</kbd></button>' +
     "</div>" +
+    '<div class="kos" id="kos" hidden><b id="kosV">0.0</b><small>K.O./s</small><i id="kosA"></i></div>' +
+    '<div class="edbar" id="edbar" hidden><span id="edHint"></span><button type="button" class="btn" id="edDone" data-ed="done"></button></div>' +
+    '<div class="edbox" id="edbox" hidden></div><div class="edbox sel" id="edsel" hidden></div>' +
+    '<div class="edpanel" id="edpanel" hidden><b id="edName"></b><div class="edbtns">' +
+      '<button type="button" data-ed="minus">−</button><span id="edScale">100%</span><button type="button" data-ed="plus">+</button>' +
+      '<button type="button" id="edHide" data-ed="hide"></button><button type="button" id="edReset" data-ed="reset"></button></div></div>' +
     '<div class="screen" id="screen" hidden>' +
       '<div class="hub" role="dialog" aria-modal="true" id="hub">' +
         '<header class="ribbon" id="ribbon">' +
@@ -1939,7 +2015,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
         "</header>" +
         '<div class="tbar">' +
           '<nav class="seg nav" id="nav">' + NAV.map(function (n) {
-            return '<button type="button" class="pill" data-view="' + n.v + '">' + uiIcon(n.icon, 20) + '<span data-label="' + n.v + '"></span></button>';
+            return '<button type="button" class="pill" data-view="' + n.v + '">' + navIcon(n, 20) + '<span data-label="' + n.v + '"></span></button>';
           }).join("") + "</nav>" +
           '<div class="searchwrap" id="searchwrap">' +
             '<span class="sic">' + IC.search + "</span>" +
@@ -2003,7 +2079,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   function snapshot() { return { view: state.view, sel: state.sel, query: state.query }; }
 
   function isDetail() { return state.view === "poke" || state.view === "type" || state.view === "map" || state.view === "run"; }
-  function hasSearch() { return !isDetail() && state.view !== "stats"; }
+  function hasSearch() { return !isDetail() && state.view !== "stats" && state.view !== "cfg"; }
 
   function rootView() {
     return state.view === "poke" ? "dex"
@@ -2014,6 +2090,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
 
   function headerTexts() {
+    if (state.view === "cfg") return [S("cfgNav"), S("cfgSub")];
     if (state.view === "stats" || state.view === "run") {
       return [S("nav"), runs.length ? fill(S("sub"), runs.length) : S("subNone")];
     }
@@ -2045,7 +2122,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     var rv = rootView();
     var nav = NAV.filter(function (n) { return n.v === rv; })[0] || NAV[0];
     ribbon.className = "ribbon " + nav.rb;
-    root.getElementById("rbIc").innerHTML = uiIcon(nav.icon, 26);
+    root.getElementById("rbIc").innerHTML = navIcon(nav, 26);
     Array.prototype.forEach.call(root.querySelectorAll("[data-label]"), function (el) {
       var n = NAV.filter(function (x) { return x.v === el.getAttribute("data-label"); })[0];
       el.textContent = n.label();
@@ -2086,6 +2163,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     else if (state.view === "type" && TYPES.indexOf(state.sel) >= 0) html = typeView(state.sel);
     else if (state.view === "map" && REGION_BY_ID[state.sel]) html = mapView(state.sel);
     else if (state.view === "run") html = runView(state.sel);
+    else if (state.view === "cfg") html = cfgView();
     else if (state.view === "stats") html = statsView();
     else if (state.view === "maps") html = mapsView();
     else html = state.view === "types" ? typesView() : dexView();
@@ -2112,7 +2190,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
 
   function setView(v) {
-    if (v !== "dex" && v !== "types" && v !== "maps" && v !== "stats") return;
+    if (v !== "dex" && v !== "types" && v !== "maps" && v !== "stats" && v !== "cfg") return;
     if (v === "maps" && !HAS_MAPS) return;
     hist = [];
     state.view = v;
@@ -2264,6 +2342,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if ((el = e.target.closest("[data-stmon]"))) { stx.mon = el.getAttribute("data-stmon"); renderContent(); content.scrollTop = 0; return; }
     if ((el = e.target.closest("[data-stmap]"))) { stx.map = el.getAttribute("data-stmap"); renderContent(); content.scrollTop = 0; return; }
     if ((el = e.target.closest("[data-update]"))) { applyUpdate(); return; }
+    if ((el = e.target.closest("[data-cfg]"))) { cfgAction(el.getAttribute("data-cfg")); return; }
+    if ((el = e.target.closest("[data-ed]"))) { edAction(el.getAttribute("data-ed")); return; }
     if ((el = e.target.closest("[data-folder]"))) { openFolder(); return; }
     if ((el = e.target.closest("[data-run]"))) { openRun(el.getAttribute("data-run")); return; }
     if ((el = e.target.closest("[data-view]"))) { setView(el.getAttribute("data-view")); return; }
@@ -2276,6 +2356,8 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   window.addEventListener("keydown", function (e) {
     var path = e.composedPath ? e.composedPath() : [];
     var inHost = path.indexOf(host) >= 0;
+    if (editing) return;
+    if (capturing) { handleCapture(e); return; }
     if (e.key === "F2") {
       if (!inHost) { e.preventDefault(); e.stopPropagation(); }
       toggleHub();
@@ -2323,6 +2405,432 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   document.addEventListener("fullscreenchange", ensureHost);
   document.addEventListener("visibilitychange", ensureHost);
   setInterval(ensureHost, 4000);
+
+  var GAME_KEYS = /^(pb-render-res|pb-battery|pb-fs-off|pb-pad-cal|pb-padtold|pb-pad-first|pb\.coop\.mute|pb\.coop\.quick|pb\.boardFilter)$/;
+  var PREF_KEY = "pokebonk_hub_prefs";
+  var prefs = { ko: true, wheelUp: "", wheelDown: "", ui: {} };
+  try {
+    var savedPrefs = JSON.parse(localStorage.getItem(PREF_KEY) || "null");
+    if (savedPrefs && typeof savedPrefs === "object") {
+      Object.keys(prefs).forEach(function (k) { if (savedPrefs[k] != null) prefs[k] = savedPrefs[k]; });
+    }
+  } catch (e) {}
+  if (!prefs.ui || typeof prefs.ui !== "object") prefs.ui = {};
+
+  function yamlScalar(v) {
+    return typeof v === "boolean" || typeof v === "number" ? String(v) : JSON.stringify(String(v));
+  }
+  function yamlKey(k) { return /^[A-Za-z0-9_]+$/.test(k) ? k : JSON.stringify(k); }
+  function toYaml(o, depth) {
+    var pad = new Array((depth || 0) + 1).join("  "), out = "";
+    Object.keys(o).forEach(function (k) {
+      var v = o[k];
+      if (v && typeof v === "object") out += pad + yamlKey(k) + ":\n" + toYaml(v, (depth || 0) + 1);
+      else out += pad + yamlKey(k) + ": " + yamlScalar(v) + "\n";
+    });
+    return out;
+  }
+  function parseYaml(text) {
+    var root = {}, stack = [{ ind: -1, obj: root }];
+    String(text).split(/\r?\n/).forEach(function (raw) {
+      if (!raw.trim() || /^\s*#/.test(raw)) return;
+      var ind = raw.match(/^ */)[0].length;
+      var m = raw.slice(ind).match(/^("(?:[^"\\]|\\.)*"|[^:]+?)\s*:(?:\s+(.*))?$/);
+      if (!m) return;
+      var key = m[1].charAt(0) === '"' ? JSON.parse(m[1]) : m[1].trim();
+      var val = (m[2] || "").trim(), parsed;
+      while (stack.length > 1 && stack[stack.length - 1].ind >= ind) stack.pop();
+      var parent = stack[stack.length - 1].obj;
+      if (val.charAt(0) === '"') {
+        var q = val.match(/^"(?:[^"\\]|\\.)*"/);
+        try { parsed = q ? JSON.parse(q[0]) : val; } catch (e) { parsed = val; }
+      } else {
+        val = val.replace(/\s+#.*$/, "");
+        if (val === "") { parsed = {}; stack.push({ ind: ind, obj: parsed }); }
+        else if (val === "true" || val === "false") parsed = val === "true";
+        else if (/^-?\d+(\.\d+)?$/.test(val)) parsed = parseFloat(val);
+        else parsed = val.replace(/^'(.*)'$/, "$1");
+      }
+      parent[key] = parsed;
+    });
+    return root;
+  }
+
+  var CFG_HEADER = "# PokeBonk Toolkit settings. Edit this file, then restart the app.\n";
+  var lastCfgText = "";
+  var cfgTimer = 0;
+  var cfgLoaded = false;
+
+  function gameStorage() {
+    var out = {};
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (GAME_KEYS.test(k)) out[k] = localStorage.getItem(k);
+      }
+    } catch (e) {}
+    return out;
+  }
+  function configObject() {
+    var o = {
+      toolkit: { language: lang, ko_per_second: !!prefs.ko, wheel_up: prefs.wheelUp || "", wheel_down: prefs.wheelDown || "" },
+      "interface": {},
+      game: gameStorage()
+    };
+    Object.keys(prefs.ui).forEach(function (sel) {
+      var e = prefs.ui[sel];
+      o["interface"][sel] = { hidden: !!e.hide, scale: e.scale || 1, origin: e.origin || "center center" };
+    });
+    return o;
+  }
+  function configText() { return CFG_HEADER + toYaml(configObject()); }
+  function writeConfig() {
+    cfgTimer = 0;
+    var a = pyApi();
+    if (!a || !a.save_config || !cfgLoaded) return;
+    var text = configText();
+    if (text === lastCfgText) return;
+    lastCfgText = text;
+    try { a.save_config(text); } catch (e) {}
+  }
+  function scheduleConfig() {
+    if (cfgTimer) clearTimeout(cfgTimer);
+    cfgTimer = setTimeout(writeConfig, 1500);
+  }
+  function savePrefs() {
+    try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch (e) {}
+    scheduleConfig();
+  }
+  function applyConfig(o) {
+    var t = o.toolkit || {}, changedGame = false;
+    if (typeof t.ko_per_second === "boolean") prefs.ko = t.ko_per_second;
+    if (typeof t.wheel_up === "string") prefs.wheelUp = t.wheel_up;
+    if (typeof t.wheel_down === "string") prefs.wheelDown = t.wheel_down;
+    var ui = {}, iface = o["interface"] || {};
+    Object.keys(iface).forEach(function (sel) {
+      var e = iface[sel];
+      if (!e || typeof e !== "object" || /[{};<]/.test(sel)) return;
+      ui[sel] = { hide: !!e.hidden, scale: typeof e.scale === "number" ? e.scale : 1, origin: typeof e.origin === "string" ? e.origin : "center center" };
+    });
+    prefs.ui = ui;
+    var g = o.game || {};
+    try {
+      Object.keys(g).forEach(function (k) {
+        if (GAME_KEYS.test(k) && String(g[k]) !== localStorage.getItem(k)) { localStorage.setItem(k, String(g[k])); changedGame = true; }
+      });
+    } catch (e) {}
+    try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch (e) {}
+    applyUiEdits();
+    if (t.language && I18N[t.language] && t.language !== lang) setLang(t.language);
+    else if (isOpen) refreshCfg();
+    if (changedGame && !sessionStorage.getItem("pb_cfg_reload")) {
+      try { sessionStorage.setItem("pb_cfg_reload", "1"); } catch (e) {}
+      location.reload();
+    }
+  }
+  function loadConfig() {
+    var a = pyApi();
+    if (cfgLoaded || !a || !a.load_config) return;
+    cfgLoaded = true;
+    a.load_config().then(function (text) {
+      if (text && text.trim()) {
+        try { applyConfig(parseYaml(text)); } catch (e) {}
+        lastCfgText = configText();
+      } else {
+        scheduleConfig();
+      }
+    }).catch(function () {});
+  }
+  if (pyApi()) loadConfig();
+  window.addEventListener("pywebviewready", loadConfig);
+  setTimeout(loadConfig, 3500);
+  setInterval(function () { if (cfgLoaded) scheduleConfig(); }, 30000);
+
+  var kosEl = root.getElementById("kos");
+  var kosV = root.getElementById("kosV");
+  var kosA = root.getElementById("kosA");
+  var koHist = [];
+  function oneDecimal(n) {
+    return n.toLocaleString(locale(), { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+  function koSample(h, now) {
+    if (!h) { koHist.length = 0; return; }
+    var last = koHist[koHist.length - 1];
+    if (last && h.kills < last[1]) koHist.length = 0;
+    koHist.push([now, h.kills]);
+    while (koHist.length > 2 && now - koHist[0][0] > 15000) koHist.shift();
+  }
+  function paintKos(h) {
+    var counter = h && prefs.ko && !isOpen && !editing && koHist.length > 1 ? document.querySelector(".hud-tr .counter") : null;
+    var r = counter && counter.getBoundingClientRect();
+    if (!r || !r.width) { if (!kosEl.hidden) kosEl.hidden = true; return; }
+    var a = koHist[0], b = koHist[koHist.length - 1];
+    var span = (b[0] - a[0]) / 1000;
+    var rate = span >= 2 ? (b[1] - a[1]) / span : 0;
+    var avg = cur && cur.dur > 5 ? cur.kills / cur.dur : 0;
+    kosEl.style.top = Math.round(r.bottom + 6) + "px";
+    kosEl.style.right = Math.max(4, Math.round(innerWidth - r.right)) + "px";
+    kosV.textContent = oneDecimal(rate);
+    kosA.textContent = S("kosAvg") + " " + oneDecimal(avg);
+    kosEl.hidden = false;
+  }
+
+  var KEYCAP = { Space: "Space", Enter: "Enter", Tab: "Tab", ShiftLeft: "Shift", ShiftRight: "Shift", ControlLeft: "Ctrl", ControlRight: "Ctrl", AltLeft: "Alt", AltRight: "Alt", Backquote: "`" };
+  function keyCap(code) {
+    if (!code) return S("wheelNone");
+    if (KEYCAP[code]) return KEYCAP[code];
+    var arrow = { ArrowUp: "↑", ArrowDown: "↓", ArrowLeft: "←", ArrowRight: "→" };
+    return arrow[code] || code.replace(/^Key/, "").replace(/^Digit/, "").replace(/^Numpad/, "Num ");
+  }
+  function keyChar(code) {
+    if (/^Key[A-Z]$/.test(code)) return code.slice(3).toLowerCase();
+    if (/^Digit\d$/.test(code)) return code.slice(5);
+    return code === "Space" ? " " : code;
+  }
+  function tapKey(code) {
+    var init = { code: code, key: keyChar(code), bubbles: true, cancelable: true };
+    window.dispatchEvent(new KeyboardEvent("keydown", init));
+    setTimeout(function () { window.dispatchEvent(new KeyboardEvent("keyup", init)); }, 60);
+  }
+  var lastWheelKey = 0;
+  window.addEventListener("wheel", function (e) {
+    if (!dockInRun || isOpen || editing) return;
+    var code = e.deltaY < 0 ? prefs.wheelUp : e.deltaY > 0 ? prefs.wheelDown : "";
+    if (!code) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var now = Date.now();
+    if (now - lastWheelKey < 140) return;
+    lastWheelKey = now;
+    tapKey(code);
+  }, { capture: true, passive: false });
+
+  var capturing = "";
+  function handleCapture(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.code === "Escape") capturing = "";
+    else if (e.code === "Backspace" || e.code === "Delete") { prefs[capturing] = ""; capturing = ""; savePrefs(); }
+    else if (/^(Shift|Control|Alt|Meta)(Left|Right)$/.test(e.code)) return;
+    else { prefs[capturing] = e.code; capturing = ""; savePrefs(); }
+    refreshCfg();
+  }
+  function refreshCfg() {
+    if (!isOpen || state.view !== "cfg") return;
+    var top = content.scrollTop;
+    renderContent();
+    content.scrollTop = top;
+  }
+
+  var editing = false;
+  var edSel = "";
+  var edEl = null;
+  var styleEl = null;
+  var STATE_CLS = /^(on|off|show|shown|hide|hidden|active|open|opened|sel|selected|disabled|low|warn|pulse|flash|anim|in|out|enter|leave|touch|mobile|ready|full|empty)$/;
+  var edbar = root.getElementById("edbar");
+  var edbox = root.getElementById("edbox");
+  var edsel = root.getElementById("edsel");
+  var edpanel = root.getElementById("edpanel");
+
+  function applyUiEdits() {
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = "pb-ui-edits";
+      (document.head || document.documentElement).appendChild(styleEl);
+    }
+    var css = "";
+    Object.keys(prefs.ui).forEach(function (sel) {
+      var e = prefs.ui[sel], rule = "";
+      if (/[{};<]/.test(sel)) return;
+      if (e.hide) rule += editing ? "opacity:.3!important;outline:2px dashed #fc3!important;" : "display:none!important;";
+      if (e.scale && e.scale !== 1) rule += "scale:" + e.scale + ";transform-origin:" + (e.origin || "center center") + ";";
+      if (rule) css += sel + "{" + rule + "}\n";
+    });
+    styleEl.textContent = css;
+  }
+  function cssId(s) { return window.CSS && CSS.escape ? CSS.escape(s) : String(s).replace(/[^\w-]/g, "\\$&"); }
+  function selectorFor(el) {
+    var parts = [], cur2 = el;
+    while (cur2 && cur2 !== document.body && parts.length < 5) {
+      var seg = cur2.tagName.toLowerCase();
+      if (cur2.id) { parts.unshift("#" + cssId(cur2.id)); break; }
+      var cls = Array.prototype.filter.call(cur2.classList, function (c) {
+        return !STATE_CLS.test(c) && /^[A-Za-z_-][\w-]*$/.test(c);
+      }).slice(0, 3);
+      if (cls.length) seg += "." + cls.join(".");
+      parts.unshift(seg);
+      try { if (document.querySelectorAll(parts.join(" > ")).length === 1) break; } catch (e) { break; }
+      cur2 = cur2.parentElement;
+    }
+    return parts.join(" > ");
+  }
+  function originFor(el) {
+    var r = el.getBoundingClientRect();
+    var cx = (r.left + r.right) / 2 / innerWidth, cy = (r.top + r.bottom) / 2 / innerHeight;
+    return (cx < 0.33 ? "left" : cx > 0.67 ? "right" : "center") + " " + (cy < 0.33 ? "top" : cy > 0.67 ? "bottom" : "center");
+  }
+  function pickBlock(x, y) {
+    var els = document.elementsFromPoint(x, y), el = null;
+    for (var i = 0; i < els.length; i++) {
+      var c = els[i];
+      if (c === host || c.id === "game" || c === document.documentElement || c === document.body) continue;
+      el = c;
+      break;
+    }
+    if (!el) return null;
+    var limit = innerWidth * innerHeight * 0.5;
+    while (el.parentElement && el.parentElement !== document.body && el.parentElement.id !== "ui" && el.parentElement !== document.documentElement) {
+      var pr = el.parentElement.getBoundingClientRect();
+      if (pr.width * pr.height > limit) break;
+      el = el.parentElement;
+    }
+    return el;
+  }
+  function placeBox(box, el) {
+    if (!el || !el.isConnected) { box.hidden = true; return; }
+    var r = el.getBoundingClientRect();
+    box.style.left = r.left + "px";
+    box.style.top = r.top + "px";
+    box.style.width = r.width + "px";
+    box.style.height = r.height + "px";
+    box.hidden = false;
+  }
+  function inHost(e) { return (e.composedPath ? e.composedPath() : []).indexOf(host) >= 0; }
+  function edEntry() { return prefs.ui[edSel] || { hide: false, scale: 1, origin: "center center" }; }
+  function paintEdPanel() {
+    edpanel.hidden = !edSel;
+    if (!edSel) return;
+    var e = edEntry();
+    root.getElementById("edName").textContent = edSel.length > 60 ? "…" + edSel.slice(-58) : edSel;
+    root.getElementById("edScale").textContent = Math.round((e.scale || 1) * 100) + "%";
+    root.getElementById("edHide").textContent = e.hide ? S("edShow") : S("edHide");
+    root.getElementById("edHint").textContent = S("edHint");
+    root.getElementById("edDone").textContent = S("edDone");
+    root.getElementById("edReset").textContent = S("edReset");
+  }
+  function edAction(what) {
+    if (what === "done") { stopEdit(); return; }
+    if (!edSel) return;
+    var e = Object.assign({ hide: false, scale: 1, origin: edEl ? originFor(edEl) : "center center" }, prefs.ui[edSel] || {});
+    if (what === "minus") e.scale = Math.max(0.4, Math.round((e.scale - 0.1) * 100) / 100);
+    else if (what === "plus") e.scale = Math.min(2, Math.round((e.scale + 0.1) * 100) / 100);
+    else if (what === "hide") e.hide = !e.hide;
+    else if (what === "reset") { delete prefs.ui[edSel]; e = null; }
+    if (e) {
+      if (!e.hide && e.scale === 1) delete prefs.ui[edSel];
+      else prefs.ui[edSel] = e;
+    }
+    savePrefs();
+    applyUiEdits();
+    paintEdPanel();
+    requestAnimationFrame(function () { placeBox(edsel, edEl); });
+  }
+  function onEdBlock(e) {
+    if (inHost(e)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  }
+  function onEdClick(e) {
+    if (inHost(e)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var el = pickBlock(e.clientX, e.clientY);
+    if (!el) return;
+    edEl = el;
+    edSel = selectorFor(el);
+    placeBox(edsel, el);
+    paintEdPanel();
+  }
+  var edRaf = 0, edMoveEv = null;
+  function onEdMove(e) {
+    if (inHost(e)) { edbox.hidden = true; return; }
+    edMoveEv = e;
+    if (!edRaf) edRaf = requestAnimationFrame(function () {
+      edRaf = 0;
+      placeBox(edbox, pickBlock(edMoveEv.clientX, edMoveEv.clientY));
+    });
+  }
+  function onEdKey(e) {
+    if (inHost(e)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if (e.type === "keydown" && e.code === "Escape") stopEdit();
+  }
+  var ED_BLOCK = ["pointerdown", "pointerup", "mousedown", "mouseup", "dblclick", "contextmenu", "touchstart", "touchend", "wheel"];
+  function startEdit() {
+    if (editing) return;
+    try { if (document.pointerLockElement) document.exitPointerLock(); } catch (e) {}
+    closeHub();
+    editing = true;
+    edEl = null;
+    edSel = "";
+    applyUiEdits();
+    edbar.hidden = false;
+    paintEdPanel();
+    ED_BLOCK.forEach(function (ev) { window.addEventListener(ev, onEdBlock, true); });
+    window.addEventListener("click", onEdClick, true);
+    window.addEventListener("pointermove", onEdMove, true);
+    window.addEventListener("keydown", onEdKey, true);
+    window.addEventListener("keyup", onEdKey, true);
+  }
+  function stopEdit() {
+    if (!editing) return;
+    ED_BLOCK.forEach(function (ev) { window.removeEventListener(ev, onEdBlock, true); });
+    window.removeEventListener("click", onEdClick, true);
+    window.removeEventListener("pointermove", onEdMove, true);
+    window.removeEventListener("keydown", onEdKey, true);
+    window.removeEventListener("keyup", onEdKey, true);
+    editing = false;
+    edbar.hidden = edbox.hidden = edsel.hidden = edpanel.hidden = true;
+    applyUiEdits();
+    savePrefs();
+    openHub("cfg");
+  }
+  applyUiEdits();
+
+  function swHtml(on, key) {
+    return '<button type="button" class="sw' + (on ? " on" : "") + '" role="switch" aria-checked="' + (on ? "true" : "false") +
+      '" data-cfg="' + key + '"><i></i></button>';
+  }
+  function cfgRow(title, hint, ctl) {
+    return '<div class="crow"><div class="ctx"><b>' + esc(title) + "</b>" + (hint ? "<span>" + esc(hint) + "</span>" : "") + "</div>" + ctl + "</div>";
+  }
+  function keyBtn(which) {
+    var on = capturing === which;
+    return '<span class="kbind"><button type="button" class="btn ghost kb' + (on ? " listen" : "") + '" data-cfg="bind-' + which + '">' +
+      esc(on ? S("wheelPress") : keyCap(prefs[which])) + "</button>" +
+      (prefs[which] && !on ? '<button type="button" class="kx" data-cfg="clear-' + which + '" title="' + esc(S("wheelClear")) + '">×</button>' : "") + "</span>";
+  }
+  function cfgView() {
+    var n = Object.keys(prefs.ui).length;
+    return '<div class="panel">' + cfgRow(S("koT"), S("koH"), swHtml(prefs.ko, "ko")) + "</div>" +
+      '<div class="panel"><div class="panel-t">' + esc(S("wheelT")) + "</div>" +
+        '<p class="hint2">' + esc(S("wheelH")) + "</p>" +
+        cfgRow(S("wheelUp"), "", keyBtn("wheelUp")) + cfgRow(S("wheelDown"), "", keyBtn("wheelDown")) + "</div>" +
+      '<div class="panel"><div class="panel-t">' + esc(S("uiT")) + "</div>" +
+        '<p class="hint2">' + esc(S("uiH")) + "</p>" +
+        '<div class="crow"><div class="ctx"><span>' + esc(tmpl(S("uiCount"), { n: n })) + "</span></div>" +
+          '<button type="button" class="btn ghost" data-cfg="uireset"' + (n ? "" : " disabled") + ">" + esc(S("uiReset")) + "</button>" +
+          '<button type="button" class="btn" data-cfg="uiedit">' + esc(S("uiEdit")) + "</button></div></div>" +
+      '<div class="panel"><div class="panel-t">' + esc(S("cfgT")) + "</div>" +
+        '<p class="hint2">' + esc(S("cfgH")) + "</p>" +
+        '<div class="crow"><div class="ctx"><span>' + esc(S("cfgPath")) + "</span></div>" +
+          '<button type="button" class="btn ghost" data-cfg="opencfg">' + esc(S("cfgOpen")) + "</button></div></div>";
+  }
+  function cfgAction(what) {
+    if (what === "ko") { prefs.ko = !prefs.ko; savePrefs(); }
+    else if (what === "bind-wheelUp" || what === "bind-wheelDown") { capturing = what.slice(5); }
+    else if (what === "clear-wheelUp" || what === "clear-wheelDown") { prefs[what.slice(6)] = ""; savePrefs(); }
+    else if (what === "uireset") { prefs.ui = {}; savePrefs(); applyUiEdits(); }
+    else if (what === "uiedit") { startEdit(); return; }
+    else if (what === "opencfg") {
+      var a = pyApi();
+      writeConfig();
+      if (a && a.open_config) a.open_config();
+      return;
+    }
+    refreshCfg();
+  }
 
   var updBtn = root.getElementById("upd");
   var updText = root.getElementById("updText");

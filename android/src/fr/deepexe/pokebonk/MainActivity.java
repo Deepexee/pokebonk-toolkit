@@ -319,6 +319,33 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
+        public String loadConfig() {
+            File f = new File(getFilesDir(), "config.yml");
+            return f.exists() ? readFile(f) : "";
+        }
+
+        @JavascriptInterface
+        public boolean saveConfig(String text) {
+            File f = new File(getFilesDir(), "config.yml");
+            File tmp = new File(f.getPath() + ".tmp");
+            try {
+                writeFile(tmp, text.getBytes(StandardCharsets.UTF_8));
+            } catch (Exception e) {
+                return false;
+            }
+            return tmp.renameTo(f);
+        }
+
+        @JavascriptInterface
+        public void shareConfig() {
+            Intent send = new Intent(Intent.ACTION_SEND);
+            send.setType("text/plain");
+            send.putExtra(Intent.EXTRA_SUBJECT, "pokebonk-config.yml");
+            send.putExtra(Intent.EXTRA_TEXT, loadConfig());
+            startActivity(Intent.createChooser(send, "PokéBonk config"));
+        }
+
+        @JavascriptInterface
         public void shareRuns(String text) {
             Intent send = new Intent(Intent.ACTION_SEND);
             send.setType("application/json");

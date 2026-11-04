@@ -20,6 +20,7 @@ DATA_DIR = os.environ.get("POKEBONK_DATA_DIR") or os.path.join(
 os.makedirs(DATA_DIR, exist_ok=True)
 RUNS_FILE = os.path.join(DATA_DIR, "runs.json")
 SETTINGS_FILE = os.path.join(DATA_DIR, "settings.json")
+CONFIG_FILE = os.path.join(DATA_DIR, "config.yml")
 TOOLKIT_DIR = os.path.join(DATA_DIR, "toolkit")
 UPDATE_DIR = os.path.join(DATA_DIR, "update")
 UPDATE_URL = os.environ.get("POKEBONK_UPDATE_URL") or "https://pokebonk.deepexe.fr/update/latest.json"
@@ -190,7 +191,7 @@ def sha256_file(path):
 VERSION_INFO = read_json(resource_path("version.json"), {})
 APP_VERSION = VERSION_INFO.get("app", "1.0.0")
 TOOLKIT_BUILD = int(VERSION_INFO.get("toolkit", 0))
-SETTINGS = {"gpu_boost": True, "priority_boost": True, "auto_update": True}
+SETTINGS = {"gpu_boost": True, "high_performance_gpu": True, "priority_boost": True, "auto_update": True}
 SETTINGS.update(read_json(SETTINGS_FILE, {}) or {})
 
 TOOLKIT_FILES = (TYPEDEX_FILE, MAPS_FILE, HUB_FILE, "rpc_index.json")
@@ -304,6 +305,41 @@ class Api:
             os.startfile(DATA_DIR)
         except Exception as e:
             log("Runs: could not open the folder (%r)" % (e,))
+
+    def load_config(self):
+        try:
+            with open(CONFIG_FILE, encoding="utf-8-sig") as f:
+                return f.read()
+        except FileNotFoundError:
+            return ""
+        except Exception as e:
+            log("Config: could not read (%r)" % (e,))
+            return ""
+
+    def save_config(self, text):
+        try:
+            tmp = CONFIG_FILE + ".tmp"
+            with self._lock:
+                with open(tmp, "w", encoding="utf-8", newline="\n") as f:
+                    f.write(str(text))
+                os.replace(tmp, CONFIG_FILE)
+            return True
+        except Exception as e:
+            log("Config: could not save (%r)" % (e,))
+            return False
+
+    def open_config(self):
+        try:
+            if not os.path.exists(CONFIG_FILE):
+                return False
+            try:
+                os.startfile(CONFIG_FILE)
+            except OSError:
+                subprocess.Popen(["notepad.exe", CONFIG_FILE])
+            return True
+        except Exception as e:
+            log("Config: could not open (%r)" % (e,))
+            return False
 
     def update_info(self):
         ready = UPDATE["ready"]
@@ -795,7 +831,9 @@ ORIGINAL_BROWSER_ARGS = os.environ.get("WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS")
 def set_browser_args():
     args = ["--disable-features=ElasticOverscroll,msSmartScreenProtection"]
     if SETTINGS.get("gpu_boost", True):
-        args += ["--ignore-gpu-blocklist", "--enable-gpu-rasterization", "--force_high_performance_gpu"]
+        args += ["--ignore-gpu-blocklist", "--enable-gpu-rasterization"]
+    if SETTINGS.get("high_performance_gpu", True):
+        args.append("--force_high_performance_gpu")
     if ORIGINAL_BROWSER_ARGS:
         args.append(ORIGINAL_BROWSER_ARGS)
     os.environ["WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS"] = " ".join(args)

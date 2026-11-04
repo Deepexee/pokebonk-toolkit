@@ -66,13 +66,25 @@ py PokeBonk\tools\publish_update.py site\update --exe PokeBonk\dist\PokeBonkApp.
 
 Leave out `--exe` or `--apk` to keep the previous ones. The app reads `https://pokebonk.deepexe.fr/update/latest.json`.
 
-## Settings
+## Toolkit settings
+
+The **Settings** tab of the toolkit (F2) has:
+
+- a **K.O./s counter** shown under the game's K.O. counter during a run;
+- **mouse wheel binds**: bind the wheel up/down to a key during a run (it acts like pressing that key, so use the key you set in the game for the action);
+- an **interface editor**: hide or resize any part of the game's screen, in the menus or in a run (pause the game first for the in-run screen).
+
+Everything is saved in `%LOCALAPPDATA%\PokeBonk\config.yml` (a copy of your toolkit options plus some game options such as the controller calibration). Edit it with any text editor and restart the app.
+
+## App settings
 
 `%LOCALAPPDATA%\PokeBonk\settings.json` can turn features off, for example on a PC with GPU driver problems:
 
 ```json
-{ "gpu_boost": false, "priority_boost": false, "auto_update": false }
+{ "gpu_boost": false, "high_performance_gpu": false, "priority_boost": false, "auto_update": false }
 ```
+
+If OBS shows a black window, use **Window Capture** with the *Windows 10 (1903 and up)* capture method, and set `"high_performance_gpu": false` on laptops with two graphics cards.
 
 ## Credits
 
