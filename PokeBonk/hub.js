@@ -17,7 +17,7 @@
   });
 
   var MAPS = window.__PBMaps || null;
-  var HAS_MAPS = !!(MAPS && MAPS.regions && MAPS.partners);
+  var HAS_MAPS = false;
   var REGIONS = HAS_MAPS ? MAPS.regions : [];
   var PARTNERS = HAS_MAPS ? MAPS.partners : {};
   var REGION_BY_ID = {};
@@ -60,7 +60,7 @@
       better: "+{p}% wobec 5 poprzednich", worse: "{p}% wobec 5 poprzednich", same: "tak samo jak wcześniej",
       timeline: "Przebieg gry", timelineHint: "K.O. i poziom w czasie",
       endMenu: "zakończona", endClosed: "przerwana", endRestart: "restart", live: "w trakcie",
-      exportB: "Otwórz folder z zapisami", minHp: "Najniższe PV", tools: "Narzędzia", lvl: "Poz.", ago: "{n} temu", now: "teraz", plays: "{n} gier",
+      exportB: "Otwórz folder z zapisami", resetB: "Zresetuj postępy", resetSure: "Kliknij ponownie, aby potwierdzić", arrB: "Układ", arrDone: "Gotowe", arrReset: "Układ domyślny", minHp: "Najniższe PV", tools: "Narzędzia", lvl: "Poz.", ago: "{n} temu", now: "teraz", plays: "{n} gier",
       saved: "Zapis: %LOCALAPPDATA%\\PokeBonk\\runs.json",
       updRestart: "Aktualizacja {v} · Uruchom ponownie", updDownload: "Aktualizacja {v} · Pobierz",
       updRestartT: "Nowa wersja jest gotowa. Zainstaluje się też po zamknięciu aplikacji.",
@@ -87,7 +87,7 @@
       better: "+{p}% vs the 5 before", worse: "{p}% vs the 5 before", same: "same as before",
       timeline: "Run timeline", timelineHint: "K.O.s and level over time",
       endMenu: "finished", endClosed: "interrupted", endRestart: "restarted", live: "live",
-      exportB: "Open the save folder", minHp: "Lowest HP", tools: "Toolkit", lvl: "Lv.", ago: "{n} ago", now: "now", plays: "{n} runs",
+      exportB: "Open the save folder", resetB: "Reset progress", resetSure: "Click again to confirm", arrB: "Rearrange", arrDone: "Done", arrReset: "Default layout", minHp: "Lowest HP", tools: "Toolkit", lvl: "Lv.", ago: "{n} ago", now: "now", plays: "{n} runs",
       saved: "Saved in %LOCALAPPDATA%\\PokeBonk\\runs.json",
       updRestart: "Update {v} · Restart", updDownload: "Update {v} · Download",
       updRestartT: "A new version is ready. It also installs when you close the app.",
@@ -114,7 +114,7 @@
       better: "+{p} % par rapport aux 5 d'avant", worse: "{p} % par rapport aux 5 d'avant", same: "comme avant",
       timeline: "Déroulé de la partie", timelineHint: "K.O. et niveau au fil du temps",
       endMenu: "terminée", endClosed: "interrompue", endRestart: "relancée", live: "en cours",
-      exportB: "Ouvrir le dossier des sauvegardes", minHp: "PV les plus bas", tools: "Outils", lvl: "N.", ago: "il y a {n}", now: "à l'instant", plays: "{n} parties",
+      exportB: "Ouvrir le dossier des sauvegardes", resetB: "Réinitialiser la progression", resetSure: "Clique encore pour confirmer", arrB: "Réorganiser", arrDone: "Terminé", arrReset: "Disposition par défaut", minHp: "PV les plus bas", tools: "Outils", lvl: "N.", ago: "il y a {n}", now: "à l'instant", plays: "{n} parties",
       saved: "Enregistré dans %LOCALAPPDATA%\\PokeBonk\\runs.json",
       updRestart: "Mise à jour {v} · Redémarrer", updDownload: "Mise à jour {v} · Télécharger",
       updRestartT: "Une nouvelle version est prête. Elle s'installe aussi quand tu fermes l'appli.",
@@ -1090,6 +1090,13 @@
   var runs = [];
   try { runs = JSON.parse(localStorage.getItem(RUNS_KEY) || "[]"); } catch (e) { runs = []; }
   if (!Array.isArray(runs)) runs = [];
+  (function () {
+    var good = runs.filter(function (r) { return r && r.v >= 2; });
+    if (good.length === runs.length) return;
+    try { localStorage.setItem(RUNS_KEY + "_old", JSON.stringify(runs.filter(function (r) { return !(r && r.v >= 2); }))); } catch (e) {}
+    runs = good;
+    try { localStorage.setItem(RUNS_KEY, JSON.stringify(runs)); } catch (e) {}
+  })();
 
   function pyApi() { return window.pywebview && window.pywebview.api; }
 
@@ -1107,7 +1114,7 @@
     runs.forEach(function (r) { have[r.id] = 1; });
     var added = 0;
     list.forEach(function (r) {
-      if (r && r.id && !have[r.id]) { runs.push(r); have[r.id] = 1; added++; }
+      if (r && r.id && r.v >= 2 && !have[r.id]) { runs.push(r); have[r.id] = 1; added++; }
     });
     if (added) runs.sort(function (a, b) { return a.at - b.at; });
     return added;
@@ -1220,7 +1227,7 @@
 
   function newRun(h) {
     return {
-      v: 1,
+      v: 2,
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       at: Date.now() - h.t * 1000,
       biome: h.biome, biomeName: h.biomeName,
@@ -1551,7 +1558,7 @@
     var all = runs;
     if (!all.length && !cur) {
       shownCount = 0;
-      return '<div class="empty"><img class="pix" src="' + asset("ui/icons/record.png") + '" alt="" width="56" height="56"><b>' +
+      return questsTabHtml() + '<div class="empty"><img class="pix" src="' + asset("ui/icons/record.png") + '" alt="" width="56" height="56"><b>' +
         esc(S("emptyT")) + "</b><span>" + esc(S("emptyH")) + "</span></div>";
     }
     var maps = {}, modes = {}, mons = {};
@@ -1562,7 +1569,9 @@
     });
     var list = filteredRuns();
     shownCount = list.length;
-    var html = '<div class="filters">' +
+    var B = {};
+    B.quests = questsTabHtml();
+    B.filters = '<div class="filters">' +
       selectBox("map", stx.map, [["", S("allMaps")]].concat(Object.keys(maps).map(function (k) { return [k, maps[k]]; }))) +
       selectBox("mode", stx.mode, [["", S("allModes")]].concat(Object.keys(modes).map(function (k) { return [k, modes[k]]; }))) +
       selectBox("mon", stx.mon, [["", S("allMons")]].concat(Object.keys(mons).sort(function (a, b) {
@@ -1570,14 +1579,14 @@
       }).map(function (k) { return [k, mons[k]]; }))) +
       "</div>";
 
-    html += liveCardHtml();
+    B.live = liveCardHtml();
 
-    if (!list.length) return html + emptyHtml(S("emptyT"), S("emptyH"));
+    if (!list.length) return arrangeBlocks(B) + emptyHtml(S("emptyT"), S("emptyH"));
 
     var total = list.reduce(function (s, r) { return s + r.dur; }, 0);
     var kpmAvg = list.reduce(function (s, r) { return s + kpmOf(r); }, 0) / list.length;
     var lvlAvg = list.reduce(function (s, r) { return s + r.lvl; }, 0) / list.length;
-    html += '<div class="stiles">' +
+    B.tiles = '<div class="stiles">' +
       statTile(S("runs"), fmtNum(list.length)) +
       statTile(S("total"), fmtDur(total)) +
       statTile(S("bestTime"), fmtDur(Math.max.apply(null, list.map(function (r) { return r.dur; })))) +
@@ -1603,16 +1612,16 @@
       .map(function (b) {
         return '<button type="button" class="pill' + (m === b[0] ? " on" : "") + '" data-metric="' + b[0] + '">' + esc(b[1]) + "</button>";
       }).join("");
-    html += '<div class="panel"><div class="panel-t">' + esc(S("trend")) + ' <span class="hint">' + esc(S("trendHint")) + "</span>" + delta + "</div>" +
+    B.trend = '<div class="panel"><div class="panel-t">' + esc(S("trend")) + ' <span class="hint">' + esc(S("trendHint")) + "</span>" + delta + "</div>" +
       '<div class="seg sm metric">' + mBtns + "</div>" + trendSvg(chartList, m) + "</div>";
 
-    html += '<div class="panel"><div class="panel-t">' + esc(S("recent")) + "</div>" +
+    B.recent = '<div class="panel"><div class="panel-t">' + esc(S("recent")) + "</div>" +
       '<div class="rlist">' + list.slice(-12).reverse().map(runRow).join("") + "</div></div>";
 
     var byMon = groupBy(list, spOf);
     var monKeys = Object.keys(byMon).sort(function (a, b) { return byMon[b].length - byMon[a].length; });
     var byMap = groupBy(list, function (r) { return r.biome; });
-    html += '<div class="cards">' +
+    B.cards = '<div class="cards">' +
       '<div class="panel"><div class="panel-t">' + esc(S("byMon")) + '</div><div class="slist">' +
         monKeys.slice(0, 12).map(function (k) {
           var l = byMon[k];
@@ -1625,9 +1634,67 @@
         }).join("") + "</div></div>" +
       "</div>";
 
-    html += '<div class="foot-actions"><button type="button" class="btn ghost" data-folder>' + esc(S("exportB")) + "</button>" +
+    B.foot = '<div class="foot-actions"><button type="button" class="btn ghost" data-folder>' + esc(S("exportB")) + "</button>" +
+      '<button type="button" class="btn ghost" data-resetruns>' + esc(S("resetB")) + "</button>" +
       '<span class="hint">' + esc(S("saved")) + "</span></div>";
-    return html;
+    return arrangeBlocks(B);
+  }
+
+  var LAYOUT_DEFAULT = ["quests", "filters", "live", "tiles", "trend", "recent", "cards", "foot"];
+  var arrVisible = [];
+  var resetArmed = false;
+  function layoutOrder() {
+    var cur0 = prefs.layout && prefs.layout.stats;
+    var out = [];
+    if (Array.isArray(cur0)) cur0.forEach(function (k) { if (LAYOUT_DEFAULT.indexOf(k) >= 0 && out.indexOf(k) < 0) out.push(k); });
+    LAYOUT_DEFAULT.forEach(function (k) { if (out.indexOf(k) < 0) out.push(k); });
+    return out;
+  }
+  function arrangeBlocks(B) {
+    var html = "";
+    arrVisible = [];
+    layoutOrder().forEach(function (id) {
+      if (!B[id]) return;
+      arrVisible.push(id);
+      if (state.arrange) {
+        html += '<div class="blk arr"><div class="arrbar"><button type="button" data-mv="up:' + id + '">\u25b2</button><button type="button" data-mv="down:' + id + '">\u25bc</button></div>' + B[id] + "</div>";
+      } else html += B[id];
+    });
+    var top = '<div class="arrtop">' +
+      (state.arrange ? '<button type="button" class="btn ghost" data-arrreset>' + esc(S("arrReset")) + "</button>" : "") +
+      '<button type="button" class="btn' + (state.arrange ? "" : " ghost") + '" data-arrange>' + esc(S(state.arrange ? "arrDone" : "arrB")) + "</button></div>";
+    return top + html;
+  }
+  function moveBlock(id, dir) {
+    var vis = arrVisible.slice();
+    var i = vis.indexOf(id), k = i + dir;
+    if (i < 0 || k < 0 || k >= vis.length) return;
+    var order = layoutOrder();
+    var a = order.indexOf(id), b = order.indexOf(vis[k]);
+    order[a] = vis[k];
+    order[b] = id;
+    prefs.layout.stats = order;
+    savePrefs();
+    var top = content.scrollTop;
+    renderContent();
+    content.scrollTop = top;
+  }
+  function resetRuns(btn) {
+    if (!resetArmed) {
+      resetArmed = true;
+      btn.textContent = S("resetSure");
+      setTimeout(function () {
+        resetArmed = false;
+        if (btn.isConnected) btn.textContent = S("resetB");
+      }, 4000);
+      return;
+    }
+    resetArmed = false;
+    try { localStorage.setItem(RUNS_KEY + "_old", JSON.stringify(runs)); } catch (e) {}
+    runs = [];
+    lastResult = null;
+    persist();
+    renderAll();
   }
 
   function runById(id) {
@@ -1975,12 +2042,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 .kos .kr b{font:900 14px/1 var(--ft);color:#fff;font-variant-numeric:tabular-nums}
 .kos .kr small{font:900 10px/1 var(--ft);color:var(--ink2)}
 .kos .kr i{margin-left:auto;font:800 10px/1 var(--f);font-style:normal;color:var(--ink3)}
-.wtoast{position:absolute;left:50%;bottom:132px;transform:translateX(-50%);padding:8px 18px;border-radius:999px;background:rgba(34,40,58,.94);color:#fff;font:900 14px/1 var(--ft);box-shadow:0 4px 0 rgba(0,0,0,.38),var(--ring);pointer-events:none;white-space:nowrap}
-.wtoast[hidden]{display:none}
-.wtoast.pulse{animation:wtp .35s ease-out}
-@keyframes wtp{0%{transform:translateX(-50%) scale(.85);opacity:.4}60%{transform:translateX(-50%) scale(1.08)}100%{transform:translateX(-50%) scale(1);opacity:1}}
-.wsel{min-width:170px;padding:9px 12px;border-radius:12px;border:0;background:var(--paper3);color:#fff;font:800 13px var(--f);box-shadow:var(--ring)}
-.wsel option{background:#1a1f2e}
+.arrtop{display:flex;justify-content:flex-end;gap:8px;margin:0 0 12px}
+.blk.arr{position:relative;outline:2px dashed rgba(255,255,255,.3);outline-offset:5px;border-radius:18px;margin-bottom:16px}
+.blk.arr{padding-right:92px}
+.arrbar{position:absolute;right:12px;top:10px;display:flex;gap:6px;z-index:3}
+.arrbar button{width:34px;height:34px;border:0;border-radius:10px;background:rgba(34,40,58,.96);color:#fff;font:900 15px/1 var(--f);cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.4),var(--ring)}
+.arrbar button:hover{background:#3a4568}
 .rkc{position:absolute;display:flex;align-items:center;gap:10px;min-width:178px;padding:7px 14px 7px 8px;border-radius:999px;background:linear-gradient(160deg,rgba(44,52,78,.96),rgba(26,31,46,.96));color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.38),var(--ring);pointer-events:none;white-space:nowrap;--c1:#3a8cff;--c2:#2563d8;--glow:58,140,255}
 .rkc[hidden]{display:none}
 .rkc.t50{--c1:#3a8cff;--c2:#2563d8;--glow:58,140,255}
@@ -2074,7 +2141,6 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     '<div class="kos" id="kos" hidden><div class="kt" id="kosRow"><small id="kosL"></small><b id="kosT">0</b></div><div class="kr"><b id="kosV">0.0</b><small>K.O./s</small><i id="kosA"></i></div></div>' +
     '<div class="rkc" id="rk" hidden><div class="rkm"><b id="rkV">#1</b></div><div class="rkx"><small id="rkL"></small><span id="rkS"></span><i class="rkbar"><u id="rkB"></u></i></div></div>' +
     '<div class="lvq" id="lvq" hidden></div>' +
-    '<div class="wtoast" id="wtoast" hidden></div>' +
     '<div class="edbar" id="edbar" hidden><span id="edHint"></span><button type="button" class="btn" id="edDone" data-ed="done"></button></div>' +
     '<div class="edbox" id="edbox" hidden></div><div class="edbox sel" id="edsel" hidden></div>' +
     '<div class="edpanel" id="edpanel" hidden><b id="edName"></b><div class="edbtns">' +
@@ -2245,7 +2311,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     else if (state.view === "run") html = runView(state.sel);
     else if (state.view === "cfg") html = cfgView();
     else if (state.view === "items") html = itemsView();
-    else if (state.view === "stats") html = questsTabHtml() + statsView();
+    else if (state.view === "stats") html = statsView();
     else if (state.view === "maps") html = mapsView();
     else html = state.view === "types" ? typesView() : dexView();
     content.innerHTML = '<div class="view">' + html + "</div>";
@@ -2427,13 +2493,6 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   root.addEventListener("change", function (e) {
     var el = e.target;
-    if (el && el.hasAttribute && el.hasAttribute("data-wsel")) {
-      var wh = el.getAttribute("data-wsel");
-      if (el.value === "custom") { capturing = wh; }
-      else { capturing = ""; prefs[wh] = el.value; savePrefs(); }
-      refreshCfg();
-      return;
-    }
     if (el && el.hasAttribute && el.hasAttribute("data-stx")) {
       stx[el.getAttribute("data-stx")] = el.value;
       renderContent();
@@ -2453,6 +2512,10 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if ((el = e.target.closest("[data-update]"))) { applyUpdate(); return; }
     if ((el = e.target.closest("[data-cfg]"))) { cfgAction(el.getAttribute("data-cfg")); return; }
     if ((el = e.target.closest("[data-ed]"))) { edAction(el.getAttribute("data-ed")); return; }
+    if ((el = e.target.closest("[data-arrange]"))) { state.arrange = !state.arrange; renderContent(); return; }
+    if ((el = e.target.closest("[data-arrreset]"))) { prefs.layout.stats = []; savePrefs(); renderContent(); return; }
+    if ((el = e.target.closest("[data-mv]"))) { var mv = el.getAttribute("data-mv").split(":"); moveBlock(mv[1], mv[0] === "up" ? -1 : 1); return; }
+    if ((el = e.target.closest("[data-resetruns]"))) { resetRuns(el); return; }
     if ((el = e.target.closest("[data-folder]"))) { openFolder(); return; }
     if ((el = e.target.closest("[data-run]"))) { openRun(el.getAttribute("data-run")); return; }
     if ((el = e.target.closest("[data-view]"))) { setView(el.getAttribute("data-view")); return; }
@@ -2466,7 +2529,6 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     var path = e.composedPath ? e.composedPath() : [];
     var inHost = path.indexOf(host) >= 0;
     if (editing) return;
-    if (capturing) { handleCapture(e); return; }
     if (e.key === "F2") {
       if (!inHost) { e.preventDefault(); e.stopPropagation(); }
       toggleHub();
@@ -2524,7 +2586,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
 
   var GAME_KEYS = /^(pb-render-res|pb-battery|pb-fs-off|pb-pad-cal|pb-padtold|pb-pad-first|pb\.coop\.mute|pb\.coop\.quick|pb\.boardFilter)$/;
   var PREF_KEY = "pokebonk_hub_prefs";
-  var prefs = { ko: true, rank: true, quests: true, journal: true, ult: true, wheelUp: "", wheelDown: "", ui: {} };
+  var prefs = { ko: true, rank: true, quests: true, journal: true, layout: {}, ui: {} };
   try {
     var savedPrefs = JSON.parse(localStorage.getItem(PREF_KEY) || "null");
     if (savedPrefs && typeof savedPrefs === "object") {
@@ -2532,6 +2594,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     }
   } catch (e) {}
   if (!prefs.ui || typeof prefs.ui !== "object") prefs.ui = {};
+  if (!prefs.layout || typeof prefs.layout !== "object") prefs.layout = {};
 
   function yamlScalar(v) {
     return typeof v === "boolean" || typeof v === "number" ? String(v) : JSON.stringify(String(v));
@@ -2589,7 +2652,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function configObject() {
     var o = {
-      toolkit: { language: lang, ko_per_second: !!prefs.ko, live_rank: !!prefs.rank, quest_tracker: !!prefs.quests, run_journal: !!prefs.journal, ultimate_notice: !!prefs.ult, wheel_up: prefs.wheelUp || "", wheel_down: prefs.wheelDown || "" },
+      toolkit: { language: lang, ko_per_second: !!prefs.ko, live_rank: !!prefs.rank, quest_tracker: !!prefs.quests, run_journal: !!prefs.journal },
       "interface": {},
       game: gameStorage()
     };
@@ -2623,9 +2686,6 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if (typeof t.live_rank === "boolean") prefs.rank = t.live_rank;
     if (typeof t.quest_tracker === "boolean") prefs.quests = t.quest_tracker;
     if (typeof t.run_journal === "boolean") prefs.journal = t.run_journal;
-    if (typeof t.ultimate_notice === "boolean") prefs.ult = t.ultimate_notice;
-    if (typeof t.wheel_up === "string") prefs.wheelUp = t.wheel_up;
-    if (typeof t.wheel_down === "string") prefs.wheelDown = t.wheel_down;
     var ui = {}, iface = o["interface"] || {};
     Object.keys(iface).forEach(function (sel) {
       var e = iface[sel];
@@ -2725,85 +2785,6 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     kosEl.hidden = false;
   }
 
-  var KEYCAP = { Space: "Space", Enter: "Enter", Tab: "Tab", ShiftLeft: "Shift", ShiftRight: "Shift", ControlLeft: "Ctrl", ControlRight: "Ctrl", AltLeft: "Alt", AltRight: "Alt", Backquote: "`" };
-  function keyCap(code) {
-    if (!code) return S("wheelNone");
-    if (KEYCAP[code]) return KEYCAP[code];
-    var arrow = { ArrowUp: "↑", ArrowDown: "↓", ArrowLeft: "←", ArrowRight: "→" };
-    return arrow[code] || code.replace(/^Key/, "").replace(/^Digit/, "").replace(/^Numpad/, "Num ");
-  }
-  function keyChar(code) {
-    if (/^Key[A-Z]$/.test(code)) return code.slice(3).toLowerCase();
-    if (/^Digit\d$/.test(code)) return code.slice(5);
-    return code === "Space" ? " " : code;
-  }
-  function tapKey(code) {
-    var init = { code: code, key: keyChar(code), bubbles: true, cancelable: true };
-    window.dispatchEvent(new KeyboardEvent("keydown", init));
-    setTimeout(function () { window.dispatchEvent(new KeyboardEvent("keyup", init)); }, 60);
-  }
-  var WHEEL_ACTIONS = [["jump", "Space"], ["dash", "ShiftLeft"], ["interact", "KeyE"], ["ult", "KeyR"], ["incense", "KeyC"], ["aim", "KeyQ"], ["autorun", "KeyT"], ["map", "KeyM"], ["autoult", "KeyY"], ["cleanfx", "KeyH"], ["pause", "KeyP"], ["reroll", "KeyF"], ["skip", "KeyX"], ["banish", "KeyZ"]];
-  var ACT_NAMES = {
-    en: { jump: "Jump", dash: "Dash / glide", interact: "Interact", ult: "Ultimate", incense: "Incense (open rift)", aim: "Aim mode", autorun: "Auto-run", map: "Big map", autoult: "Auto-ultimate", cleanfx: "Hide effects", pause: "Pause", reroll: "Reroll", skip: "Skip", banish: "Banish" },
-    fr: { jump: "Saut", dash: "Glisse", interact: "Interagir", ult: "Ultimate", incense: "Encens (ouvrir une faille)", aim: "Mode de visée", autorun: "Course auto", map: "Grande carte", autoult: "Ultimate auto", cleanfx: "Cacher les effets", pause: "Pause", reroll: "Relancer", skip: "Passer", banish: "Bannir" },
-    pl: { jump: "Skok", dash: "Ślizg", interact: "Interakcja", ult: "Ultimate", incense: "Kadzidło (otwórz szczelinę)", aim: "Tryb celowania", autorun: "Auto-bieg", map: "Duża mapa", autoult: "Auto-ultimate", cleanfx: "Ukryj efekty", pause: "Pauza", reroll: "Przelosuj", skip: "Pomiń", banish: "Odrzuć" }
-  };
-  function actName(a) { return (ACT_NAMES[lang] || ACT_NAMES.en)[a] || a; }
-  function actDefault(a) {
-    for (var i = 0; i < WHEEL_ACTIONS.length; i++) if (WHEEL_ACTIONS[i][0] === a) return WHEEL_ACTIONS[i][1];
-    return "";
-  }
-  function actCode(a) {
-    var p = LIVE.profile, st = p && p.settings;
-    var custom = (st && st.keys && st.keys[a]) || (st && st.binds && st.binds[a]) || (p && p.keys && p.keys[a]) || (p && p.binds && p.binds[a]);
-    if (typeof custom === "string" && custom && custom.length < 24) return custom;
-    return actDefault(a);
-  }
-  function wheelCode(v) {
-    if (!v) return "";
-    return v.indexOf("act:") === 0 ? actCode(v.slice(4)) : v;
-  }
-  function wheelLabel(v) {
-    if (!v) return "";
-    return v.indexOf("act:") === 0 ? actName(v.slice(4)) : keyCap(v);
-  }
-  var wtEl = root.getElementById("wtoast");
-  var wtTimer = 0;
-  function wheelToast(arrow, label) {
-    if (!wtEl) return;
-    wtEl.textContent = arrow + " " + label;
-    wtEl.hidden = false;
-    wtEl.classList.remove("pulse");
-    void wtEl.offsetWidth;
-    wtEl.classList.add("pulse");
-    clearTimeout(wtTimer);
-    wtTimer = setTimeout(function () { wtEl.hidden = true; }, 900);
-  }
-  var lastWheelKey = 0;
-  window.addEventListener("wheel", function (e) {
-    if (!dockInRun || isOpen || editing) return;
-    var pref = e.deltaY < 0 ? prefs.wheelUp : e.deltaY > 0 ? prefs.wheelDown : "";
-    var code = wheelCode(pref);
-    if (!code) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    var now = Date.now();
-    if (now - lastWheelKey < 140) return;
-    lastWheelKey = now;
-    tapKey(code);
-    wheelToast(e.deltaY < 0 ? "\u25b2" : "\u25bc", wheelLabel(pref));
-  }, { capture: true, passive: false });
-
-  var capturing = "";
-  function handleCapture(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.code === "Escape") capturing = "";
-    else if (e.code === "Backspace" || e.code === "Delete") { prefs[capturing] = ""; capturing = ""; savePrefs(); }
-    else if (/^(Shift|Control|Alt|Meta)(Left|Right)$/.test(e.code)) return;
-    else { prefs[capturing] = e.code; capturing = ""; savePrefs(); }
-    refreshCfg();
-  }
   function refreshCfg() {
     if (!isOpen || state.view !== "cfg") return;
     var top = content.scrollTop;
@@ -3018,34 +2999,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   function cfgRow(title, hint, ctl) {
     return '<div class="crow"><div class="ctx"><b>' + esc(title) + "</b>" + (hint ? "<span>" + esc(hint) + "</span>" : "") + "</div>" + ctl + "</div>";
   }
-  function wheelCtl(which) {
-    var v = prefs[which] || "";
-    var isAct = v.indexOf("act:") === 0;
-    var isKey = !!v && !isAct;
-    var opts = '<option value=""' + (!v && capturing !== which ? " selected" : "") + ">" + esc(S("wheelNone")) + "</option>";
-    WHEEL_ACTIONS.forEach(function (a) {
-      opts += '<option value="act:' + a[0] + '"' + (v === "act:" + a[0] ? " selected" : "") + ">" + esc(actName(a[0])) + "</option>";
-    });
-    opts += '<option value="custom"' + (isKey || capturing === which ? " selected" : "") + ">" + esc(S("wheelCustom")) + "</option>";
-    return '<span class="kbind"><select class="wsel" data-wsel="' + which + '">' + opts + "</select>" +
-      (isKey || capturing === which ? keyBtn(which) : "") + "</span>";
-  }
-  function keyBtn(which) {
-    var on = capturing === which;
-    return '<span class="kbind"><button type="button" class="btn ghost kb' + (on ? " listen" : "") + '" data-cfg="bind-' + which + '">' +
-      esc(on ? S("wheelPress") : keyCap(prefs[which])) + "</button>" +
-      (prefs[which] && !on ? '<button type="button" class="kx" data-cfg="clear-' + which + '" title="' + esc(S("wheelClear")) + '">×</button>' : "") + "</span>";
-  }
   function cfgView() {
     var n = Object.keys(prefs.ui).length;
     return '<div class="panel">' + cfgRow(S("koT"), S("koH"), swHtml(prefs.ko, "ko")) +
         cfgRow(S("rankT"), S("rankH"), swHtml(prefs.rank, "rank")) +
         cfgRow(S("questT"), S("questH"), swHtml(prefs.quests, "quests")) +
-        cfgRow(S("logT"), S("logH"), swHtml(prefs.journal, "journal")) +
-        cfgRow(S("ultT"), S("ultH"), swHtml(prefs.ult, "ult")) + "</div>" +
-      '<div class="panel"><div class="panel-t">' + esc(S("wheelT")) + "</div>" +
-        '<p class="hint2">' + esc(S("wheelH")) + "</p>" +
-        cfgRow(S("wheelUp"), "", wheelCtl("wheelUp")) + cfgRow(S("wheelDown"), "", wheelCtl("wheelDown")) + "</div>" +
+        cfgRow(S("logT"), S("logH"), swHtml(prefs.journal, "journal")) + "</div>" +
       '<div class="panel"><div class="panel-t">' + esc(S("uiT")) + "</div>" +
         '<p class="hint2">' + esc(S("uiH")) + "</p>" +
         '<div class="crow"><div class="ctx"><span>' + esc(tmpl(S("uiCount"), { n: n })) + "</span></div>" +
@@ -3058,9 +3017,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function cfgAction(what) {
     if (what === "ko") { prefs.ko = !prefs.ko; savePrefs(); }
-    else if (what === "rank" || what === "quests" || what === "journal" || what === "ult") { prefs[what] = !prefs[what]; savePrefs(); lvqSig = ""; }
-    else if (what === "bind-wheelUp" || what === "bind-wheelDown") { capturing = what.slice(5); }
-    else if (what === "clear-wheelUp" || what === "clear-wheelDown") { prefs[what.slice(6)] = ""; savePrefs(); }
+    else if (what === "rank" || what === "quests" || what === "journal") { prefs[what] = !prefs[what]; savePrefs(); lvqSig = ""; }
     else if (what === "uireset") { prefs.ui = {}; savePrefs(); applyUiEdits(); }
     else if (what === "uiedit") { startEdit(); return; }
     else if (what === "opencfg") {
@@ -3382,7 +3339,12 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     var low = txt.toLowerCase();
     var base = String(tr("¡Ultimate lista!")).replace(/[¡!]/g, "").trim().toLowerCase();
     var ult = low.indexOf("ultimate") >= 0 || (base.length > 4 && low.indexOf(base) >= 0);
-    if (ult && !prefs.ult) { el.style.display = "none"; return; }
+    var hs = [];
+    ["Ataques y números ocultos en esta partida: pulsa {k} para volver a verlos", "Ataques y números visibles"].forEach(function (k) {
+      [k, tr(k)].forEach(function (v) { hs.push(String(v).split("{k}")[0].replace(/[:\s]+$/, "").toLowerCase()); });
+    });
+    var clean = hs.some(function (p) { return p.length > 8 && low.indexOf(p) === 0; });
+    if (ult || clean) { el.style.display = "none"; return; }
     if (!ult && cur) addLog("toast", txt);
   }
   function bindToasts() {
@@ -3399,6 +3361,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   function liveTick(h, now) {
     try {
       pollGame(h, now);
+      loadTr();
       bindToasts();
       if (h && cur) logTick(h);
       paintRank(h);
