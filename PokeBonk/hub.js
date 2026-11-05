@@ -50,10 +50,10 @@
 
   var SI18N = {
     pl: {
-      nav: "Postępy", sub: "{n} zapisanych gier", subNone: "Brak zapisanych gier",
+      nav: "Postępy", sub: "Twoje gry", subNone: "Brak zapisanych gier",
       emptyT: "Nic tu jeszcze nie ma", emptyH: "Zagraj grę: czas, K.O., poziom i złoto zapisują się same co kilka sekund.",
       runs: "Gry", total: "Łączny czas", bestTime: "Najdłużej", bestKills: "Rekord K.O.", kpm: "K.O./min", avgLvl: "Śr. poziom",
-      allMaps: "Wszystkie mapy", allModes: "Wszystkie tryby", allMons: "Wszystkie Pokémony",
+      allMaps: "Wszystkie mapy", allModes: "Wszystkie tryby", modeNormal: "Normalny", modeSurvival: "Przetrwanie", modeCoop: "Koop", allMons: "Wszystkie Pokémony",
       trend: "Twoja forma", trendHint: "każdy punkt to jedna gra · linia = średnia z 5",
       mDur: "Czas", mKills: "K.O.", mKpm: "K.O./min", mLvl: "Poziom", mGold: "Złoto",
       byMon: "Według Pokémona", byMap: "Według mapy", recent: "Ostatnie gry",
@@ -77,10 +77,10 @@
       rkLabel: "Ranking", rkNeed: "{n} K.O. aby wejść", qT: "Zadania", qDaily: "Dzienne", qWeekly: "Tygodniowe", journal: "Dziennik gry", jt_lvl: "Poziom", jt_zone: "Strefa", jt_atk: "Atak", jt_atkUp: "Ulepszenie", jt_relic: "Relikwia", jt_vit: "Witamina", jt_item: "Przedmiot", jt_boss: "Boss", jt_bossEnd: "Boss pokonany", jt_toast: "Info", itemsNav: "Przedmioty", vitT: "Witaminy i wzmocnienia", vitH: "To nie są przedmioty: zajmują miejsca na witaminy i działają jak ulepszenia statystyk.", itemsSub: "Wszystkie przedmioty i ile jeszcze zostało", itemsSearch: "Szukaj przedmiotu…", itemsLoad: "Wczytywanie przedmiotów…", itemsHave: "W tej grze", itemsLeft: "Do zdobycia", itemsTotal: "Wszystkie", itemsHint: "Lista odświeża się, gdy otworzysz pauzę w grze (tam widać Twoje przedmioty).", itemsIdle: "Zacznij grę i otwórz pauzę, aby zobaczyć, które przedmioty już masz.", rankT: "Pozycja w rankingu", rankH: "Pokazuje na żywo Twoje miejsce w rankingu K.O. sezonu pod licznikiem K.O.", questT: "Śledzenie zadań", questH: "Pokazuje postęp dziennych i tygodniowych zadań w trakcie gry.", logT: "Dziennik gry", logH: "Zapisuje z czasem ataki, przedmioty, relikwie, bossów i poziomy. Widać go w szczegółach gry.", ultT: "Powiadomienie o ultimate", ultH: "Wyświetla komunikat, gdy ultimate jest gotowe."
     },
     en: {
-      nav: "Progress", sub: "{n} runs saved", subNone: "No runs saved yet",
+      nav: "Progress", sub: "Your runs", subNone: "No runs saved yet",
       emptyT: "Nothing here yet", emptyH: "Play a run: time, K.O.s, level and gold are saved by themselves every few seconds.",
       runs: "Runs", total: "Time played", bestTime: "Longest run", bestKills: "Most K.O.s", kpm: "K.O./min", avgLvl: "Avg. level",
-      allMaps: "All maps", allModes: "All modes", allMons: "All Pokémon",
+      allMaps: "All maps", allModes: "All modes", modeNormal: "Normal", modeSurvival: "Survival", modeCoop: "Co-op", allMons: "All Pokémon",
       trend: "Your form", trendHint: "one dot per run · line = average of 5",
       mDur: "Time", mKills: "K.O.s", mKpm: "K.O./min", mLvl: "Level", mGold: "Gold",
       byMon: "By Pokémon", byMap: "By map", recent: "Recent runs",
@@ -104,10 +104,10 @@
       rkLabel: "Rank", rkNeed: "{n} K.O. to enter", qT: "Quests", qDaily: "Daily", qWeekly: "Weekly", journal: "Run log", jt_lvl: "Level", jt_zone: "Zone", jt_atk: "Attack", jt_atkUp: "Upgrade", jt_relic: "Relic", jt_vit: "Vitamin", jt_item: "Item", jt_boss: "Boss", jt_bossEnd: "Boss down", jt_toast: "Info", itemsNav: "Items", vitT: "Vitamins and boosts", vitH: "These are not items: they use the vitamin slots and work as stat upgrades.", itemsSub: "Every item and how many are left to find", itemsSearch: "Search items…", itemsLoad: "Loading items…", itemsHave: "This run", itemsLeft: "Left to find", itemsTotal: "Total", itemsHint: "The list updates whenever you open the game's pause screen (it shows your items).", itemsIdle: "Start a run and open the pause screen to see which items you already have.", rankT: "Live ranking", rankH: "Shows your live position in the season's K.O. ranking under the K.O. counter.", questT: "Quest tracker", questH: "Shows the progress of your daily and weekly quests during a run.", logT: "Run log", logH: "Records attacks, items, relics, bosses and levels with timestamps. See it in a run's details.", ultT: "Ultimate notification", ultH: "Shows the message when your ultimate is ready."
     },
     fr: {
-      nav: "Progression", sub: "{n} parties enregistrées", subNone: "Aucune partie enregistrée",
+      nav: "Progression", sub: "Tes parties", subNone: "Aucune partie enregistrée",
       emptyT: "Rien pour l'instant", emptyH: "Lance une partie : temps, K.O., niveau et or s'enregistrent tout seuls toutes les quelques secondes.",
       runs: "Parties", total: "Temps de jeu", bestTime: "Plus longue", bestKills: "Record K.O.", kpm: "K.O./min", avgLvl: "Niveau moyen",
-      allMaps: "Toutes les cartes", allModes: "Tous les modes", allMons: "Tous les Pokémon",
+      allMaps: "Toutes les cartes", allModes: "Tous les modes", modeNormal: "Normal", modeSurvival: "Survie", modeCoop: "Coop", allMons: "Tous les Pokémon",
       trend: "Ta forme", trendHint: "un point par partie · ligne = moyenne sur 5",
       mDur: "Durée", mKills: "K.O.", mKpm: "K.O./min", mLvl: "Niveau", mGold: "Or",
       byMon: "Par Pokémon", byMap: "Par carte", recent: "Dernières parties",
@@ -1090,10 +1090,14 @@
   var runs = [];
   try { runs = JSON.parse(localStorage.getItem(RUNS_KEY) || "[]"); } catch (e) { runs = []; }
   if (!Array.isArray(runs)) runs = [];
+  var MODE_KEYS = { normal: 1, survival: 1, coop: 1 };
   (function () {
-    var good = runs.filter(function (r) { return r && r.v >= 2; });
+    runs.forEach(function (r) {
+      if (r && r.v >= 2) r.mode = r.mode === "endless" ? "survival" : r.mode === "0" ? "normal" : r.mode;
+    });
+    var good = runs.filter(function (r) { return r && r.v >= 2 && MODE_KEYS[r.mode]; });
     if (good.length === runs.length) return;
-    try { localStorage.setItem(RUNS_KEY + "_old", JSON.stringify(runs.filter(function (r) { return !(r && r.v >= 2); }))); } catch (e) {}
+    try { localStorage.setItem(RUNS_KEY + "_old", JSON.stringify(runs.filter(function (r) { return !(r && r.v >= 2 && MODE_KEYS[r.mode]); }))); } catch (e) {}
     runs = good;
     try { localStorage.setItem(RUNS_KEY, JSON.stringify(runs)); } catch (e) {}
   })();
@@ -1114,7 +1118,7 @@
     runs.forEach(function (r) { have[r.id] = 1; });
     var added = 0;
     list.forEach(function (r) {
-      if (r && r.id && r.v >= 2 && !have[r.id]) { runs.push(r); have[r.id] = 1; added++; }
+      if (r && r.id && r.v >= 2 && MODE_KEYS[r.mode] && !have[r.id]) { runs.push(r); have[r.id] = 1; added++; }
     });
     if (added) runs.sort(function (a, b) { return a.at - b.at; });
     return added;
@@ -1140,7 +1144,7 @@
   try {
     var pending = JSON.parse(localStorage.getItem(LIVE_KEY) || "null");
     localStorage.removeItem(LIVE_KEY);
-    if (pending && pending.id && pending.dur >= MIN_RUN) {
+    if (pending && pending.id && !pending.skip && pending.dur >= MIN_RUN && MODE_KEYS[pending.mode]) {
       pending.end = "closed";
       if (mergeRuns([pending])) persist();
     }
@@ -1192,6 +1196,16 @@
     return "";
   }
 
+  function modeKind(top, tier) {
+    if (document.querySelector(".coop-bar, .coop-mate")) return "coop";
+    var t = tier ? tier.getAttribute("data-t") || "" : "";
+    return t === "endless" ? "survival" : t === "0" ? "normal" : "";
+  }
+
+  function modeLabel(m) {
+    return m === "coop" ? S("modeCoop") : m === "survival" ? S("modeSurvival") : m === "normal" ? S("modeNormal") : m;
+  }
+
   function readHud() {
     var top = document.querySelector(".hud-top");
     var biomeEl = top && top.querySelector(".ht-biome");
@@ -1209,7 +1223,7 @@
       biome: String(biomeEl.getAttribute("data-k") || "").split("|")[0],
       biomeName: (biomeEl.textContent || "").trim(),
       phase: text(".ht-zone", top),
-      mode: tier ? tier.getAttribute("data-t") || "" : "",
+      mode: modeKind(top, tier),
       modeName: tier ? (tier.textContent || "").trim() : "",
       sp: portrait ? parseInt(portrait.getAttribute("data-k"), 10) || 0 : 0,
       skin: skinOf(portrait),
@@ -1231,7 +1245,7 @@
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       at: Date.now() - h.t * 1000,
       biome: h.biome, biomeName: h.biomeName,
-      mode: h.mode, modeName: h.modeName,
+      mode: h.mode, modeName: h.modeName, skip: !h.mode,
       sp0: h.sp, sp: h.sp, spName: h.spName,
       dur: h.t, lvl: h.lvl, kills: h.kills, gold: h.gold, phase: h.phase,
       minHp: h.hp == null ? 100 : h.hp,
@@ -1263,7 +1277,7 @@
     try { localStorage.removeItem(LIVE_KEY); } catch (e) {}
     LIVE.profileAt = 0;
     if (r.dur >= 60 && LIVE.baseKills != null) LIVE.baseKills += r.kills;
-    if (r.dur < MIN_RUN) return;
+    if (r.dur < MIN_RUN || r.skip) return;
     r.end = reason;
     var last = r.pts[r.pts.length - 1];
     if (last[0] !== r.dur) r.pts.push([r.dur, r.lvl, r.kills, r.gold]);
@@ -1295,7 +1309,7 @@
     });
     var win = heroEl.classList.contains("win");
     return {
-      outcome: win ? "victory" : (cur && cur.mode === "endless" ? "survived" : "defeat"),
+      outcome: win ? "victory" : (cur && cur.mode === "survival" ? "survived" : "defeat"),
       time: k[0] || "", killsText: k[1] || "", dmgText: k[2] || "", pointsText: k[3] || ""
     };
   }
@@ -1370,7 +1384,6 @@
     publish(h);
     setDockMode(!!h);
     koSample(h, now);
-    paintKos(h);
     liveTick(h, now);
     refreshLiveCard();
   }
@@ -1529,7 +1542,7 @@
     return '<button type="button" class="rrow" data-run="' + esc(r.id) + '">' + runThumb(r) +
       '<span class="rr-n"><b>' + esc(monName(r.sp, r.spName)) + " <i>" + esc(S("lvl")) + " " + r.lvl + "</i>" +
         (r.result === "victory" ? ' <img class="pix won" src="' + asset("ui/icons/record.png") + '" alt="" title="Victory">' : "") + "</b>" +
-      "<small>" + esc((r.biomeName || r.biome) + " · " + (r.modeName || r.mode)) + "</small></span>" +
+      "<small>" + esc((r.biomeName || r.biome) + " · " + modeLabel(r.mode)) + "</small></span>" +
       '<span class="rr-v"><b>' + fmtDur(r.dur) + "</b><small>" + esc(S("mDur")) + "</small></span>" +
       '<span class="rr-v"><b>' + fmtMetric(r.kills, "kills") + "</b><small>" + esc(S("mKills")) + "</small></span>" +
       '<span class="rr-v hide-s"><b>' + fmtMetric(kpmOf(r), "kpm") + "</b><small>" + esc(S("kpm")) + "</small></span>" +
@@ -1540,7 +1553,7 @@
     if (!cur) return "";
     return '<div class="livecard">' + runThumb(cur) + '<span class="rr-n"><b>' + esc(monName(cur.sp, cur.spName)) +
       " <i>" + esc(S("lvl")) + " " + cur.lvl + '</i> <em class="live">' + esc(S("live")) + "</em></b><small>" +
-      esc((cur.biomeName || cur.biome) + " · " + (cur.modeName || cur.mode)) +
+      esc((cur.biomeName || cur.biome) + " · " + modeLabel(cur.mode)) +
       '</small></span><span class="rr-v"><b>' + fmtDur(cur.dur) + "</b><small>" + esc(S("mDur")) + "</small></span>" +
       '<span class="rr-v"><b>' + fmtMetric(cur.kills, "kills") + "</b><small>" + esc(S("mKills")) + "</small></span>" +
       '<span class="rr-v hide-s"><b>' + fmtMetric(kpmOf(cur), "kpm") + "</b><small>" + esc(S("kpm")) + "</small></span></div>";
@@ -1564,7 +1577,7 @@
     var maps = {}, modes = {}, mons = {};
     all.forEach(function (r) {
       maps[r.biome] = r.biomeName || r.biome;
-      modes[r.mode] = r.modeName || r.mode;
+      modes[r.mode] = modeLabel(r.mode);
       mons[spOf(r)] = monName(spOf(r), r.spName);
     });
     var list = filteredRuns();
@@ -1587,7 +1600,6 @@
     var kpmAvg = list.reduce(function (s, r) { return s + kpmOf(r); }, 0) / list.length;
     var lvlAvg = list.reduce(function (s, r) { return s + r.lvl; }, 0) / list.length;
     B.tiles = '<div class="stiles">' +
-      statTile(S("runs"), fmtNum(list.length)) +
       statTile(S("total"), fmtDur(total)) +
       statTile(S("bestTime"), fmtDur(Math.max.apply(null, list.map(function (r) { return r.dur; })))) +
       statTile(S("bestKills"), fmtMetric(Math.max.apply(null, list.map(function (r) { return r.kills; })), "kills")) +
@@ -1709,7 +1721,7 @@
     html += '<div class="hero map run" style="--r1:138,92,255;--r2:90,47,200;--bg:url(\'' + biomeGround(r.biome) + '\')">' +
       '<span class="hero-pt">' + portraitImg(r.sp || spOf(r), "pt big") + "</span>" +
       '<h2 class="hname">' + esc(monName(r.sp, r.spName)) + "</h2>" +
-      "<p>" + esc((r.biomeName || r.biome) + " · " + (r.modeName || r.mode) + " · " + new Date(r.at).toLocaleString(locale()) + " · " + endLabel(r.end)) + "</p></div>";
+      "<p>" + esc((r.biomeName || r.biome) + " · " + modeLabel(r.mode) + " · " + new Date(r.at).toLocaleString(locale()) + " · " + endLabel(r.end)) + "</p></div>";
     html += '<div class="stiles">' +
       statTile(S("mDur"), fmtDur(r.dur)) +
       statTile(S("mKills"), fmtMetric(r.kills, "kills")) +
@@ -2238,7 +2250,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
     if (state.view === "cfg") return [S("cfgNav"), S("cfgSub")];
     if (state.view === "items") return [S("itemsNav"), S("itemsSub")];
     if (state.view === "stats" || state.view === "run") {
-      return [S("nav"), runs.length ? fill(S("sub"), runs.length) : S("subNone")];
+      return [S("nav"), runs.length ? S("sub") : S("subNone")];
     }
     if (state.view === "map") {
       var r = REGION_BY_ID[state.sel];
@@ -2652,7 +2664,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function configObject() {
     var o = {
-      toolkit: { language: lang, ko_per_second: !!prefs.ko, live_rank: !!prefs.rank, quest_tracker: !!prefs.quests, run_journal: !!prefs.journal },
+      toolkit: { language: lang, live_rank: !!prefs.rank, quest_tracker: !!prefs.quests, run_journal: !!prefs.journal },
       "interface": {},
       game: gameStorage()
     };
@@ -2682,7 +2694,6 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
   }
   function applyConfig(o) {
     var t = o.toolkit || {}, changedGame = false;
-    if (typeof t.ko_per_second === "boolean") prefs.ko = t.ko_per_second;
     if (typeof t.live_rank === "boolean") prefs.rank = t.live_rank;
     if (typeof t.quest_tracker === "boolean") prefs.quests = t.quest_tracker;
     if (typeof t.run_journal === "boolean") prefs.journal = t.run_journal;
@@ -3006,7 +3017,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
         '<p class="hint2">' + esc(S("updH")) + "</p>" +
         '<div class="crow"><div class="ctx"><span>' + esc("PokeBonk" + (appv.version ? " " + appv.version : "") + (appv.toolkit ? " · build " + appv.toolkit : "")) + "</span></div>" +
           '<button type="button" class="btn" data-cfg="getupdate">' + esc(S("updGet")) + "</button></div></div>" +
-      '<div class="panel">' + cfgRow(S("koT"), S("koH"), swHtml(prefs.ko, "ko")) +
+      '<div class="panel">' +
         cfgRow(S("rankT"), S("rankH"), swHtml(prefs.rank, "rank")) +
         cfgRow(S("questT"), S("questH"), swHtml(prefs.quests, "quests")) +
         cfgRow(S("logT"), S("logH"), swHtml(prefs.journal, "journal")) + "</div>" +
@@ -3021,8 +3032,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
           '<button type="button" class="btn ghost" data-cfg="opencfg">' + esc(S("cfgOpen")) + "</button></div></div>";
   }
   function cfgAction(what) {
-    if (what === "ko") { prefs.ko = !prefs.ko; savePrefs(); }
-    else if (what === "rank" || what === "quests" || what === "journal") { prefs[what] = !prefs[what]; savePrefs(); lvqSig = ""; }
+    if (what === "rank" || what === "quests" || what === "journal") { prefs[what] = !prefs[what]; savePrefs(); lvqSig = ""; }
     else if (what === "getupdate") {
       var ap = pyApi();
       if (ap && ap.open_download) ap.open_download();
@@ -3126,7 +3136,7 @@ details.neutral .chips,details.neutral .ranklist{margin-top:10px}
       LIVE.busyB = true;
       gameGet("/leaderboard").then(function (j) { LIVE.board = j; LIVE.boardAt = Date.now(); }).catch(function () { LIVE.boardAt = Date.now() - 20000; }).then(function () { LIVE.busyB = false; });
     }
-    var wantProf = (prefs.quests || prefs.ko) && now - LIVE.profileAt > 90000;
+    var wantProf = (prefs.quests || prefs.rank) && now - LIVE.profileAt > 90000;
     if (wantProf && !LIVE.busyP) {
       LIVE.busyP = true;
       gameGet("/profile").then(function (j) {
